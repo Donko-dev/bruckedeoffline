@@ -1,0 +1,1110 @@
+{
+  "meta": {
+    "appName": "BrückeDeOffline",
+    "appAcronym": "BDE",
+    "version": "1.0.0",
+    "generatedBy": "admin.html",
+    "poweredBy": "EMPIRE DONKO",
+    "legalNotice": "BrückeDeOffline est un outil indépendant de préparation. Il n'est affilié à aucun organisme officiel (Goethe-Institut, ÖSD, telc) ni à aucune administration allemande.",
+    "donation": {
+      "provider": "KKiaPay",
+      "url": "https://direct.kkiapay.me/38121/br-ckedeoffline-bde-FQO6CT710",
+      "note": "Don libre et ponctuel. BrückeDeOffline reste et restera 100% gratuit."
+    },
+    "contact": {
+      "org": "Empire Donko",
+      "country": "Bénin",
+      "whatsapp": "+2290196809106",
+      "whatsappLink": "https://wa.me/2290196809106",
+      "email": "empiredonko@gmail.com"
+    },
+    "footer": "Powered by EMPIRE DONKO",
+    "mediaNote": "La médiathèque (photos, audio, vidéo locale, vidéo YouTube) se gère entièrement depuis admin.html > Médiathèque. Les photos peuvent être intégrées directement dans data.json (pratique, mais à réserver aux images de taille raisonnable) ; les vidéos locales doivent être déposées à plat à la racine du dépôt GitHub, à côté de data.json."
+  },
+  "config": {
+    "theme": {
+      "mode": "light",
+      "colors": {
+        "primary": "#2F6259",
+        "primaryDark": "#4C9C8D",
+        "secondary": "#B4472B",
+        "secondaryDark": "#D46A46",
+        "accent": "#B8933D",
+        "accentDark": "#D4AF5A",
+        "info": "#3A5A73",
+        "backgroundLight": "#F1EEE6",
+        "surfaceLight": "#FFFFFF",
+        "backgroundDark": "#14181A",
+        "surfaceDark": "#1D2422",
+        "textLight": "#1F2421",
+        "textDark": "#E7E5DD",
+        "buttonTextOnPrimary": "#F1EEE6"
+      },
+      "font": {
+        "display": "'BDE Display', Georgia, 'Iowan Old Style', 'Times New Roman', serif",
+        "body": "'BDE Body', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+        "weightBold": 700,
+        "weightRegular": 400,
+        "baseSizePx": 16
+      }
+    },
+    "layout": [
+      "home",
+      "test",
+      "courses",
+      "germanyGuide",
+      "visaHub",
+      "donate",
+      "contact"
+    ],
+    "features": {
+      "showB2": true,
+      "showC1": true,
+      "showC2": true,
+      "donationWidget": true,
+      "liveNews": true,
+      "visaHub": true,
+      "germanyGuide": true
+    }
+  },
+  "languages": [
+    {
+      "code": "fr",
+      "label": "Français",
+      "rtl": false,
+      "complete": true
+    },
+    {
+      "code": "en",
+      "label": "English",
+      "rtl": false,
+      "complete": true
+    },
+    {
+      "code": "es",
+      "label": "Español",
+      "rtl": false,
+      "complete": true
+    },
+    {
+      "code": "zh",
+      "label": "中文",
+      "rtl": false,
+      "complete": true
+    },
+    {
+      "code": "ru",
+      "label": "Русский",
+      "rtl": false,
+      "complete": true
+    },
+    {
+      "code": "ar",
+      "label": "العربية",
+      "rtl": true,
+      "complete": true
+    },
+    {
+      "code": "tr",
+      "label": "Türkçe",
+      "rtl": false,
+      "complete": true
+    },
+    {
+      "code": "pt",
+      "label": "Português",
+      "rtl": false,
+      "complete": true
+    },
+    {
+      "code": "da",
+      "label": "Dansk",
+      "rtl": false,
+      "complete": true
+    }
+  ],
+  "i18n": {
+    "fr": {
+      "appTagline": "Apprenez l'allemand, partout, même sans connexion.",
+      "continue": "Continuer",
+      "back": "Retour",
+      "next": "Suivant",
+      "close": "Fermer",
+      "save": "Enregistrer",
+      "loading": "Chargement…",
+      "offlineNotice": "Cette fonctionnalité nécessite une connexion Internet.",
+      "online": "En ligne",
+      "offline": "Hors ligne",
+      "chooseLanguageTitle": "Choisissez votre langue",
+      "chooseLanguageSubtitle": "Vous pourrez la changer à tout moment dans les paramètres.",
+      "welcomeTitle": "Bienvenue sur BrückeDeOffline",
+      "welcomeSubtitle": "Pour retrouver votre progression sur n'importe quel appareil, sans email ni mot de passe, nous utilisons un identifiant unique.",
+      "generateIdButton": "Générer mon identifiant",
+      "restoreIdButton": "J'ai déjà un identifiant",
+      "idExplanation": "Ce sera votre trousseau personnel sur BrückeDeOffline. Aucune adresse email, aucun mot de passe ne vous sera jamais demandé.",
+      "idWarningSave": "Notez-le précieusement (capture d'écran conseillée) : c'est le seul moyen de retrouver votre progression.",
+      "yourIdIs": "Votre identifiant unique",
+      "copyId": "Copier",
+      "idCopied": "Copié !",
+      "restoreTitle": "Restaurer ma progression",
+      "restoreInputLabel": "Entrez votre identifiant unique",
+      "restoreInputPlaceholder": "Ex. : BDE-A1B2C3D4",
+      "restoreSubmit": "Restaurer",
+      "restoreBack": "Retour",
+      "restoreError": "Identifiant introuvable ou invalide. Vérifiez qu'il est correctement saisi.",
+      "restoreOfflineError": "La restauration nécessite une connexion Internet la première fois sur un nouvel appareil.",
+      "navHome": "Accueil",
+      "navCourses": "Cours",
+      "navTest": "Test de niveau",
+      "navGuide": "Vivre en Allemagne",
+      "navVisa": "Visas",
+      "navDonate": "Faire un don",
+      "navContact": "Contact",
+      "translationFallbackNotice": "Cette section n'est pas encore traduite dans votre langue et s'affiche en anglais."
+    },
+    "en": {
+      "appTagline": "Learn German, anywhere, even offline.",
+      "continue": "Continue",
+      "back": "Back",
+      "next": "Next",
+      "close": "Close",
+      "save": "Save",
+      "loading": "Loading…",
+      "offlineNotice": "This feature requires an Internet connection.",
+      "online": "Online",
+      "offline": "Offline",
+      "chooseLanguageTitle": "Choose your language",
+      "chooseLanguageSubtitle": "You can change it anytime in settings.",
+      "welcomeTitle": "Welcome to BrückeDeOffline",
+      "welcomeSubtitle": "To find your progress on any device, without email or password, we use a unique ID.",
+      "generateIdButton": "Generate my ID",
+      "restoreIdButton": "I already have an ID",
+      "idExplanation": "This will be your personal key on BrückeDeOffline. We will never ask for an email address or a password.",
+      "idWarningSave": "Save it carefully (a screenshot is a good idea): it's the only way to recover your progress.",
+      "yourIdIs": "Your unique ID",
+      "copyId": "Copy",
+      "idCopied": "Copied!",
+      "restoreTitle": "Restore my progress",
+      "restoreInputLabel": "Enter your unique ID",
+      "restoreInputPlaceholder": "E.g.: BDE-A1B2C3D4",
+      "restoreSubmit": "Restore",
+      "restoreBack": "Back",
+      "restoreError": "ID not found or invalid. Please check it was typed correctly.",
+      "restoreOfflineError": "Restoring requires an Internet connection the first time on a new device.",
+      "navHome": "Home",
+      "navCourses": "Courses",
+      "navTest": "Placement test",
+      "navGuide": "Living in Germany",
+      "navVisa": "Visas",
+      "navDonate": "Donate",
+      "navContact": "Contact",
+      "translationFallbackNotice": "This section isn't translated into your language yet and is shown in English."
+    },
+    "es": {
+      "appTagline": "Aprende alemán en cualquier lugar, incluso sin conexión.",
+      "continue": "Continuar",
+      "back": "Atrás",
+      "next": "Siguiente",
+      "close": "Cerrar",
+      "save": "Guardar",
+      "loading": "Cargando…",
+      "offlineNotice": "Esta función requiere conexión a Internet.",
+      "online": "En línea",
+      "offline": "Sin conexión",
+      "chooseLanguageTitle": "Elige tu idioma",
+      "chooseLanguageSubtitle": "Podrás cambiarlo en cualquier momento en los ajustes.",
+      "welcomeTitle": "Bienvenido a BrückeDeOffline",
+      "welcomeSubtitle": "Para recuperar tu progreso en cualquier dispositivo, sin correo ni contraseña, usamos un identificador único.",
+      "generateIdButton": "Generar mi identificador",
+      "restoreIdButton": "Ya tengo un identificador",
+      "idExplanation": "Será tu llave personal en BrückeDeOffline. Nunca te pediremos un correo electrónico ni una contraseña.",
+      "idWarningSave": "Guárdalo con cuidado (una captura de pantalla es buena idea): es la única forma de recuperar tu progreso.",
+      "yourIdIs": "Tu identificador único",
+      "copyId": "Copiar",
+      "idCopied": "¡Copiado!",
+      "restoreTitle": "Restaurar mi progreso",
+      "restoreInputLabel": "Introduce tu identificador único",
+      "restoreInputPlaceholder": "Ej.: BDE-A1B2C3D4",
+      "restoreSubmit": "Restaurar",
+      "restoreBack": "Atrás",
+      "restoreError": "Identificador no encontrado o inválido. Verifica que esté bien escrito.",
+      "restoreOfflineError": "La restauración requiere conexión a Internet la primera vez en un nuevo dispositivo.",
+      "navHome": "Inicio",
+      "navCourses": "Cursos",
+      "navTest": "Prueba de nivel",
+      "navGuide": "Vivir en Alemania",
+      "navVisa": "Visados",
+      "navDonate": "Donar",
+      "navContact": "Contacto",
+      "translationFallbackNotice": "Esta sección aún no está traducida a tu idioma y se muestra en inglés."
+    },
+    "zh": {
+      "appTagline": "随时随地学德语，离线也能用。",
+      "continue": "继续",
+      "back": "返回",
+      "next": "下一步",
+      "close": "关闭",
+      "save": "保存",
+      "loading": "加载中…",
+      "offlineNotice": "此功能需要连接互联网。",
+      "online": "在线",
+      "offline": "离线",
+      "chooseLanguageTitle": "选择您的语言",
+      "chooseLanguageSubtitle": "您可以随时在设置中更改。",
+      "welcomeTitle": "欢迎使用 BrückeDeOffline",
+      "welcomeSubtitle": "无需邮箱或密码，我们使用唯一识别码，让您在任何设备上找回学习进度。",
+      "generateIdButton": "生成我的识别码",
+      "restoreIdButton": "我已有识别码",
+      "idExplanation": "这是您在 BrückeDeOffline 上的专属钥匙。我们绝不会要求您提供邮箱或密码。",
+      "idWarningSave": "请妥善保存（建议截图）：这是找回学习进度的唯一方式。",
+      "yourIdIs": "您的唯一识别码",
+      "copyId": "复制",
+      "idCopied": "已复制！",
+      "restoreTitle": "恢复我的学习进度",
+      "restoreInputLabel": "请输入您的唯一识别码",
+      "restoreInputPlaceholder": "例如：BDE-A1B2C3D4",
+      "restoreSubmit": "恢复",
+      "restoreBack": "返回",
+      "restoreError": "未找到该识别码或格式不正确，请检查后重试。",
+      "restoreOfflineError": "首次在新设备上恢复需要连接互联网。",
+      "navHome": "首页",
+      "navCourses": "课程",
+      "navTest": "分级测试",
+      "navGuide": "德国生活",
+      "navVisa": "签证",
+      "navDonate": "捐赠",
+      "navContact": "联系我们",
+      "translationFallbackNotice": "此部分尚未翻译为您的语言，暂以英文显示。"
+    },
+    "ru": {
+      "appTagline": "Учите немецкий где угодно — даже офлайн.",
+      "continue": "Продолжить",
+      "back": "Назад",
+      "next": "Далее",
+      "close": "Закрыть",
+      "save": "Сохранить",
+      "loading": "Загрузка…",
+      "offlineNotice": "Для этой функции требуется подключение к интернету.",
+      "online": "В сети",
+      "offline": "Не в сети",
+      "chooseLanguageTitle": "Выберите язык",
+      "chooseLanguageSubtitle": "Вы сможете изменить его позже в настройках.",
+      "welcomeTitle": "Добро пожаловать в BrückeDeOffline",
+      "welcomeSubtitle": "Чтобы находить ваш прогресс на любом устройстве без email и пароля, мы используем уникальный идентификатор.",
+      "generateIdButton": "Создать идентификатор",
+      "restoreIdButton": "У меня уже есть идентификатор",
+      "idExplanation": "Это будет ваш личный ключ в BrückeDeOffline. Мы никогда не запросим у вас email или пароль.",
+      "idWarningSave": "Сохраните его в надёжном месте (например, сделайте скриншот): это единственный способ восстановить прогресс.",
+      "yourIdIs": "Ваш уникальный идентификатор",
+      "copyId": "Копировать",
+      "idCopied": "Скопировано!",
+      "restoreTitle": "Восстановить прогресс",
+      "restoreInputLabel": "Введите ваш уникальный идентификатор",
+      "restoreInputPlaceholder": "Напр.: BDE-A1B2C3D4",
+      "restoreSubmit": "Восстановить",
+      "restoreBack": "Назад",
+      "restoreError": "Идентификатор не найден или введён неверно. Проверьте правильность ввода.",
+      "restoreOfflineError": "Для восстановления на новом устройстве в первый раз нужен интернет.",
+      "navHome": "Главная",
+      "navCourses": "Курсы",
+      "navTest": "Тест уровня",
+      "navGuide": "Жизнь в Германии",
+      "navVisa": "Визы",
+      "navDonate": "Поддержать",
+      "navContact": "Контакты",
+      "translationFallbackNotice": "Этот раздел пока не переведён на ваш язык и показан на английском."
+    },
+    "ar": {
+      "appTagline": "تعلّم الألمانية أينما كنت، حتى دون اتصال بالإنترنت.",
+      "continue": "متابعة",
+      "back": "رجوع",
+      "next": "التالي",
+      "close": "إغلاق",
+      "save": "حفظ",
+      "loading": "جارٍ التحميل…",
+      "offlineNotice": "تتطلب هذه الميزة اتصالاً بالإنترنت.",
+      "online": "متصل",
+      "offline": "غير متصل",
+      "chooseLanguageTitle": "اختر لغتك",
+      "chooseLanguageSubtitle": "يمكنك تغييرها في أي وقت من الإعدادات.",
+      "welcomeTitle": "مرحبًا بك في BrückeDeOffline",
+      "welcomeSubtitle": "لاسترجاع تقدّمك على أي جهاز، دون بريد إلكتروني أو كلمة مرور، نستخدم معرّفًا فريدًا.",
+      "generateIdButton": "إنشاء معرّفي",
+      "restoreIdButton": "لديّ معرّف بالفعل",
+      "idExplanation": "سيكون هذا مفتاحك الشخصي في BrückeDeOffline. لن نطلب منك أبدًا بريدًا إلكترونيًا أو كلمة مرور.",
+      "idWarningSave": "احتفظ به جيدًا (يُنصح بأخذ لقطة شاشة): إنه الوسيلة الوحيدة لاسترجاع تقدّمك.",
+      "yourIdIs": "معرّفك الفريد",
+      "copyId": "نسخ",
+      "idCopied": "تم النسخ!",
+      "restoreTitle": "استرجاع تقدّمي",
+      "restoreInputLabel": "أدخل معرّفك الفريد",
+      "restoreInputPlaceholder": "مثال: BDE-A1B2C3D4",
+      "restoreSubmit": "استرجاع",
+      "restoreBack": "رجوع",
+      "restoreError": "المعرّف غير موجود أو غير صحيح. تحقق من إدخاله بشكل صحيح.",
+      "restoreOfflineError": "تتطلب الاستعادة اتصالاً بالإنترنت في المرة الأولى على جهاز جديد.",
+      "navHome": "الرئيسية",
+      "navCourses": "الدورات",
+      "navTest": "اختبار المستوى",
+      "navGuide": "الحياة في ألمانيا",
+      "navVisa": "التأشيرات",
+      "navDonate": "تبرّع",
+      "navContact": "اتصل بنا",
+      "translationFallbackNotice": "لم تتم ترجمة هذا القسم إلى لغتك بعد، ويُعرض بالإنجليزية."
+    },
+    "tr": {
+      "appTagline": "Almancayı her yerde öğrenin, çevrimdışıyken bile.",
+      "continue": "Devam et",
+      "back": "Geri",
+      "next": "İleri",
+      "close": "Kapat",
+      "save": "Kaydet",
+      "loading": "Yükleniyor…",
+      "offlineNotice": "Bu özellik internet bağlantısı gerektirir.",
+      "online": "Çevrimiçi",
+      "offline": "Çevrimdışı",
+      "chooseLanguageTitle": "Dilinizi seçin",
+      "chooseLanguageSubtitle": "Ayarlardan istediğiniz zaman değiştirebilirsiniz.",
+      "welcomeTitle": "BrückeDeOffline'a hoş geldiniz",
+      "welcomeSubtitle": "İlerlemenizi e-posta veya şifre olmadan herhangi bir cihazda bulabilmeniz için benzersiz bir kimlik kullanıyoruz.",
+      "generateIdButton": "Kimliğimi oluştur",
+      "restoreIdButton": "Zaten bir kimliğim var",
+      "idExplanation": "Bu, BrückeDeOffline'daki kişisel anahtarınız olacak. Sizden asla e-posta veya şifre istemeyeceğiz.",
+      "idWarningSave": "Dikkatlice saklayın (ekran görüntüsü almanız önerilir): ilerlemenizi kurtarmanın tek yolu budur.",
+      "yourIdIs": "Benzersiz kimliğiniz",
+      "copyId": "Kopyala",
+      "idCopied": "Kopyalandı!",
+      "restoreTitle": "İlerlemi geri yükle",
+      "restoreInputLabel": "Benzersiz kimliğinizi girin",
+      "restoreInputPlaceholder": "Örn.: BDE-A1B2C3D4",
+      "restoreSubmit": "Geri yükle",
+      "restoreBack": "Geri",
+      "restoreError": "Kimlik bulunamadı veya geçersiz. Doğru girildiğinden emin olun.",
+      "restoreOfflineError": "Yeni bir cihazda ilk geri yükleme için internet bağlantısı gerekir.",
+      "navHome": "Ana sayfa",
+      "navCourses": "Kurslar",
+      "navTest": "Seviye testi",
+      "navGuide": "Almanya'da yaşam",
+      "navVisa": "Vizeler",
+      "navDonate": "Bağış yap",
+      "navContact": "İletişim",
+      "translationFallbackNotice": "Bu bölüm henüz dilinize çevrilmedi ve İngilizce olarak gösteriliyor."
+    },
+    "pt": {
+      "appTagline": "Aprenda alemão em qualquer lugar, mesmo offline.",
+      "continue": "Continuar",
+      "back": "Voltar",
+      "next": "Seguinte",
+      "close": "Fechar",
+      "save": "Guardar",
+      "loading": "A carregar…",
+      "offlineNotice": "Esta funcionalidade requer ligação à Internet.",
+      "online": "Online",
+      "offline": "Offline",
+      "chooseLanguageTitle": "Escolha o seu idioma",
+      "chooseLanguageSubtitle": "Pode alterá-lo a qualquer momento nas definições.",
+      "welcomeTitle": "Bem-vindo ao BrückeDeOffline",
+      "welcomeSubtitle": "Para encontrar o seu progresso em qualquer dispositivo, sem email nem palavra-passe, usamos um identificador único.",
+      "generateIdButton": "Gerar o meu identificador",
+      "restoreIdButton": "Já tenho um identificador",
+      "idExplanation": "Esta será a sua chave pessoal no BrückeDeOffline. Nunca lhe pediremos um email ou uma palavra-passe.",
+      "idWarningSave": "Guarde-o com cuidado (uma captura de ecrã é uma boa ideia): é a única forma de recuperar o seu progresso.",
+      "yourIdIs": "O seu identificador único",
+      "copyId": "Copiar",
+      "idCopied": "Copiado!",
+      "restoreTitle": "Restaurar o meu progresso",
+      "restoreInputLabel": "Introduza o seu identificador único",
+      "restoreInputPlaceholder": "Ex.: BDE-A1B2C3D4",
+      "restoreSubmit": "Restaurar",
+      "restoreBack": "Voltar",
+      "restoreError": "Identificador não encontrado ou inválido. Verifique se foi escrito corretamente.",
+      "restoreOfflineError": "A primeira restauração num novo dispositivo requer ligação à Internet.",
+      "navHome": "Início",
+      "navCourses": "Cursos",
+      "navTest": "Teste de nível",
+      "navGuide": "Viver na Alemanha",
+      "navVisa": "Vistos",
+      "navDonate": "Doar",
+      "navContact": "Contacto",
+      "translationFallbackNotice": "Esta secção ainda não está traduzida para o seu idioma e é apresentada em inglês."
+    },
+    "da": {
+      "appTagline": "Lær tysk overalt – også offline.",
+      "continue": "Fortsæt",
+      "back": "Tilbage",
+      "next": "Næste",
+      "close": "Luk",
+      "save": "Gem",
+      "loading": "Indlæser…",
+      "offlineNotice": "Denne funktion kræver internetforbindelse.",
+      "online": "Online",
+      "offline": "Offline",
+      "chooseLanguageTitle": "Vælg dit sprog",
+      "chooseLanguageSubtitle": "Du kan altid ændre det i indstillingerne.",
+      "welcomeTitle": "Velkommen til BrückeDeOffline",
+      "welcomeSubtitle": "For at finde dine fremskridt på en hvilken som helst enhed – uden e-mail eller adgangskode – bruger vi et unikt ID.",
+      "generateIdButton": "Opret mit ID",
+      "restoreIdButton": "Jeg har allerede et ID",
+      "idExplanation": "Dette bliver din personlige nøgle til BrückeDeOffline. Vi beder dig aldrig om en e-mail eller adgangskode.",
+      "idWarningSave": "Gem det omhyggeligt (et screenshot er en god idé): det er den eneste måde at gendanne dine fremskridt på.",
+      "yourIdIs": "Dit unikke ID",
+      "copyId": "Kopiér",
+      "idCopied": "Kopieret!",
+      "restoreTitle": "Gendan mine fremskridt",
+      "restoreInputLabel": "Indtast dit unikke ID",
+      "restoreInputPlaceholder": "F.eks.: BDE-A1B2C3D4",
+      "restoreSubmit": "Gendan",
+      "restoreBack": "Tilbage",
+      "restoreError": "ID ikke fundet eller ugyldigt. Kontrollér, at det er indtastet korrekt.",
+      "restoreOfflineError": "Gendannelse for første gang på en ny enhed kræver internetforbindelse.",
+      "navHome": "Hjem",
+      "navCourses": "Kurser",
+      "navTest": "Niveautest",
+      "navGuide": "Livet i Tyskland",
+      "navVisa": "Visum",
+      "navDonate": "Donér",
+      "navContact": "Kontakt",
+      "translationFallbackNotice": "Dette afsnit er endnu ikke oversat til dit sprog og vises på engelsk."
+    }
+  },
+  "cecrl": {
+    "levels": [
+      "A1",
+      "A2",
+      "B1",
+      "B2",
+      "C1",
+      "C2"
+    ],
+    "passThresholdPercent": 66,
+    "methodologyNote": "Barème indicatif inspiré de la progression du CECRL, construit de façon indépendante par BrückeDeOffline. Il ne s'agit pas d'un test officiel Goethe-Institut, ÖSD ou telc et n'a aucune valeur de certification.",
+    "questionBank": [
+      {
+        "id": "q-a1-1",
+        "level": "A1",
+        "points": 1,
+        "prompt": "Ich ___ Student.",
+        "choices": [
+          "bin",
+          "bist",
+          "ist"
+        ],
+        "answerIndex": 0
+      },
+      {
+        "id": "q-a1-2",
+        "level": "A1",
+        "points": 1,
+        "prompt": "Das ist ___ Haus.",
+        "choices": [
+          "der",
+          "die",
+          "das"
+        ],
+        "answerIndex": 2
+      },
+      {
+        "id": "q-a1-3",
+        "level": "A1",
+        "points": 1,
+        "prompt": "___ heißt du?",
+        "choices": [
+          "Wie",
+          "Was",
+          "Wo"
+        ],
+        "answerIndex": 0
+      },
+      {
+        "id": "q-a2-1",
+        "level": "A2",
+        "points": 1,
+        "prompt": "Gestern ___ ich ins Kino gegangen.",
+        "choices": [
+          "bin",
+          "habe",
+          "war"
+        ],
+        "answerIndex": 0
+      },
+      {
+        "id": "q-a2-2",
+        "level": "A2",
+        "points": 1,
+        "prompt": "Ich ___ heute Abend zu Hause bleiben.",
+        "choices": [
+          "möchte",
+          "möchtest",
+          "möchten"
+        ],
+        "answerIndex": 0
+      },
+      {
+        "id": "q-a2-3",
+        "level": "A2",
+        "points": 1,
+        "prompt": "Er kommt nicht, ___ er krank ist.",
+        "choices": [
+          "weil",
+          "aber",
+          "und"
+        ],
+        "answerIndex": 0
+      },
+      {
+        "id": "q-b1-1",
+        "level": "B1",
+        "points": 1,
+        "prompt": "Das ist der Mann, ___ mir geholfen hat.",
+        "choices": [
+          "der",
+          "den",
+          "dem"
+        ],
+        "answerIndex": 0
+      },
+      {
+        "id": "q-b1-2",
+        "level": "B1",
+        "points": 1,
+        "prompt": "Ich stehe jeden Morgen um sieben Uhr ___.",
+        "choices": [
+          "auf",
+          "an",
+          "aus"
+        ],
+        "answerIndex": 0
+      },
+      {
+        "id": "q-b1-3",
+        "level": "B1",
+        "points": 1,
+        "prompt": "Berlin ist ___ als München, aber kleiner als Moskau.",
+        "choices": [
+          "größer",
+          "groß",
+          "am größten"
+        ],
+        "answerIndex": 0
+      },
+      {
+        "id": "q-b2-1",
+        "level": "B2",
+        "points": 1,
+        "prompt": "Das Projekt ___ letztes Jahr abgeschlossen.",
+        "choices": [
+          "wurde",
+          "hat",
+          "ist"
+        ],
+        "answerIndex": 0
+      },
+      {
+        "id": "q-b2-2",
+        "level": "B2",
+        "points": 1,
+        "prompt": "___ ich mehr Zeit hätte, würde ich Ihnen helfen.",
+        "choices": [
+          "Wenn",
+          "Ob",
+          "Als"
+        ],
+        "answerIndex": 0
+      },
+      {
+        "id": "q-b2-3",
+        "level": "B2",
+        "points": 1,
+        "prompt": "Er tut so, ___ er nichts wüsste.",
+        "choices": [
+          "als ob",
+          "weil",
+          "obwohl"
+        ],
+        "answerIndex": 0
+      },
+      {
+        "id": "q-c1-1",
+        "level": "C1",
+        "points": 1,
+        "prompt": "___ der schwierigen Wirtschaftslage investierte das Unternehmen weiter.",
+        "choices": [
+          "Trotz",
+          "Wegen",
+          "Während"
+        ],
+        "answerIndex": 0
+      },
+      {
+        "id": "q-c1-2",
+        "level": "C1",
+        "points": 1,
+        "prompt": "Die von der Regierung ___ Maßnahmen zeigten Wirkung.",
+        "choices": [
+          "erlassene",
+          "erlassenen",
+          "erlassen"
+        ],
+        "answerIndex": 1
+      },
+      {
+        "id": "q-c1-3",
+        "level": "C1",
+        "points": 1,
+        "prompt": "Man kann davon ausgehen, dass sich die Reform ___ wird.",
+        "choices": [
+          "durchsetzen",
+          "durchsetzt",
+          "durchgesetzt"
+        ],
+        "answerIndex": 0
+      },
+      {
+        "id": "q-c2-1",
+        "level": "C2",
+        "points": 1,
+        "prompt": "Er ließ sich nicht ___, obwohl alle dagegen waren.",
+        "choices": [
+          "beirren",
+          "verwirren",
+          "stören"
+        ],
+        "answerIndex": 0
+      },
+      {
+        "id": "q-c2-2",
+        "level": "C2",
+        "points": 1,
+        "prompt": "Das Vorhaben erwies sich, allen Unkenrufen zum Trotz, als ___.",
+        "choices": [
+          "erfolgreich",
+          "Erfolg",
+          "erfolgreiche"
+        ],
+        "answerIndex": 0
+      },
+      {
+        "id": "q-c2-3",
+        "level": "C2",
+        "points": 1,
+        "prompt": "Die Entscheidung wurde nicht ___ getroffen, sondern nach reiflicher Überlegung.",
+        "choices": [
+          "leichtfertig",
+          "leicht",
+          "leichte"
+        ],
+        "answerIndex": 0
+      }
+    ]
+  },
+  "cours": {
+    "encrypted": false,
+    "levels": [
+      {
+        "code": "A1",
+        "title": "Sich vorstellen — Se présenter",
+        "lessons": [
+          {
+            "id": "a1-vorstellen",
+            "title": "Se présenter",
+            "contentHtml": "<h3>Se présenter en allemand</h3><p>Pour se présenter, on utilise le verbe <strong>sein</strong> (être) et le verbe <strong>heißen</strong> (s'appeler).</p><p><em>Ich bin Marie. Ich heiße Marie. Ich komme aus Frankreich.</em></p><h4>Conjugaison de « sein » (être) au présent</h4><table><thead><tr><th>Pronom</th><th>Forme</th></tr></thead><tbody><tr><td>ich</td><td>bin</td></tr><tr><td>du</td><td>bist</td></tr><tr><td>er / sie / es</td><td>ist</td></tr><tr><td>wir</td><td>sind</td></tr><tr><td>ihr</td><td>seid</td></tr><tr><td>sie / Sie</td><td>sind</td></tr></tbody></table><h4>Les articles définis au nominatif (der / die / das)</h4><table><thead><tr><th>Genre</th><th>Article</th><th>Exemple</th></tr></thead><tbody><tr><td>Masculin</td><td>der</td><td>der Mann</td></tr><tr><td>Féminin</td><td>die</td><td>die Frau</td></tr><tr><td>Neutre</td><td>das</td><td>das Kind</td></tr><tr><td>Pluriel</td><td>die</td><td>die Kinder</td></tr></tbody></table><p><em>Astuce administrateur&#160;: le bouton «&#160;Insérer un audio&#160;» de l'éditeur (admin.html) ajoute ici une balise &lt;audio&gt; pointant vers un fichier que vous téléversez vous-même à la racine du dépôt.</em></p>"
+          }
+        ]
+      },
+      {
+        "code": "A2",
+        "title": "Das Perfekt — Parler du passé",
+        "lessons": [
+          {
+            "id": "a2-perfekt",
+            "title": "Le Perfekt (passé composé)",
+            "contentHtml": "<h3>Formation du Perfekt</h3><p>Le Perfekt se forme avec l'auxiliaire <strong>haben</strong> ou <strong>sein</strong> conjugué + le participe passé (Partizip II) en fin de phrase.</p><p><em>Ich habe einen Kaffee getrunken. Ich bin nach Hause gegangen.</em></p><h4>Quand utiliser « sein » ?</h4><ul><li>Verbes de mouvement : <em>gehen, fahren, kommen, fliegen</em></li><li>Verbes de changement d'état : <em>aufwachen, einschlafen, werden</em></li><li>Exceptions à retenir : <em>sein → gewesen, bleiben → geblieben</em></li></ul>"
+          }
+        ]
+      },
+      {
+        "code": "B1",
+        "title": "Nebensätze — Les subordonnées (weil, dass, wenn)",
+        "lessons": [
+          {
+            "id": "b1-nebensaetze",
+            "title": "Les propositions subordonnées",
+            "contentHtml": "<h3>La place du verbe dans la subordonnée</h3><p>Après <strong>weil, dass, wenn, obwohl</strong>, le verbe conjugué part en toute fin de proposition.</p><p><em>Ich bleibe zu Hause, weil ich krank bin.</em><br><em>Ich glaube, dass er Recht hat.</em></p><p>À l'écrit soutenu et à l'oral rapide, cette construction demande de l'entraînement : on garde le verbe « en réserve » jusqu'à la fin.</p>"
+          }
+        ]
+      },
+      {
+        "code": "B2",
+        "title": "Das Passiv — La voix passive",
+        "lessons": [
+          {
+            "id": "b2-passiv",
+            "title": "Le passif (Vorgangspassiv)",
+            "contentHtml": "<h3>Formation</h3><p><strong>werden</strong> conjugué + Partizip II.</p><p><em>Das Haus wird gebaut. (présent) — Das Haus wurde gebaut. (prétérit)</em></p><h4>Zustandspassiv vs Vorgangspassiv</h4><p>Le <em>Vorgangspassiv</em> (avec <strong>werden</strong>) décrit une action en cours ; le <em>Zustandspassiv</em> (avec <strong>sein</strong>) décrit un état résultant : <em>Das Fenster ist geöffnet.</em></p>"
+          }
+        ]
+      },
+      {
+        "code": "C1",
+        "title": "Erweiterte Partizipialattribute — Le style nominal",
+        "lessons": [
+          {
+            "id": "c1-partizipialattribute",
+            "title": "Les attributs participiaux étendus",
+            "contentHtml": "<h3>Un style typique de l'allemand écrit formel</h3><p>La presse et les textes académiques compressent une proposition relative en un groupe adjectival placé avant le nom.</p><p><em>Die von der Regierung erlassenen Maßnahmen</em> (= die Maßnahmen, die von der Regierung erlassen wurden).</p><p><strong>Méthode de lecture :</strong> repérer d'abord le nom noyau en fin de groupe, puis « dérouler » l'attribut comme une relative.</p>"
+          }
+        ]
+      },
+      {
+        "code": "C2",
+        "title": "Redewendungen und Nuancen — Nuances idiomatiques",
+        "lessons": [
+          {
+            "id": "c2-nuancen",
+            "title": "Nuances de registre",
+            "contentHtml": "<h3>Trois expressions à manier avec finesse</h3><ul><li><strong>etwas auf die lange Bank schieben</strong> — repousser indéfiniment quelque chose (registre courant, légèrement critique)</li><li><strong>den Nagel auf den Kopf treffen</strong> — voir juste, cerner exactement le problème (registre neutre à soutenu)</li><li><strong>sich nicht beirren lassen</strong> — garder son cap malgré les objections (registre soutenu, connotation valorisante)</li></ul><p>À ce niveau, la difficulté n'est plus la grammaire mais le <strong>choix du registre juste</strong> selon le contexte.</p>"
+          }
+        ]
+      }
+    ]
+  },
+  "germanyGuide": {
+    "populationNote": "Allemagne : environ 84 millions d'habitants (ordre de grandeur ; chiffres officiels : Statistisches Bundesamt / Destatis).",
+    "culture": {
+      "art": "L'Allemagne a une scène culturelle dense et décentralisée : chaque grande ville (et pas seulement Berlin) a ses musées, ses orchestres et ses théâtres subventionnés. Le Bauhaus, le romantisme allemand (Caspar David Friedrich) et la musique classique (Bach, Beethoven, Brahms) restent des repères culturels majeurs.",
+      "generalInfo": "L'Allemagne est une république fédérale de 16 Länder, chacun disposant de compétences propres (éducation, police, culture). L'allemand standard (Hochdeutsch) coexiste avec de nombreux dialectes régionaux forts (bavarois, souabe, plattdeutsch au nord…).",
+      "fallbackArticles": [
+        {
+          "title": "Le multilinguisme au quotidien",
+          "body": "Dans les grandes villes, l'anglais est largement compris chez les moins de 40 ans, mais l'allemand reste indispensable pour les démarches administratives, le monde du travail et la vie de quartier."
+        },
+        {
+          "title": "Le système scolaire allemand en bref",
+          "body": "Après le primaire (Grundschule), les élèves sont orientés dès la 5e ou 6e classe vers différentes filières (Gymnasium, Realschule, Hauptschule ou Gesamtschule selon le Land), un système décentralisé qui varie sensiblement d'un Land à l'autre."
+        },
+        {
+          "title": "Les grands fleuves d'Allemagne",
+          "body": "Le Rhin, le Danube, l'Elbe et la Moselle structurent historiquement les échanges commerciaux, les paysages viticoles et de nombreuses villes majeures du pays."
+        }
+      ],
+      "newsNote": "Lorsque l'appareil est en ligne, cette section peut afficher un flux d'actualités dynamique (à connecter par l'administrateur à une source RSS/API de son choix). Hors ligne, ce sont ces articles fixes qui s'affichent."
+    },
+    "laender": [
+      {
+        "name": "Baden-Württemberg",
+        "capital": "Stuttgart",
+        "population": "environ 11,3 millions",
+        "description": "Moteur industriel du sud-ouest, berceau de l'automobile (Mercedes-Benz, Porsche) et de la mécanique de précision. Paysages contrastés entre la Forêt-Noire et la vallée du Neckar. Karlsruhe abrite la Cour constitutionnelle fédérale."
+      },
+      {
+        "name": "Bayern (Bavière)",
+        "capital": "Munich",
+        "population": "environ 13,5 millions",
+        "description": "Le plus grand Land par sa superficie, entre Alpes bavaroises et vastes plaines. Forte identité régionale et dialecte marqué, poids économique majeur (BMW, Siemens, Allianz) et tradition de l'Oktoberfest."
+      },
+      {
+        "name": "Berlin",
+        "capital": "Berlin (ville-Land, capitale fédérale)",
+        "population": "environ 3,8 millions",
+        "description": "Capitale politique et culturelle de l'Allemagne, scène artistique internationale, mémoire vive de la division Est-Ouest, ville jeune et cosmopolite."
+      },
+      {
+        "name": "Brandenburg",
+        "capital": "Potsdam",
+        "population": "environ 2,6 millions",
+        "description": "Land rural entourant Berlin, lacs et forêts, célèbre château de Sans-Souci à Potsdam, nombreux habitants pendulaires vers la capitale."
+      },
+      {
+        "name": "Bremen",
+        "capital": "Brême (villes de Brême et Bremerhaven)",
+        "population": "environ 680 000",
+        "description": "Le plus petit Land, cité hanséatique portuaire au riche patrimoine maritime et à l'architecture typique de la Hanse."
+      },
+      {
+        "name": "Hamburg",
+        "capital": "Hambourg (ville-Land)",
+        "population": "environ 1,9 million",
+        "description": "Deuxième port d'Europe, pôle médiatique et commercial, quartier moderne de la HafenCity, ville marquée par son ouverture sur le monde."
+      },
+      {
+        "name": "Hessen (Hesse)",
+        "capital": "Wiesbaden (Francfort-sur-le-Main = plus grande ville)",
+        "population": "environ 6,4 millions",
+        "description": "Cœur financier de l'Allemagne autour de Francfort, siège de la Banque centrale européenne, région Rhin-Main densément peuplée."
+      },
+      {
+        "name": "Mecklenburg-Vorpommern",
+        "capital": "Schwerin",
+        "population": "environ 1,6 million",
+        "description": "Land rural de la côte baltique, île de Rügen, faible densité de population, tourisme balnéaire important."
+      },
+      {
+        "name": "Niedersachsen (Basse-Saxe)",
+        "capital": "Hanovre",
+        "population": "environ 8 millions",
+        "description": "Siège de Volkswagen à Wolfsbourg, façade sur la mer du Nord, deuxième Land par la superficie."
+      },
+      {
+        "name": "Nordrhein-Westfalen (Rhénanie-du-Nord-Westphalie)",
+        "capital": "Düsseldorf",
+        "population": "environ 18 millions",
+        "description": "Land le plus peuplé d'Allemagne, ancien bassin industriel de la Ruhr en pleine reconversion, grandes villes rapprochées (Cologne, Dortmund, Essen)."
+      },
+      {
+        "name": "Rheinland-Pfalz (Rhénanie-Palatinat)",
+        "capital": "Mayence",
+        "population": "environ 4,1 millions",
+        "description": "Région viticole le long du Rhin et de la Moselle, paysages de collines et de châteaux."
+      },
+      {
+        "name": "Saarland (Sarre)",
+        "capital": "Sarrebruck",
+        "population": "environ 980 000",
+        "description": "Plus petit Land continental par la superficie, frontalier de la France, ancien bassin minier et sidérurgique en reconversion."
+      },
+      {
+        "name": "Sachsen (Saxe)",
+        "capital": "Dresde",
+        "population": "environ 4 millions",
+        "description": "Patrimoine architectural baroque à Dresde, dynamisme technologique autour de Leipzig et Dresde (microélectronique, « Silicon Saxony »)."
+      },
+      {
+        "name": "Sachsen-Anhalt",
+        "capital": "Magdebourg",
+        "population": "environ 2,1 millions",
+        "description": "Sites classés à l'UNESCO liés à la Réforme protestante (Wittenberg, ville de Luther), industrie chimique historique."
+      },
+      {
+        "name": "Schleswig-Holstein",
+        "capital": "Kiel",
+        "population": "environ 2,9 millions",
+        "description": "Land le plus septentrional, entre mer du Nord et mer Baltique, paysages de plaines côtières."
+      },
+      {
+        "name": "Thüringen (Thuringe)",
+        "capital": "Erfurt",
+        "population": "environ 2,1 millions",
+        "description": "Surnommée le « cœur vert de l'Allemagne » pour ses forêts, ville de Weimar liée à Goethe et Schiller."
+      }
+    ],
+    "civicLaws": [
+      {
+        "title": "Anmeldung (déclaration de domicile)",
+        "description": "Inscription obligatoire de son domicile auprès du Bürgeramt / Einwohnermeldeamt dans les deux semaines suivant une installation. C'est un préalable à de nombreuses démarches (banque, opérateur mobile, titre de séjour)."
+      },
+      {
+        "title": "Assurance maladie obligatoire",
+        "description": "La couverture santé (« gesetzlich » ou « privat ») est obligatoire pour toute personne résidant en Allemagne, y compris les étudiants."
+      },
+      {
+        "title": "Rundfunkbeitrag (redevance audiovisuelle)",
+        "description": "Contribution obligatoire par foyer, indépendante de la possession d'un téléviseur, qui finance les médias publics (ARD, ZDF, Deutschlandradio)."
+      },
+      {
+        "title": "Tri des déchets (Mülltrennung)",
+        "description": "Système de tri strict par bac de couleur (papier, emballages, biodéchets, ordures résiduelles) et conteneurs de verre séparés par couleur, pris très au sérieux par le voisinage."
+      },
+      {
+        "title": "Heures de repos (Ruhezeiten)",
+        "description": "Silence attendu le dimanche, les jours fériés et en soirée (souvent 22h-6h) dans les immeubles résidentiels ; les nuisances sonores répétées peuvent entraîner des rappels du bailleur."
+      },
+      {
+        "title": "Traversée au feu piéton rouge",
+        "description": "Traverser au feu rouge piéton, même sans circulation, est verbalisable et socialement mal vu — en particulier devant des enfants."
+      },
+      {
+        "title": "Schufa (évaluation de solvabilité)",
+        "description": "Organisme consulté par les bailleurs, opérateurs et banques ; un historique Schufa insuffisant ou négatif peut compliquer sérieusement la location d'un logement."
+      },
+      {
+        "title": "Droit du travail : les bases",
+        "description": "Contrat de travail écrit quasi systématique, congé payé légal minimum (généralement 20 jours pour une semaine de 5 jours), protection renforcée contre le licenciement après la période d'essai."
+      }
+    ]
+  },
+  "visaHub": {
+    "globalDisclaimer": "Informations générales à visée pédagogique, non exhaustives et susceptibles d'évoluer. Elles ne remplacent pas une vérification sur le site officiel de l'ambassade/du consulat d'Allemagne compétent ou du portail fédéral avant toute démarche. BrückeDeOffline n'est pas un cabinet de conseil en immigration.",
+    "officialPortals": [
+      {
+        "name": "Auswärtiges Amt (portail consulaire officiel)",
+        "note": "Ministère fédéral des Affaires étrangères — informations et prise de rendez-vous consulaires."
+      },
+      {
+        "name": "Make it in Germany",
+        "note": "Portail officiel du gouvernement fédéral pour les talents internationaux (auto-évaluation Chancenkarte, reconnaissance des diplômes, offres d'emploi)."
+      },
+      {
+        "name": "Ausländerportal",
+        "note": "Portail numérique fédéral permettant de déposer certaines demandes de titre de séjour en ligne."
+      },
+      {
+        "name": "ANABIN",
+        "note": "Base de données officielle d'évaluation des diplômes étrangers."
+      }
+    ],
+    "types": [
+      {
+        "id": "familyReunification",
+        "title": "Regroupement familial (Familiennachzug)",
+        "summary": "Rejoindre un conjoint, partenaire ou parent déjà titulaire d'un titre de séjour en Allemagne.",
+        "documents": [
+          "Passeport valide",
+          "Acte de mariage ou de naissance, apostillé/légalisé et traduit par un traducteur assermenté",
+          "Justificatif de logement du regroupant (Wohnraumbescheinigung)",
+          "Justificatif de ressources du regroupant en Allemagne",
+          "Certificat de niveau A1 d'allemand (sauf exemptions : hauts diplômés, certaines nationalités, cas particuliers)",
+          "Photos d'identité biométriques",
+          "Formulaire de demande de visa national rempli"
+        ],
+        "pitfalls": [
+          "Traductions non certifiées par un traducteur assermenté reconnu",
+          "Sous-estimer le délai d'obtention d'un rendez-vous consulaire (parfois plusieurs mois)",
+          "Ignorer l'exigence de niveau A1 avant le départ quand elle s'applique",
+          "Dossier de ressources incomplet côté regroupant en Allemagne"
+        ],
+        "whereToApply": "Ambassade ou consulat général d'Allemagne du pays de résidence du demandeur ; en Allemagne, prolongation auprès de l'Ausländerbehörde locale.",
+        "platforms": [
+          "Portail de rendez-vous consulaire (RK Termin / Videx selon le pays)",
+          "Ausländerportal pour certaines démarches en ligne"
+        ],
+        "disclaimer": "Informations générales à visée pédagogique, non exhaustives et susceptibles d'évoluer. Elles ne remplacent pas une vérification sur le site officiel de l'ambassade/du consulat d'Allemagne compétent ou du portail fédéral avant toute démarche. BrückeDeOffline n'est pas un cabinet de conseil en immigration."
+      },
+      {
+        "id": "ausbildung",
+        "title": "Formation professionnelle (Ausbildung)",
+        "summary": "Venir en Allemagne suivre une formation professionnelle en alternance (duale Ausbildung).",
+        "documents": [
+          "Contrat de formation signé (Ausbildungsvertrag) avec une entreprise allemande",
+          "Certificat de langue allemande (généralement B1 ; parfois A2 avec engagement de progression selon le Land et le métier)",
+          "Preuve de subsistance (compte bloqué Sperrkonto ou déclaration de prise en charge « Verpflichtungserklärung »)",
+          "Diplôme scolaire reconnu, traduit et légalisé",
+          "Assurance maladie"
+        ],
+        "pitfalls": [
+          "Candidater sans contrat de formation signé",
+          "Niveau de langue insuffisant lors de l'entretien consulaire",
+          "Compte bloqué mal configuré ou montant insuffisant",
+          "Diplôme non traduit ou non légalisé"
+        ],
+        "whereToApply": "Ambassade/consulat allemand du pays de résidence ; puis Ausländerbehörde du lieu de formation en Allemagne pour le titre de séjour.",
+        "platforms": [
+          "Ausländerportal",
+          "Make it in Germany",
+          "Portail consulaire local"
+        ],
+        "disclaimer": "Informations générales à visée pédagogique, non exhaustives et susceptibles d'évoluer. Elles ne remplacent pas une vérification sur le site officiel de l'ambassade/du consulat d'Allemagne compétent ou du portail fédéral avant toute démarche. BrückeDeOffline n'est pas un cabinet de conseil en immigration."
+      },
+      {
+        "id": "studies",
+        "title": "Études (visa étudiant / Studienbewerbervisum)",
+        "summary": "Intégrer une université ou un Studienkolleg en Allemagne.",
+        "documents": [
+          "Lettre d'admission (Zulassungsbescheid) ou preuve de candidature pour le visa de candidat aux études",
+          "Preuve de ressources : compte bloqué (Sperrkonto), 11 904 € par an / 992 € par mois en 2026 — montant révisé chaque année, à reconfirmer avant toute démarche",
+          "Assurance maladie reconnue par les autorités allemandes",
+          "Certificat APS pour certains pays (ex. Chine, Vietnam, selon les cas)",
+          "Lettre de motivation"
+        ],
+        "pitfalls": [
+          "Candidater trop tard : les délais de rendez-vous consulaires peuvent être très longs selon le pays",
+          "Sperrkonto insuffisant ou ouvert trop tardivement",
+          "Oubli du certificat APS quand il est exigé pour la nationalité concernée",
+          "Dossier de motivation trop générique, peu adapté au programme visé"
+        ],
+        "whereToApply": "Ambassade/consulat allemand du pays de résidence ; Ausländerbehörde de la ville universitaire une fois sur place.",
+        "platforms": [
+          "uni-assist (candidatures universitaires)",
+          "Ausländerportal",
+          "Portail consulaire (RK Termin / Videx)"
+        ],
+        "disclaimer": "Informations générales à visée pédagogique, non exhaustives et susceptibles d'évoluer. Elles ne remplacent pas une vérification sur le site officiel de l'ambassade/du consulat d'Allemagne compétent ou du portail fédéral avant toute démarche. BrückeDeOffline n'est pas un cabinet de conseil en immigration. Montant du Sperrkonto vérifié via sources officielles à la date de génération de ce contenu ; à reconfirmer, ce montant étant révisé chaque année."
+      },
+      {
+        "id": "work",
+        "title": "Travail qualifié (Fachkräfteeinwanderung)",
+        "summary": "Venir occuper un emploi qualifié en Allemagne dans le cadre de la loi sur l'immigration de main-d'œuvre qualifiée.",
+        "documents": [
+          "Contrat de travail ou promesse d'embauche",
+          "Diplôme reconnu ou procédure de reconnaissance (Anerkennung) engagée",
+          "Preuve de qualification professionnelle",
+          "Selon le cas : conditions de la Carte bleue européenne (Blue Card UE) si le seuil de salaire est atteint"
+        ],
+        "pitfalls": [
+          "Ne pas engager la procédure de reconnaissance du diplôme avant de candidater",
+          "Sous-estimer les délais de reconnaissance (Anerkennung), qui peuvent prendre plusieurs mois",
+          "Confondre les seuils de salaire de la Blue Card avec ceux du visa Fachkräfte classique",
+          "Dossier employeur incomplet"
+        ],
+        "whereToApply": "Ambassade/consulat allemand ; Ausländerbehörde locale pour le titre de séjour définitif une fois en Allemagne ; Zentrale Anerkennungs- und Beratungsstelle (ZAB) pour la reconnaissance des diplômes.",
+        "platforms": [
+          "ANABIN (base de reconnaissance)",
+          "Ausländerportal",
+          "Make it in Germany"
+        ],
+        "disclaimer": "Informations générales à visée pédagogique, non exhaustives et susceptibles d'évoluer. Elles ne remplacent pas une vérification sur le site officiel de l'ambassade/du consulat d'Allemagne compétent ou du portail fédéral avant toute démarche. BrückeDeOffline n'est pas un cabinet de conseil en immigration."
+      },
+      {
+        "id": "chancenkarte",
+        "title": "Carte d'opportunité (Chancenkarte)",
+        "summary": "Titre de séjour d'un an permettant de venir chercher un emploi qualifié sans promesse d'embauche préalable (§20a de la loi sur le séjour, AufenthG, en vigueur depuis le 1er juin 2024).",
+        "documents": [
+          "Qualification reconnue comme travailleur qualifié (diplôme universitaire ou formation professionnelle d'au moins 2 ans reconnue), OU au moins 6 points sur la grille de points officielle si la qualification n'est pas pleinement reconnue",
+          "Niveau de langue minimum : allemand A1 OU anglais B2 (les deux, et les niveaux supérieurs, rapportent des points supplémentaires)",
+          "Preuve de ressources financières : environ 1 091 €/mois (13 092 €/an) en 2026 — montant révisé chaque année",
+          "Assurance maladie"
+        ],
+        "pitfalls": [
+          "Ne pas vérifier son score sur la grille de points avant de candidater (l'outil officiel « Self-Check » du portail Make it in Germany permet de le faire)",
+          "Confondre la Chancenkarte avec un visa de travail classique : elle sert à chercher un emploi (avec droit de travailler jusqu'à 20h/semaine et de faire des périodes d'essai de 2 semaines), pas à occuper un poste à temps plein dès l'arrivée",
+          "Sous-estimer les délais de reconnaissance du diplôme"
+        ],
+        "whereToApply": "Ambassade/consulat allemand du pays de résidence.",
+        "platforms": [
+          "Make it in Germany (auto-évaluation officielle par points)",
+          "Ausländerportal",
+          "ANABIN"
+        ],
+        "disclaimer": "Informations générales à visée pédagogique, non exhaustives et susceptibles d'évoluer. Elles ne remplacent pas une vérification sur le site officiel de l'ambassade/du consulat d'Allemagne compétent ou du portail fédéral avant toute démarche. BrückeDeOffline n'est pas un cabinet de conseil en immigration. Chiffres (seuil de 6 points, montant mensuel) vérifiés via sources officielles à la date de génération de ce contenu ; le dispositif étant récent (2024), ses paramètres sont susceptibles d'évoluer — à reconfirmer avant toute démarche."
+      },
+      {
+        "id": "tourism",
+        "title": "Tourisme (visa Schengen court séjour)",
+        "summary": "Séjour touristique ou de visite jusqu'à 90 jours sur toute période de 180 jours, dans l'espace Schengen.",
+        "documents": [
+          "Passeport valide",
+          "Assurance voyage couvrant au moins 30 000 € (urgences médicales et rapatriement)",
+          "Justificatif d'hébergement",
+          "Justificatif de ressources suffisantes pour la durée du séjour",
+          "Preuve de liens avec le pays d'origine (emploi, famille) démontrant l'intention de retour",
+          "Itinéraire de voyage"
+        ],
+        "pitfalls": [
+          "Assurance voyage insuffisante ou non reconnue pour l'espace Schengen",
+          "Réserver des billets non remboursables avant l'obtention du visa",
+          "Dossier ne démontrant pas assez clairement l'intention de retour, motif fréquent de refus"
+        ],
+        "whereToApply": "Ambassade/consulat allemand du pays de résidence (ou du pays Schengen de destination principale si plusieurs pays sont visités).",
+        "platforms": [
+          "Portail consulaire de rendez-vous (RK Termin / Videx selon le pays)"
+        ],
+        "disclaimer": "Informations générales à visée pédagogique, non exhaustives et susceptibles d'évoluer. Elles ne remplacent pas une vérification sur le site officiel de l'ambassade/du consulat d'Allemagne compétent ou du portail fédéral avant toute démarche. BrückeDeOffline n'est pas un cabinet de conseil en immigration."
+      }
+    ]
+  },
+  "sync": {
+    "enabled": false,
+    "endpoint": "",
+    "provider": "none",
+    "note": "Laisser enabled=false tant qu'aucun backend n'est configuré. Voir README.md section 4 pour le choix et la mise en place d'un backend adapté (Firebase/Supabase recommandés, Google Sheets déconseillé à l'échelle — raisons détaillées dans le README)."
+  },
+  "media": [
+    {
+      "id": "media-sample-bridge",
+      "type": "photo",
+      "title": "Le pont, symbole de BrückeDeOffline",
+      "caption": "Illustration d'accueil — exemple réel montrant le fonctionnement de la médiathèque (photo encodée directement dans data.json).",
+      "category": "guide",
+      "src": "data:image/jpeg;base64,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bP5p460ntHGddVvNe/0YdIYzF6/Y+jEYvEXqI0VcmKblyaoieGs8/OPXzp+alo13MbB4Z/3Xwv26j9O4YyzRf9J7FX8JqDgK8Pfu2a50rbiardU0zMcDe5uY/mLjrSe0cZ11W8Z6GdfzXvU1zMawwzJ+OtJ7RxnXVbxx1pPaOM66rePVzyhuNYYZk/HWk9o4zrqt4460ntHGddVvHq55NxrDDMn460ntHGddVvHHWk9o4zrqt49XPJuNYYZk/HWk9o4zrqt4460ntHGddVvHq55NxrDDMn460ntHGddVvHHWk9o4zrqt49XPJuNYYZk/HWk9o4zrqt4460ntHGddVvHq55NxrDDMn460ntHGddVvHHWk9o4zrqt49XPJuNYYZk/HWk9o4zrqt4460ntHGddVvHq55NxrDDMn460ntHGddVvHHWk9o4zrqt49XPJuNYYZk/HWk9o4zrqt4460ntHGddVvHq55NxrDDMn460ntHGddVvHHWk9o4zrqt49XPJuNYYZk/HWk9o4zrqt4460ntHGddVvHq55NxrDDMn460ntHGddVvHHWk9o4zrqt49XPJuNYYZk/HWk9o4zrqt4460ntHGddVvHq55NxrDDMn460ntHGddVvHHWk9o4zrqt49XPJuNYYZk/HWk9o4zrqt4460ntHGddVvHq55NxrDDMn460ntHGddVvHHWk9o4zrqt49XPJuNYYZk/HWk9o4zrqt4460ntHGddVvHq55NxrDDMn460ntHGddVvHHWk9o4zrqt49XPJuNYYZk/HWk9o4zrqt4460ntHGddVvHq55NxrDDMn460ntHGddVvHHWk9o4zrqt49XPJuNYYZk/HWk9o4zrqt4460ntHGddVvHq55NxrDDMn460ntHGddVvHHWk9o4zrqt49XPJuNYYZk/HWk9o4zrqt4460ntHGddVvHq55NxrDDMn460ntHGddVvHHWk9o4zrqt49XPJuNYYZk/HWk9o4zrqt4460ntHGddVvHq55NxrDDMn460ntHGddVvHHWk9o4zrqt49XPJuNYYZk/HWk9o4zrqt4460ntHGddVvHq55NxrDDMn460ntHGddVvHHWk9o4zrqt49XPJuNYYZk/HWk9o4zrqt4460ntHGddVvHq55NxrDDMn460ntHGddVvHHWk9o4zrqt49XPJuNYYZk/HWk9o4zrqt4460ntHGddVvHq55NxrDDMn460ntHGddVvHHWk9o4zrqt49XPJuNYYZk/HWk9o4zrqt4460ntHGddVvHq55NxrDDMn460ntHGddVvHHWk9o4zrqt49XPJuNYYZk/HWk9o4zrqt4460ntHGddVvHq55NxrDPfeBif2oxX2Gv9S2fzTx1pPaOM66rea9/ow6QxmL1+x9GIxeIvURoq5MU3Lk1RE8NZ5+cevnT81LRruY2Dwz/ALr4X7dR+ncMZZov+k9ir+E1BwFeHv3bNc6VtxNVuqaZmOBvc3MfzFx1pPaOM66reM9DOv5r3qa5mNYYZk/HWk9o4zrqt4460ntHGddVvHq55Q3GsMMyfjrSe0cZ11W8cdaT2jjOuq3j1c8m41hhmT8daT2jjOuq3jjrSe0cZ11W8ernk3GsMMyfjrSe0cZ11W8cdaT2jjOuq3j1c8m41hhmT8daT2jjOuq3jjrSe0cZ11W8ernk3HTABccgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAclmxXfeWbcL07lNP+cwcniN308P8A4i3vA64Ox4jd9PD/AOIt7x4jd9PD/wCIt7wOuDseI3fTw/8AiLe8eI3fTw/+It7wOuC7tqqzVFNU0TMw/kVxVHviSAAAAAAAAAAAAAAAAAAAAAQnzxMx9RTt+jV97/8AAJBTt+jV97/8P2K6KZiqmmXHPDmJj3LnAgHapxV+qHFOF9tq3H9D8uXb1yiaKow0RPo0W6Z98c4HWBfA1eej78bxwNXno+/G8CAXwNXno+/G8cDV56PvxvAgCYUoAADkjD11RExNvn89ymP6gcYOXxav0rXW07x4tX6Vrrad4HEBMZZmJXN5pYAAAACuCufN1+4cFc+br9wEgrgrnzdfuHBXPm6/cBIOSjD11N/I/jTPP7oKnDTEOblMR/01bgOEHJwVHz9v3VbhwVHz9v3VbgOMHJwVHz9v3Vbj8m3TETPDW5+qIq5/wAgAAAAAAAAAAADkjDX6oiYs3ZieeJimecDjByThr9MTM2bsRHPMzTPMcYAAAAAAAAAAAAAAAAH7RTFVURNdNEelU1HuOXgLf0uz7q+6cIA5uAt/S7Pur7o4C39Ls+6vunCAOxRhKLlUUxi8PEz6WaI98wVc0fXQsuIwtx+jep5vejqnJRZoqpiZxFqifRqipx7oAvxO76VjrqN48Tu+lY66jefnAW/pdn3V90cBb+l2fdX3QOKuibdU0zNMzHo1RMe+D8ObgLf0uz7q+6OAt/S7Pur7oHCDkuWqKKXTft3JfRTFX9Yg4wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAXam1D4WiurzZa4pX4SQAObPhfmb/AFsd0Z8L8zf62O6cIAVLNOWJiHzRMuQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAF2qbMvhblyjzZKIqf4wcmTB/P4jqY7xwADnyYP5/EdTHeGTB/P4jqY7xwADnyYP5/EdTHeOGrLFU5ZmaXzTMKZg/AAAAAAAAVRFEvPVVT5lS/6lZbHzlz7kbwOMHJlsfOXPuRvOMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAActqzRcpmasTatS0q4qf4RIHEftNMTHPXTH8Wc/itr6dh/u3O6cd61RbWW/buv0Iq5vfEATkp+co/HcMlPzlH47iQBWSn5yj8dwmiIj/AHlM+/cSVTVFMc9FNX1y94EgvhKfmqPfO8cJT81R753gQC+Ep+ao987xwlPzVHvneBAL4Sn5qj3zvPyqqKo5qKafrh7wJAAAAAAAAAAAAAAAAAAAAAAAAOSjEV26Ypim1MR6VumZ98wcYA5vG7no2epo3Dxu56NnqaNxwl8Dd+br+7IFVYq5VTMTTZUwua1TH9DiL4G783X92S6MLXVDmcn1VU1f0gDhB2PE5+cp+7X3SJsU0yqr9uJ80xVuA4gXVbpppmYvW6p80RU/xggAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/acs1RmmYpfPMQ5iDmyYP5/EdTHfA4Ac9VGEimct6/NS5om1ERM/eOAAAAAAAAu3aquvLNEL0q4p/zkvxS56VnrqN4HCDm8UuelZ66jePFLnpWeuo3gcIObxS56VnrqN5wgADseLWvpuH91fdA64Ox4ta+m4f3V9064AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOamvCRTGazfmpc8xdiImfunCAOfPg/mMR10d0Z8H8xiOujunAAOfPg/mMR10d0Z8H8xiOujunAALuzamr+yoropXRVVFUv3QQctF63RTFNWGtVzH/AMqpqc+6T8u3aLlKpsW7cvppmp/jMgcYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAu1Zu36pptW67lUQ1RTMyjl4uxv0PEdXO4Drg7HF2N+h4jq53Di7G/Q8R1c7gOuDscXY36HiOrncRdwmIsUxVdsXbdMynXRMQwOIAAAAAAAAAAAAAAAAA5KMNfuUxVRZuVUz0TFMzAHGDl8TxP0e99yR4nifo977kgcQOXxPE/R733JOOuiq3VNNdM01R0xMKQPwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA5/ErvpWOvo3nAAOfxK76Vjr6N5x3bNVlZpty/Rrpq/ykgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA5beLxNqiKLeIvUUx0U01zEQcQA5/H8Z9Kv9ZJF3FX71OW7eu3KYlqqqZhnGAAAAAAAAAAAAA5M1j5u71kbhmsfN3esjcBxg5M1j5u71kbj8qm1NM5aK4nzzXE/0AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAALtWLt58FaruLpy0zKIAHN4ji/ot/q5OEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiZiYmJUx5QAL4e787c+9I4e787c+9JAAvh7vztz70kAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAc3idz0rHXUbx4nc9Kx11G8DhBzeJ3PSsddRvHidz0rHXUbwOEHN4nc9Kx11G8eJ3PSsddRvA4qK5oqiqIpmY88RMe6Tl8buejZ6mjccIA5vG7no2epo3Dxu56NnqaNxwgCrlybkuqKYlL5NMU/5EgAAAAAAA5reLuWqIoppszEelZoqn3zDOEAdjx+76GH/wAPb7o8fu+hh/8AD2+6dcAc9WNu10zTNNhTC5rFET70cAAAAAAAAAAAAAAAAAOSjE37dMU0XrlNMdERVMQBxg5fHMT9Ivffki5druzmuV1Vz0OqWBIAAAAAAAAOW1ia7NOWmm1MN/LtU1T75gvx676GH6ijcB1wct3E13qctVNqIb+Rappn3xBxAAAAAAAAAAAAAAAAAAAAAAF0W6a4dV6ij6qoq/pBXA2/pNn3VbjiAHLwNv6TZ91W4cDb+k2fdVuOIAcvA2/pNn3Vbia7dNEOm9RX9VMVf1ggAAAAAAAAAACqZoiPlU1TP1VL+gEgt2vQr+/G4O16Ff343AQC5m0pVFb/AOqNxefC/M3utjugcIObPhfmb3Wx3RnwvzN7rY7oHCC7k2pXBUV0+fNVFX9IIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//Z"
+    }
+  ]
+}

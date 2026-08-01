@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BrückeDeOffline (BDE) — Apprendre l'allemand hors ligne</title>
+<meta name="description" content="Apprenez l'allemand du niveau A1.1 au C2, gratuitement et 100% hors ligne. Guide de vie en Allemagne et hub des visas inclus.">
+<meta name="theme-color" content="#2F6259">
+<meta name="color-scheme" content="light dark">
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="style.css">
+
+<!--
+  Politique de sécurité du contenu (CSP) — voir README.md > "Sécurité".
+  script-src limité à ce domaine + cdnjs (CryptoJS, nécessaire pour lire les
+  cours si l'administrateur choisit de les chiffrer depuis admin.html).
+  connect-src limité à 'self' par défaut : la synchronisation multi-appareil
+  (désactivée par défaut) ne pourra contacter aucun serveur externe tant que
+  cette ligne n'aura pas été mise à jour par l'administrateur avec le domaine
+  de son propre backend. C'est volontaire : voir README.md section 4.
+-->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none';">
+</head>
+<body>
+
+<header id="site-header" class="site-header"></header>
+
+<main id="app-root"></main>
+
+<footer id="site-footer" class="site-footer"></footer>
+
+<div id="onboarding-overlay" class="onboarding-overlay" style="display:none;"></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<noscript>
+  <div style="padding:2rem;font-family:sans-serif;max-width:600px;margin:0 auto;">
+    BrückeDeOffline nécessite JavaScript pour fonctionner (y compris hors ligne).
+    Merci de l'activer dans votre navigateur.
+  </div>
+</noscript>
+
+<!--
+  CryptoJS n'est chargé ici que pour pouvoir DÉCHIFFRER les cours si
+  l'administrateur les a chiffrés depuis admin.html (voir app.js >
+  resolveCoursData). Aucune donnée personnelle ne transite par ce script.
+  Pas de hash "integrity" ici : en fabriquer un sans pouvoir le vérifier
+  aurait plus de chances de casser le chargement que de protéger qui que ce
+  soit. La commande pour en générer un vous-même est documentée dans
+  README.md > "Sécurité".
+-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js" crossorigin="anonymous" defer></script>
+<script src="app.js" defer></script>
+</body>
+</html>
