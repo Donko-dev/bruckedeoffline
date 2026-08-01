@@ -198,9 +198,32 @@ button { font-family: inherit; }
 .grid-3 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
 
 /* Cours */
-.level-tabs { display: flex; gap: var(--space-2); overflow-x: auto; margin-bottom: var(--space-5); padding-bottom: 4px; }
-.level-tab { flex: 0 0 auto; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--color-border); background: var(--color-surface); font-weight: 700; font-size: 0.85rem; cursor: pointer; color: var(--color-text-muted); }
-.level-tab.is-active { background: var(--color-primary); color: var(--color-on-primary); border-color: var(--color-primary); }
+/* Sélecteur de niveau de départ */
+.level-choice-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); max-width: 420px; margin: 0 auto; }
+.level-choice-btn {
+  padding: 18px 10px; border-radius: var(--radius-md); border: 1px solid var(--color-border); background: var(--color-surface);
+  font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; cursor: pointer; color: var(--color-text);
+}
+.level-choice-btn:hover { border-color: var(--color-primary); color: var(--color-primary); }
+
+/* Parcours séquentiel de leçons : verrouillé / déverrouillé / terminé */
+.lesson-list { list-style: none; margin: 0 0 var(--space-4); padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.lesson-row {
+  display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border); background: var(--color-surface);
+}
+.lesson-row__num {
+  width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; font-weight: 700; flex-shrink: 0; background: var(--color-bg); color: var(--color-text-muted);
+}
+.lesson-row__title { flex: 1; font-weight: 600; }
+.lesson-row.is-unlocked { cursor: pointer; }
+.lesson-row.is-unlocked:hover { border-color: var(--color-primary); }
+.lesson-row.is-done .lesson-row__num { background: var(--color-primary); color: var(--color-on-primary); }
+.lesson-row.is-done { cursor: pointer; }
+.lesson-row__badge { font-size: 0.75rem; font-weight: 700; color: var(--color-primary); }
+.lesson-row.is-locked { opacity: 0.55; cursor: not-allowed; }
+.lesson-row__lock { color: var(--color-text-muted); }
 .lesson-body table { width: 100%; border-collapse: collapse; margin: var(--space-4) 0; font-size: 0.92rem; }
 .lesson-body th, .lesson-body td { border: 1px solid var(--color-border); padding: 8px 10px; text-align: start; }
 .lesson-body th { background: color-mix(in srgb, var(--color-primary) 10%, var(--color-surface)); }

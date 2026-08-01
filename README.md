@@ -61,35 +61,82 @@ puis ouvrez `http://localhost:8080`.
    jour automatiquement (le Service Worker la détecte et l'affiche au
    prochain démarrage — un bandeau les prévient).
 
-## 4. Médiathèque (photos, audio, vidéos locales, YouTube)
+## 4. Ajouter des photos et vidéos : deux méthodes possibles
 
-Nouvel onglet **🖼️ Médiathèque** dans `admin.html` :
+### Méthode A — Galerie automatique (sans data.json, la plus rapide depuis un téléphone)
 
-- **Photos** : intégrées directement dans `data.json` en base64 — aucun
-  fichier séparé à téléverser. Pratique, mais gardez des images légères
-  (< ~500 Ko) pour ne pas alourdir `data.json`, qui est retéléchargé par
-  chaque visiteur.
-- **Vidéo locale / Audio local** : vous indiquez juste un nom de fichier
-  (ex. `ville-cologne.mp4`) ; déposez ensuite ce fichier **à plat**, à la
-  racine du dépôt, à côté de `data.json`. Il devient automatiquement mis en
-  cache par le Service Worker dès qu'un visiteur le consulte une première
-  fois — disponible hors ligne ensuite.
-- **YouTube** : collez n'importe quel lien YouTube (ou juste l'identifiant) ;
-  la vidéo est intégrée directement dans la page (lecteur `iframe`
-  YouTube-nocookie), **sans jamais rediriger l'utilisateur hors de
-  l'application**. Nécessite une connexion Internet au moment du visionnage
-  (comme le don ou les actualités) : un message l'indique clairement, et la
-  lecture s'active automatiquement dès que le réseau revient.
+Déposez le fichier **directement sur GitHub** (Add file → Upload files, à la
+racine du dépôt, à plat), avec l'un de ces noms **exacts** :
 
-Tout média ajouté est disponible dans l'éditeur de leçon (bouton
-**🖼️ Média**) pour l'insérer dans un cours. Les médias classés dans la
-catégorie « Guide de l'Allemagne » apparaissent en plus automatiquement
-dans une galerie sur la page *Vivre en Allemagne*, sans code à écrire.
+| Vous voulez ajouter… | Nommez le fichier… |
+|---|---|
+| 1ère photo | `galerie-photo-1.jpg` |
+| 2e photo | `galerie-photo-2.jpg` |
+| 3e photo | `galerie-photo-3.jpg` |
+| … | … (continuez en comptant, sans trou) |
+| 1ère vidéo | `galerie-video-1.mp4` |
+| 2e vidéo | `galerie-video-2.mp4` |
+| … | … |
 
-**Limite technique honnête** : au-delà d'une poignée de vidéos assez
-lourdes, la lecture en avance rapide (« seek ») d'un fichier servi depuis le
-cache hors ligne peut être imparfaite selon le navigateur — limite du Cache
-API face à un flux vidéo volumineux, pas un bug de l'application.
+Règles à respecter :
+- **Toujours ces extensions exactes** : `.jpg` pour les photos (convertissez
+  vos PNG/HEIC en JPG avant l'envoi), `.mp4` pour les vidéos.
+- **Toujours ce numéro qui s'incrémente**, sans sauter de chiffre.
+- Rien d'autre à faire : l'application détecte ces fichiers automatiquement
+  au chargement de l'onglet **Galerie** et les affiche, lecture intégrée à
+  la page (aucune redirection).
+
+**Pour remplacer une photo/vidéo** : réenvoyez un fichier avec exactement le
+même nom (ex. `galerie-photo-2.jpg`) — GitHub proposera de remplacer
+("Commit changes"), l'ancienne version disparaît.
+
+**Pour supprimer une photo/vidéo** : supprimez le fichier depuis GitHub
+(ouvrez-le dans le dépôt → icône poubelle). La détection vérifie chaque
+numéro de 1 à 40 (photos) ou 1 à 20 (vidéos) à chaque visite, pas seulement
+en séquence continue : vous pouvez donc supprimer `galerie-photo-2.jpg`
+sans que `galerie-photo-3.jpg` et les suivants ne disparaissent.
+
+**Limite honnête** : au-delà de 40 photos ou 20 vidéos, les suivantes ne
+seront pas détectées automatiquement (au-delà de ce nombre, la Médiathèque
+— méthode B — est de toute façon plus adaptée). Ce plafond se change en une
+ligne dans `app.js` (`AUTO_GALLERY_MAX_PHOTOS` / `AUTO_GALLERY_MAX_VIDEOS`)
+si besoin.
+
+Cette méthode nécessite d'être en ligne au moment de la visite pour
+détecter un **nouveau** fichier (le temps d'une vérification), mais les
+photos/vidéos déjà découvertes une première fois restent ensuite
+consultables hors ligne comme le reste de l'application.
+
+### Méthode B — Médiathèque (via `admin.html` et `data.json`)
+
+Plus riche (titre, légende, catégorie, vidéos YouTube intégrées), mais
+demande de repasser par le workflow d'export/téléversement décrit en
+section 3. À privilégier si vous voulez :
+- Intégrer une **photo directement dans data.json** (base64, sans fichier
+  séparé à téléverser) — voir Studio > onglet Médiathèque.
+- Intégrer une **vidéo YouTube** (lecture intégrée, pas de fichier à
+  héberger vous-même).
+- Insérer un média précis **à l'intérieur d'un cours** (bouton « 🖼️ Média »
+  de l'éditeur de leçon).
+- Ranger vos médias par catégorie et leur donner un titre/une légende.
+
+Dans ce cas : onglet **🖼️ Médiathèque** d'`admin.html` → renseignez le
+type, la catégorie, le titre → **⬇️ Exporter data.json** → téléversez le
+nouveau `data.json` (et, pour une vidéo/audio local·e, le fichier
+correspondant) sur GitHub, à la racine, en remplacement de l'ancien.
+
+**En résumé** : photo ou vidéo simple, vite fait, sans texte
+d'accompagnement → **méthode A**. Contenu organisé, avec titre/légende, ou
+vidéo YouTube, ou média inséré dans un cours précis → **méthode B**. Les
+deux méthodes cohabitent sans conflit, vous pouvez utiliser l'une, l'autre,
+ou les deux à la fois.
+
+**Limite technique honnête (commune aux deux méthodes)** : au-delà d'une
+poignée de vidéos assez lourdes, la lecture en avance rapide (« seek »)
+d'un fichier servi depuis le cache hors ligne peut être imparfaite selon
+le navigateur — limite du Cache API face à un flux vidéo volumineux, pas
+un bug de l'application.
+
 
 ## 5. Multi-appareil : ce que l'identifiant unique fait vraiment aujourd'hui
 
@@ -137,7 +184,33 @@ Si vous préférez rester 100% hors serveur, une alternative simple : ajouter
 un bouton « Exporter ma progression » (fichier à sauvegarder) / « Importer »
 sur un autre appareil. Je peux l'ajouter si vous le souhaitez.
 
-## 6. Sécurité — ce qui est réellement protégé (et ce qui ne l'est pas)
+## 6. Parcours de cours séquentiel (pas de mélange de niveaux)
+
+Les cours ne sont plus des onglets libres A1/A2/B1… consultables dans le
+désordre. Le parcours est désormais :
+
+1. Au premier accès aux cours, l'apprenant choisit son niveau de départ —
+   soit en passant le **test de placement**, soit en le sélectionnant
+   directement s'il le connaît déjà.
+2. Une fois le niveau choisi, seules les leçons **de ce niveau** s'affichent,
+   dans l'ordre, une par une : la leçon suivante reste verrouillée (🔒)
+   jusqu'à ce que la précédente soit marquée terminée.
+3. Une fois toutes les leçons du niveau terminées, un court test de
+   validation (utilisant la même banque de questions que le test de
+   placement, filtrée sur ce niveau) doit être réussi pour débloquer le
+   niveau suivant. En cas d'échec, l'apprenant peut revoir la leçon et
+   retenter le test — le niveau supérieur ne se débloque qu'après réussite.
+4. Un lien « ↺ Changer de niveau » reste disponible à tout moment pour
+   recommencer ailleurs (sans perdre la progression déjà faite sur les
+   autres niveaux, conservée séparément pour chacun).
+
+L'ordre des leçons affiché correspond exactement à l'ordre dans lequel
+elles apparaissent dans l'onglet Cours d'`admin.html` : réordonnez-les
+là-bas si besoin (glissez-les dans l'ordre voulu en les supprimant/
+recréant, ou éditez directement l'ordre du tableau `lessons` dans
+data.json).
+
+## 7. Sécurité — ce qui est réellement protégé (et ce qui ne l'est pas)
 
 Cette application est **100% statique et cliente** : il n'y a pas de
 serveur pour faire respecter quoi que ce soit. Chaque mécanisme de
@@ -187,7 +260,7 @@ grand public et les robots génériques, pas contre un attaquant déterminé et
 techniquement outillé — ce qui est la limite honnête de **toute** PWA sans
 serveur, quel que soit le prestataire.
 
-## 7. Guide de vie en Allemagne / Hub des visas : à vérifier avant usage réel
+## 8. Guide de vie en Allemagne / Hub des visas : à vérifier avant usage réel
 
 Les contenus sur les Länder, les lois civiques et les visas sont exacts au
 moment de la rédaction (montants du Chancenkarte et du Sperrkonto vérifiés
@@ -197,7 +270,7 @@ l'ambassade/du consulat ou du portail officiel avant toute démarche.
 BrückeDeOffline reste un outil pédagogique indépendant, non affilié au
 Goethe-Institut, à l'ÖSD, à telc ni à aucune administration allemande.
 
-## 8. Ce qui est un vrai « point de départ » plutôt qu'un contenu exhaustif
+## 9. Ce qui est un vrai « point de départ » plutôt qu'un contenu exhaustif
 
 Pour livrer une application entièrement fonctionnelle plutôt que des
 promesses vides, certains contenus sont volontairement un socle solide et
@@ -220,7 +293,7 @@ réel, extensible depuis `admin.html` sans toucher au code :
 - **16 Länder** et **6 types de visas** : tous rédigés intégralement (pas
   de trou dans la liste).
 
-## 9. Identité visuelle
+## 10. Identité visuelle
 
 Palette et pictogramme du pont (« Brücke ») dessinés spécifiquement pour ce
 projet, sans polices téléchargées (police système uniquement) afin de

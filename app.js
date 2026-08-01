@@ -270,7 +270,8 @@ const AppState = {
   online: navigator.onLine,
   userId: null,
   route: "home",
-  testSession: null
+  testSession: null,
+  courseUI: null // { levelCode, openLessonId } — état d'affichage de la leçon actuellement ouverte
 };
 
 const SYSTEM_MESSAGES = {
@@ -541,6 +542,7 @@ const NAV_SECTIONS = {
   courses: { route: "courses", labelKey: "navCourses" },
   germanyGuide: { route: "guide", labelKey: "navGuide", featureKey: "germanyGuide" },
   visaHub: { route: "visa", labelKey: "navVisa", featureKey: "visaHub" },
+  gallery: { route: "gallery", labelKey: "navGallery", featureKey: "autoGallery" },
   donate: { route: "donate", labelKey: "navDonate", featureKey: "donationWidget" },
   contact: { route: "contact", labelKey: "navContact" }
 };
@@ -607,6 +609,13 @@ function renderRoute(route) {
   document.querySelectorAll("#main-nav a").forEach((a) => {
     a.classList.toggle("is-active", a.dataset.route === route);
   });
+  window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+
+  if (route === "gallery") {
+    renderAutoGalleryRoute(); // asynchrone (sonde le réseau) : gère elle-même #app-root
+    return;
+  }
+
   const root = document.getElementById("app-root");
   const renderers = {
     home: renderHome, test: renderPlacementTestIntro, courses: renderCourses,
@@ -615,20 +624,95 @@ function renderRoute(route) {
   const renderer = renderers[route] || renderHome;
   root.innerHTML = renderer();
   attachRouteHandlers(route);
-  window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+}
+
+/* ========================================================================
+   GALERIE AUTOMATIQUE — détection par convention de nom de fichier
+   ------------------------------------------------------------------------
+   Complément volontairement indépendant de la Médiathèque (data.json) :
+   un fichier "galerie-photo-N.jpg" ou "galerie-video-N.mp4" déposé
+   directement à la racine du dépôt GitHub s'affiche automatiquement ici,
+   sans passer par admin.html ni data.json. Voir README.md > "Galerie
+   automatique" pour la convention de nommage complète.
+   ======================================================================== */
+const AUTO_GALLERY_MAX_PHOTOS = 40;
+const AUTO_GALLERY_MAX_VIDEOS = 20;
+const AUTO_GALLERY_CACHE_KEY = "bde_auto_gallery_cache";
+
+async function checkFileExists(url) {
+  try {
+    const res = await fetch(url, { method: "HEAD", cache: "no-cache" });
+    return res.ok;
+  } catch (err) {
+    return false;
+  }
+}
+
+async function discoverAutoGallery() {
+  if (!navigator.onLine) {
+    return Store.get(AUTO_GALLERY_CACHE_KEY, { photos: [], videos: [] });
+  }
+  const photoChecks = [];
+  for (let i = 1; i <= AUTO_GALLERY_MAX_PHOTOS; i++) {
+    const name = `galerie-photo-${i}.jpg`;
+    photoChecks.push(checkFileExists(name).then((ok) => (ok ? name : null)));
+  }
+  const videoChecks = [];
+  for (let i = 1; i <= AUTO_GALLERY_MAX_VIDEOS; i++) {
+    const name = `galerie-video-${i}.mp4`;
+    videoChecks.push(checkFileExists(name).then((ok) => (ok ? name : null)));
+  }
+
+  let photos, videos;
+  try {
+    [photos, videos] = await Promise.all([Promise.all(photoChecks), Promise.all(videoChecks)]);
+  } catch (err) {
+    // Échec réseau en cours de sondage : on retombe sur la dernière liste connue plutôt que de tout vider.
+    return Store.get(AUTO_GALLERY_CACHE_KEY, { photos: [], videos: [] });
+  }
+
+  const result = { photos: photos.filter(Boolean), videos: videos.filter(Boolean), checkedAt: new Date().toISOString() };
+  Store.set(AUTO_GALLERY_CACHE_KEY, result);
+  return result;
+}
+
+async function renderAutoGalleryRoute() {
+  const root = document.getElementById("app-root");
+  root.innerHTML = `<section class="section container"><p style="text-align:center;color:var(--color-text-muted);">${escapeHtml(t("autoGalleryLoading"))}</p></section>`;
+
+  const found = await discoverAutoGallery();
+  // La route a pu changer pendant l'attente réseau (navigation rapide) : on
+  // évite d'écraser une autre page avec un résultat de galerie obsolète.
+  if (AppState.route !== "gallery") return;
+
+  const items = [
+    ...found.photos.map((f) => ({ type: "photo", src: f, title: "", caption: "" })),
+    ...found.videos.map((f) => ({ type: "video", src: f, title: "", caption: "" }))
+  ];
+  const cards = items.map(renderMediaItemCard).join("");
+
+  root.innerHTML = `
+    <section class="section container">
+      <div class="section__head"><h2>${escapeHtml(t("navGallery"))}</h2><p>${escapeHtml(t("autoGalleryHint"))}</p></div>
+      ${items.length
+        ? `<div class="grid grid-3">${cards}</div>`
+        : `<div class="card center-text">${escapeHtml(t("autoGalleryEmpty"))}</div>`}
+    </section>
+  `;
 }
 
 function renderHome() {
-  const progress = Store.get(STORAGE_KEYS.progress, {});
+  const progress = getProgress();
   const levels = AppState.data.cecrl.levels;
-  const currentLevel = progress.testResult ? progress.testResult.level : null;
-  const currentIndex = currentLevel ? levels.indexOf(currentLevel) : -1;
+  const activeIndex = progress.courseLevel ? levels.indexOf(progress.courseLevel) : -1;
 
   const piers = levels.map((lvl, i) => {
-    const state = i < currentIndex ? "is-done" : i === currentIndex ? "is-current" : "";
+    const validated = progress.levelStatus[lvl] && progress.levelStatus[lvl].validated;
+    const state = validated ? "is-done" : i === activeIndex ? "is-current" : "";
     return `<div class="pier ${state}"><span class="pier__dot"></span><span class="pier__label">${lvl}</span></div>`;
   }).join("");
-  const fillPct = currentIndex >= 0 ? Math.round(((currentIndex + 1) / levels.length) * 100) : 0;
+  const validatedCount = levels.filter((lvl) => progress.levelStatus[lvl] && progress.levelStatus[lvl].validated).length;
+  const fillPct = Math.round((validatedCount / levels.length) * 100);
 
   return `
     <section class="hero container">
@@ -652,10 +736,26 @@ function renderHome() {
   `;
 }
 
-function attachRouteHandlers(route) {
-  document.querySelectorAll("[data-nav]").forEach((btn) => {
-    btn.addEventListener("click", () => { location.hash = `#${btn.dataset.nav}`; });
+// Navigue vers une route même si le hash de l'URL ne change pas (ex: on est
+// déjà sur #courses en arrière-plan pendant un quiz affiché par-dessus) :
+// un hash identique ne déclenche pas l'évènement "hashchange" du navigateur,
+// il faut donc forcer le rendu nous-mêmes dans ce cas précis.
+function goToRoute(route) {
+  if (location.hash === `#${route}`) {
+    renderRoute(route);
+  } else {
+    location.hash = `#${route}`;
+  }
+}
+
+function wireNavButtons(root = document) {
+  root.querySelectorAll("[data-nav]").forEach((btn) => {
+    btn.addEventListener("click", () => { goToRoute(btn.dataset.nav); });
   });
+}
+
+function attachRouteHandlers(route) {
+  wireNavButtons();
   if (route === "test") attachPlacementTestHandlers();
   if (route === "courses") attachCoursesHandlers();
   if (route === "guide") attachGuideHandlers();
@@ -663,59 +763,189 @@ function attachRouteHandlers(route) {
   if (route === "donate") attachDonateHandlers();
 }
 
-/* ---- Cours ---- */
+/* ========================================================================
+   COURS — parcours séquentiel : choisir un niveau, puis progresser leçon
+   après leçon dans CE niveau uniquement (jamais de mélange de niveaux),
+   avec une validation avant de débloquer le niveau suivant.
+   ======================================================================== */
 const LEVEL_FEATURE_KEYS = { B2: "showB2", C1: "showC1", C2: "showC2" };
+function levelModuleEnabled(levelCode) {
+  const key = LEVEL_FEATURE_KEYS[levelCode];
+  return !key || isFeatureEnabled(key);
+}
+function getNextLevel(levelCode) {
+  const levels = AppState.data.cecrl.levels;
+  const idx = levels.indexOf(levelCode);
+  return idx >= 0 && idx < levels.length - 1 ? levels[idx + 1] : null;
+}
+function getLevelLessons(levelCode) {
+  const level = (AppState.cours.levels || []).find((l) => l.code === levelCode);
+  return level ? level.lessons : [];
+}
+
+// Progression persistée : un niveau de cours actif, et par niveau la liste
+// des leçons terminées + si le niveau a été validé (déverrouille le suivant).
+function getProgress() {
+  const p = Store.get(STORAGE_KEYS.progress, {});
+  if (!p.levelStatus) p.levelStatus = {};
+  (AppState.data.cecrl.levels || []).forEach((lvl) => {
+    if (!p.levelStatus[lvl]) p.levelStatus[lvl] = { completedLessonIds: [], validated: false };
+  });
+  return p;
+}
+function saveProgress(p) {
+  Store.set(STORAGE_KEYS.progress, p);
+  SyncAdapter.push(AppState.userId, p);
+}
 
 function renderCourses() {
   const cours = AppState.cours;
   if (!cours || cours.decryptionFailed) {
     return `<section class="section container"><div class="card">⚠️ ${escapeHtml(t("offlineNotice"))}</div></section>`;
   }
-  const visibleLevels = cours.levels.filter((lvl) => {
-    const key = LEVEL_FEATURE_KEYS[lvl.code];
-    return !key || isFeatureEnabled(key);
-  });
-  if (!visibleLevels.length) {
-    return `<section class="section container"><div class="card">${escapeHtml(t("navCourses"))}</div></section>`;
+  const progress = getProgress();
+  if (!progress.courseLevel || !levelModuleEnabled(progress.courseLevel)) {
+    return renderLevelChooserHtml();
   }
-  return renderCoursesFromLevels(visibleLevels);
+  return renderLevelCourseHtml(progress.courseLevel, progress);
 }
 
-function renderCoursesFromLevels(levels) {
-  const cours = { levels };
-  const tabs = cours.levels.map((lvl, i) =>
-    `<button class="level-tab ${i === 0 ? "is-active" : ""}" data-level="${escapeHtml(lvl.code)}" type="button">${escapeHtml(lvl.code)}</button>`
+function renderLevelChooserHtml() {
+  const levels = AppState.data.cecrl.levels.filter(levelModuleEnabled);
+  const buttons = levels.map((lvl) =>
+    `<button class="level-choice-btn" data-choose-level="${escapeHtml(lvl)}" type="button">${escapeHtml(lvl)}</button>`
   ).join("");
-  const panels = cours.levels.map((lvl, i) => `
-    <div class="level-panel" data-level-panel="${escapeHtml(lvl.code)}" style="${i === 0 ? "" : "display:none;"}">
-      <h3>${escapeHtml(lvl.title)}</h3>
-      ${lvl.lessons.map((lesson) => `
-        <div class="card lesson-body" style="margin-bottom:16px;">
-          <h4>${escapeHtml(lesson.title)}</h4>
-          ${sanitizeHtml(lesson.contentHtml)}
-        </div>
-      `).join("") || `<p>${escapeHtml(t("loading"))}</p>`}
-    </div>
-  `).join("");
-
   return `
     <section class="section container">
-      <div class="section__head"><h2>${escapeHtml(t("navCourses"))}</h2></div>
-      <div class="level-tabs">${tabs}</div>
-      ${panels}
+      <div class="section__head">
+        <h2>${escapeHtml(t("courseLevelChooserTitle"))}</h2>
+        <p>${escapeHtml(t("courseLevelChooserSubtitle"))}</p>
+      </div>
+      <div class="card center-text" style="margin-bottom:var(--space-5);">
+        <button class="btn btn-primary" data-nav="test" type="button">🎯 ${escapeHtml(t("takePlacementTestCta"))}</button>
+      </div>
+      <p class="center-text" style="color:var(--color-text-muted);margin-bottom:var(--space-3);">${escapeHtml(t("orChooseManually"))}</p>
+      <div class="level-choice-grid">${buttons}</div>
     </section>
   `;
 }
+
+function renderLevelCourseHtml(levelCode, progress) {
+  const openLessonId = AppState.courseUI && AppState.courseUI.levelCode === levelCode ? AppState.courseUI.openLessonId : null;
+  const lessons = getLevelLessons(levelCode);
+  const status = progress.levelStatus[levelCode];
+
+  if (openLessonId) {
+    const lesson = lessons.find((l) => l.id === openLessonId);
+    if (lesson) return renderLessonDetailHtml(lesson, status);
+  }
+
+  const levelMeta = (AppState.cours.levels || []).find((l) => l.code === levelCode);
+  const allDone = lessons.length > 0 && lessons.every((l) => status.completedLessonIds.includes(l.id));
+
+  const listItems = lessons.map((lesson, i) => {
+    const done = status.completedLessonIds.includes(lesson.id);
+    const unlocked = done || i === 0 || status.completedLessonIds.includes(lessons[i - 1].id);
+    const stateClass = done ? "is-done" : unlocked ? "is-unlocked" : "is-locked";
+    return `
+      <li class="lesson-row ${stateClass}" ${unlocked ? `data-open-lesson="${escapeHtml(lesson.id)}"` : `title="${escapeHtml(t("lessonLocked"))}"`}>
+        <span class="lesson-row__num">${done ? "✓" : i + 1}</span>
+        <span class="lesson-row__title">${escapeHtml(lesson.title)}</span>
+        ${done ? `<span class="lesson-row__badge">${escapeHtml(t("lessonCompletedBadge"))}</span>` : (unlocked ? "" : `<span class="lesson-row__lock">🔒</span>`)}
+      </li>`;
+  }).join("");
+
+  return `
+    <section class="section container">
+      <div class="section__head">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;">
+          <h2>${escapeHtml(t("navCourses"))} · ${escapeHtml(levelCode)}</h2>
+          <button class="link-btn" id="change-level-btn" type="button" style="padding:0;">${escapeHtml(t("changeLevelLink"))}</button>
+        </div>
+        <p>${escapeHtml(levelMeta ? levelMeta.title : "")}</p>
+      </div>
+      <ul class="lesson-list">${listItems || `<li style="color:var(--color-text-muted);">${escapeHtml(t("loading"))}</li>`}</ul>
+      ${allDone ? `
+        <div class="card center-text" style="margin-top:var(--space-5);">
+          <p><strong>${escapeHtml(t("allLessonsDoneNotice"))}</strong></p>
+          <p style="color:var(--color-text-muted);">${escapeHtml(t("levelValidationIntro"))}</p>
+          <button class="btn btn-primary" id="start-validation-btn" type="button">${escapeHtml(t("startLevelValidation"))} →</button>
+        </div>
+      ` : ""}
+    </section>
+  `;
+}
+
+function renderLessonDetailHtml(lesson, status) {
+  const done = status.completedLessonIds.includes(lesson.id);
+  return `
+    <section class="section container">
+      <button class="link-btn" id="back-to-list-btn" type="button" style="padding:0;margin-bottom:var(--space-4);">${escapeHtml(t("backToList"))}</button>
+      <div class="card lesson-body">
+        <h3>${escapeHtml(lesson.title)}</h3>
+        ${sanitizeHtml(lesson.contentHtml)}
+      </div>
+      <div class="center-text" style="margin-top:var(--space-4);">
+        ${done
+          ? `<p style="color:var(--color-text-muted);">✓ ${escapeHtml(t("lessonCompletedBadge"))}</p>`
+          : `<button class="btn btn-primary" id="mark-done-btn" type="button">${escapeHtml(t("markLessonDone"))}</button>`
+        }
+      </div>
+    </section>
+  `;
+}
+
 function attachCoursesHandlers() {
-  document.querySelectorAll(".level-tab").forEach((tab) => {
-    tab.addEventListener("click", () => {
-      document.querySelectorAll(".level-tab").forEach((b) => b.classList.remove("is-active"));
-      tab.classList.add("is-active");
-      const level = tab.dataset.level;
-      document.querySelectorAll("[data-level-panel]").forEach((panel) => {
-        panel.style.display = panel.dataset.levelPanel === level ? "" : "none";
-      });
+  document.querySelectorAll("[data-choose-level]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const progress = getProgress();
+      progress.courseLevel = btn.dataset.chooseLevel;
+      saveProgress(progress);
+      AppState.courseUI = null;
+      goToRoute("courses");
     });
+  });
+
+  const changeBtn = document.getElementById("change-level-btn");
+  if (changeBtn) changeBtn.addEventListener("click", () => {
+    const progress = getProgress();
+    progress.courseLevel = null;
+    saveProgress(progress);
+    AppState.courseUI = null;
+    goToRoute("courses");
+  });
+
+  document.querySelectorAll("[data-open-lesson]").forEach((row) => {
+    row.addEventListener("click", () => {
+      const progress = getProgress();
+      AppState.courseUI = { levelCode: progress.courseLevel, openLessonId: row.dataset.openLesson };
+      goToRoute("courses");
+    });
+  });
+
+  const backBtn = document.getElementById("back-to-list-btn");
+  if (backBtn) backBtn.addEventListener("click", () => {
+    AppState.courseUI = null;
+    goToRoute("courses");
+  });
+
+  const markBtn = document.getElementById("mark-done-btn");
+  if (markBtn) markBtn.addEventListener("click", () => {
+    const progress = getProgress();
+    const levelCode = progress.courseLevel;
+    const lessonId = AppState.courseUI && AppState.courseUI.openLessonId;
+    if (levelCode && lessonId && !progress.levelStatus[levelCode].completedLessonIds.includes(lessonId)) {
+      progress.levelStatus[levelCode].completedLessonIds.push(lessonId);
+      saveProgress(progress);
+    }
+    AppState.courseUI = null;
+    goToRoute("courses");
+  });
+
+  const startValidationBtn = document.getElementById("start-validation-btn");
+  if (startValidationBtn) startValidationBtn.addEventListener("click", () => {
+    const progress = getProgress();
+    startLevelValidationQuiz(progress.courseLevel);
   });
 }
 
@@ -886,23 +1116,40 @@ function attachPlacementTestHandlers() {
 }
 
 function startPlacementTest() {
-  AppState.testSession = { levelIndex: 0, results: {}, currentQuestionIndex: 0, currentLevelQuestions: [], currentLevelCorrect: 0 };
+  AppState.testSession = {
+    mode: "placement",
+    levels: AppState.data.cecrl.levels.slice(),
+    levelIndex: 0, results: {}, currentQuestionIndex: 0, currentLevelQuestions: [], currentLevelCorrect: 0
+  };
+  loadLevelQuestions();
+  renderQuizQuestion();
+}
+
+function startLevelValidationQuiz(levelCode) {
+  AppState.testSession = {
+    mode: "levelValidation",
+    levels: [levelCode],
+    levelIndex: 0, results: {}, currentQuestionIndex: 0, currentLevelQuestions: [], currentLevelCorrect: 0
+  };
   loadLevelQuestions();
   renderQuizQuestion();
 }
 
 function loadLevelQuestions() {
-  const level = AppState.data.cecrl.levels[AppState.testSession.levelIndex];
-  AppState.testSession.currentLevelQuestions = AppState.data.cecrl.questionBank.filter((q) => q.level === level);
-  AppState.testSession.currentQuestionIndex = 0;
-  AppState.testSession.currentLevelCorrect = 0;
+  const session = AppState.testSession;
+  const level = session.levels[session.levelIndex];
+  session.currentLevelQuestions = AppState.data.cecrl.questionBank.filter((q) => q.level === level);
+  session.currentQuestionIndex = 0;
+  session.currentLevelCorrect = 0;
 }
 
 function renderQuizQuestion() {
   const session = AppState.testSession;
-  const level = AppState.data.cecrl.levels[session.levelIndex];
+  const level = session.levels[session.levelIndex];
   const q = session.currentLevelQuestions[session.currentQuestionIndex];
   const root = document.getElementById("app-root");
+
+  if (!q) { finishLevelAndAdvance(); return; } // garde-fou : niveau sans question dans la banque
 
   root.innerHTML = `
     <section class="section container">
@@ -940,15 +1187,14 @@ function answerQuestion(choiceIndex, question) {
 
 function finishLevelAndAdvance() {
   const session = AppState.testSession;
-  const levels = AppState.data.cecrl.levels;
-  const level = levels[session.levelIndex];
+  const level = session.levels[session.levelIndex];
   const total = session.currentLevelQuestions.length;
   const correct = session.currentLevelCorrect;
-  const pct = total ? Math.round((correct / total) * 100) : 0;
+  const pct = total ? Math.round((correct / total) * 100) : 100; // aucune question dispo : ne bloque pas la progression
   session.results[level] = { correct, total, pct };
   const passed = pct >= AppState.data.cecrl.passThresholdPercent;
 
-  if (passed && session.levelIndex < levels.length - 1) {
+  if (passed && session.levelIndex < session.levels.length - 1) {
     session.levelIndex++;
     loadLevelQuestions();
     renderQuizQuestion();
@@ -958,6 +1204,13 @@ function finishLevelAndAdvance() {
 }
 
 function finalizeTest(lastPassed, lastLevel) {
+  const session = AppState.testSession;
+  if (session.mode === "levelValidation") {
+    finalizeLevelValidation(lastPassed, lastLevel);
+    return;
+  }
+
+  // Mode "placement" : test complet en cascade A1 → C2 (comportement inchangé).
   const levels = AppState.data.cecrl.levels;
   let placedLevel;
   if (lastPassed) {
@@ -966,28 +1219,78 @@ function finalizeTest(lastPassed, lastLevel) {
     const idx = levels.indexOf(lastLevel);
     placedLevel = idx > 0 ? levels[idx - 1] : "Pré-A1";
   }
-  const result = { level: placedLevel, details: AppState.testSession.results, date: new Date().toISOString() };
-  const progress = Store.get(STORAGE_KEYS.progress, {});
+  const result = { level: placedLevel, details: session.results, date: new Date().toISOString() };
+  const progress = getProgress();
   progress.testResult = result;
-  Store.set(STORAGE_KEYS.progress, progress);
-  SyncAdapter.push(AppState.userId, progress);
+  saveProgress(progress);
   renderQuizResult(result);
 }
 
 function renderQuizResult(result) {
   const root = document.getElementById("app-root");
+  const levels = AppState.data.cecrl.levels;
+  const isRealLevel = levels.includes(result.level);
+  const adoptTargetLevel = isRealLevel ? result.level : levels[0]; // "Pré-A1" → on démarre quand même au niveau A1
   root.innerHTML = `
     <section class="section container quiz-result">
       <p>${escapeHtml(t("navTest"))}</p>
       <div class="quiz-result__level">${escapeHtml(result.level)}</div>
       <p>${escapeHtml(AppState.data.cecrl.methodologyNote)}</p>
       <div class="hero__actions" style="justify-content:center;">
-        <button class="btn btn-primary" data-nav="courses">${escapeHtml(t("navCourses"))}</button>
-        <button class="btn btn-secondary" data-nav="home">${escapeHtml(t("navHome"))}</button>
+        <button class="btn btn-primary" id="adopt-level-btn" type="button">${escapeHtml(t("placementResultCta"))}</button>
+        <button class="btn btn-secondary" data-nav="home" type="button">${escapeHtml(t("navHome"))}</button>
       </div>
     </section>
   `;
-  attachRouteHandlers("result");
+  wireNavButtons(root);
+  const adoptBtn = document.getElementById("adopt-level-btn");
+  if (adoptBtn) {
+    adoptBtn.addEventListener("click", () => {
+      const progress = getProgress();
+      progress.courseLevel = adoptTargetLevel;
+      saveProgress(progress);
+      AppState.courseUI = null;
+      goToRoute("courses");
+    });
+  }
+}
+
+/* ---- Validation de niveau (déclenchée depuis le parcours de cours) ---- */
+function finalizeLevelValidation(passed, levelCode) {
+  const progress = getProgress();
+  progress.levelStatus[levelCode].validated = passed;
+  let nextLevel = null;
+  if (passed) {
+    nextLevel = getNextLevel(levelCode);
+    if (nextLevel && levelModuleEnabled(nextLevel)) progress.courseLevel = nextLevel;
+  }
+  saveProgress(progress);
+  renderLevelValidationResult(passed, levelCode, nextLevel);
+}
+
+function renderLevelValidationResult(passed, levelCode, nextLevel) {
+  const root = document.getElementById("app-root");
+  const bodyText = passed
+    ? (nextLevel ? t("nextLevelUnlockedNotice") : t("allLevelsCompleteTitle"))
+    : t("levelFailedBody");
+
+  root.innerHTML = `
+    <section class="section container quiz-result">
+      <div class="quiz-result__level">${passed ? "🎉" : "💪"}</div>
+      <h2>${escapeHtml(passed ? t("levelPassedTitle") : t("levelFailedTitle"))}</h2>
+      <p>${escapeHtml(bodyText)}</p>
+      <div class="hero__actions" style="justify-content:center;">
+        ${passed
+          ? `<button class="btn btn-primary" data-nav="courses" type="button">${escapeHtml(t("continueToNextLevel"))}</button>`
+          : `<button class="btn btn-primary" data-nav="courses" type="button">${escapeHtml(t("reviewLesson"))}</button>
+             <button class="btn btn-secondary" id="retry-validation-btn" type="button">${escapeHtml(t("retryValidation"))}</button>`
+        }
+      </div>
+    </section>
+  `;
+  wireNavButtons(root);
+  const retryBtn = document.getElementById("retry-validation-btn");
+  if (retryBtn) retryBtn.addEventListener("click", () => startLevelValidationQuiz(levelCode));
 }
 
 /* ========================================================================
@@ -1012,7 +1315,7 @@ function renderApp() {
   renderHeader();
   renderFooter();
   const initialRoute = (location.hash || "#home").replace("#", "") || "home";
-  renderRoute(["home", "test", "courses", "guide", "visa", "donate", "contact"].includes(initialRoute) ? initialRoute : "home");
+  renderRoute(["home", "test", "courses", "guide", "visa", "gallery", "donate", "contact"].includes(initialRoute) ? initialRoute : "home");
 }
 
 window.addEventListener("hashchange", () => {
