@@ -300,3 +300,10 @@ projet, sans polices téléchargées (police système uniquement) afin de
 garantir un premier affichage instantané, un fonctionnement hors ligne dès
 la première visite, et une compatibilité native avec les 9 alphabets pris
 en charge (latin, cyrillique, arabe, sinogrammes…).
+
+Une bande tricolore allemande (noir/rouge/or) encadre la page tout en haut
+et tout en bas ; le drapeau européen (proportions et disposition des 12
+étoiles conformes au tracé officiel) est centré juste au-dessus de la bande
+du bas, dans le pied de page. Les deux sont dessinés en CSS/SVG (aucune
+image à héberger) et volontairement masqués aux lecteurs d'écran
+(`aria-hidden`), étant purement décoratifs.
