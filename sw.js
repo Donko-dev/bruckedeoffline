@@ -1,31 +1,35 @@
 /**
  * sw.js — BrückeDeOffline
  * ---------------------------------------------------------------------------
- * Stratégie :
- *  - App shell (HTML/CSS/JS/JSON/icônes) : Cache-First avec pré-cache complet
- *    à l'installation → fonctionnement garanti à 100% hors ligne, y compris
- *    lors d'une actualisation (F5) sans réseau.
- *  - data.json : Cache-First pour la réponse immédiate, MAIS on relance en
- *    parallèle une requête réseau qui met à jour le cache silencieusement
- *    (Stale-While-Revalidate) et prévient l'app via postMessage si le
- *    contenu a changé, sans jamais bloquer l'affichage sur le réseau.
- *  - Navigation (changement de page) hors ligne sans entrée en cache :
- *    on retombe sur index.html mis en cache (comportement PWA standard).
+ * Stratégie : Réseau d'abord, repli sur le cache (Network-First).
+ *  - En ligne : chaque requête tente TOUJOURS le réseau en premier, pour
+ *    être certain d'afficher la dernière version déployée sur GitHub Pages
+ *    (voir README.md > "Pourquoi mes mises à jour n'apparaissaient pas").
+ *    Si le réseau répond, le cache est mis à jour silencieusement au passage.
+ *  - Hors ligne (ou réseau en échec) : repli immédiat sur la dernière copie
+ *    mise en cache, pour un fonctionnement garanti à 100% hors ligne.
+ *  - Navigation hors ligne sans entrée en cache exacte : repli sur
+ *    index.html mis en cache (comportement PWA standard).
  *
  * Important (voir README.md > "Ce que le Service Worker ne peut pas faire") :
  * la toute première visite doit obligatoirement passer par le réseau au
- * moins une fois pour télécharger ces fichiers (comme n'importe quelle PWA :
- * Twitter, Gmail, etc.). C'est APRÈS ce premier chargement que l'application
- * fonctionne à 100% hors ligne, y compris en avion, données mobiles coupées,
- * Wi-Fi désactivé, et lors des actualisations suivantes.
+ * moins une fois pour télécharger ces fichiers (comme n'importe quelle PWA).
+ * C'est APRÈS ce premier chargement que l'application fonctionne à 100%
+ * hors ligne, y compris en avion, données mobiles coupées, Wi-Fi désactivé.
+ *
+ * NE PAS repasser en cache-first : ce fichier a délibérément préféré la
+ * fraîcheur au gain de vitesse, précisément pour qu'une mise à jour de
+ * data.json/app.js/style.css apparaisse immédiatement dès la prochaine
+ * visite en ligne, sans jamais nécessiter la navigation privée ni un
+ * vidage manuel du cache.
  */
 
-const SW_VERSION = "bde-v1.0.0";
-const CACHE_SHELL = `${SW_VERSION}-shell`;
-const CACHE_DATA = `${SW_VERSION}-data`;
-const CACHE_RUNTIME = `${SW_VERSION}-runtime`;
+const SW_VERSION = "bde-v1.1.0";
+const CACHE_MAIN = `${SW_VERSION}-main`;
 
-// Fichiers de l'application (chemins relatifs à la racine du scope du SW).
+// Fichiers de l'application (chemins relatifs à la racine du scope du SW),
+// pré-mis en cache à l'installation pour un premier fonctionnement hors
+// ligne garanti, avant même la première requête réseau applicative.
 const SHELL_FILES = [
   "./",
   "./index.html",
@@ -33,6 +37,7 @@ const SHELL_FILES = [
   "./app.js",
   "./style.css",
   "./manifest.json",
+  "./data.json",
   "./icon-72.png",
   "./icon-96.png",
   "./icon-128.png",
@@ -44,15 +49,14 @@ const SHELL_FILES = [
   "./icon-maskable-192.png",
   "./icon-maskable-512.png",
   "./favicon.png",
+  "./favicon.ico",
   "./logo.png"
 ];
 
-const DATA_FILES = ["./data.json"];
-
 // Ressources externes (CDN) nécessaires au bon fonctionnement d'admin.html
 // hors ligne. Mise en cache "best effort" : si le device n'a jamais eu accès
-// à Internet, ces lignes échouent silencieusement (voir installEvent ci-dessous)
-// et n'empêchent PAS l'installation du reste de l'app shell.
+// à Internet, ces lignes échouent silencieusement et n'empêchent PAS
+// l'installation du reste de l'app shell.
 const CDN_FILES = [
   "https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"
 ];
@@ -60,24 +64,16 @@ const CDN_FILES = [
 self.addEventListener("install", (event) => {
   event.waitUntil(
     (async () => {
-      const shellCache = await caches.open(CACHE_SHELL);
-      await shellCache.addAll(SHELL_FILES);
-
-      const dataCache = await caches.open(CACHE_DATA);
-      await dataCache.addAll(DATA_FILES);
-
-      // CDN : on tente, sans faire échouer toute l'installation si le CDN
-      // est injoignable (ex: première installation avec connexion instable).
-      const runtimeCache = await caches.open(CACHE_RUNTIME);
+      const cache = await caches.open(CACHE_MAIN);
+      await cache.addAll(SHELL_FILES);
       await Promise.allSettled(
         CDN_FILES.map((url) =>
           fetch(url, { mode: "cors" })
-            .then((res) => (res.ok ? runtimeCache.put(url, res) : null))
+            .then((res) => (res.ok ? cache.put(url, res) : null))
             .catch(() => null)
         )
       );
-
-      await self.skipWaiting();
+      await self.skipWaiting(); // active la nouvelle version sans attendre la fermeture des onglets ouverts
     })()
   );
 });
@@ -87,64 +83,28 @@ self.addEventListener("activate", (event) => {
     (async () => {
       const keys = await caches.keys();
       await Promise.all(
-        keys
-          .filter((key) => !key.startsWith(SW_VERSION))
-          .map((key) => caches.delete(key))
+        keys.filter((key) => key !== CACHE_MAIN).map((key) => caches.delete(key))
       );
-      await self.clients.claim();
+      await self.clients.claim(); // prend le contrôle des onglets déjà ouverts immédiatement
     })()
   );
 });
 
-/** Notifie tous les onglets ouverts qu'une nouvelle version de data.json est dispo. */
-async function notifyClientsDataUpdated() {
-  const clients = await self.clients.matchAll({ type: "window" });
-  clients.forEach((client) => client.postMessage({ type: "BDE_DATA_UPDATED" }));
-}
-
-/** Stratégie Stale-While-Revalidate pour data.json. */
-async function handleDataRequest(request) {
-  const cache = await caches.open(CACHE_DATA);
-  const cached = await cache.match(request);
-
-  const networkFetch = fetch(request)
-    .then(async (response) => {
-      if (response && response.ok) {
-        const previous = cached ? await cached.clone().text() : null;
-        const fresh = response.clone();
-        const freshText = await fresh.text();
-        if (previous !== null && previous !== freshText) {
-          await notifyClientsDataUpdated();
-        }
-        await cache.put(request, response.clone());
-      }
-      return response;
-    })
-    .catch(() => null);
-
-  // Réponse immédiate depuis le cache si disponible, sinon on attend le réseau.
-  return cached || (await networkFetch) || new Response(
-    JSON.stringify({ error: "data.json indisponible hors ligne et non mise en cache." }),
-    { status: 503, headers: { "Content-Type": "application/json" } }
-  );
-}
-
-/** Stratégie Cache-First classique pour l'app shell et le contenu statique. */
-async function handleShellRequest(request) {
-  const cached = await caches.match(request, { ignoreSearch: true });
-  if (cached) return cached;
-
+/** Réseau d'abord, avec mise à jour silencieuse du cache ; repli sur le cache hors ligne. */
+async function networkFirst(request) {
+  const cache = await caches.open(CACHE_MAIN);
   try {
-    const response = await fetch(request);
+    // no-store : contourne aussi le cache HTTP du navigateur, pas seulement le nôtre.
+    const response = await fetch(request, { cache: "no-store" });
     if (response && response.ok && request.method === "GET") {
-      const cache = await caches.open(CACHE_RUNTIME);
       cache.put(request, response.clone());
     }
     return response;
   } catch (err) {
-    // Repli ultime pour une navigation hors ligne sans entrée en cache exacte.
+    const cached = await cache.match(request, { ignoreSearch: true });
+    if (cached) return cached;
     if (request.mode === "navigate") {
-      const fallback = await caches.match("./index.html");
+      const fallback = await cache.match("./index.html");
       if (fallback) return fallback;
     }
     throw err;
@@ -154,16 +114,7 @@ async function handleShellRequest(request) {
 self.addEventListener("fetch", (event) => {
   const { request } = event;
   if (request.method !== "GET") return; // ne pas intercepter POST/PUT etc. (ex: appels de sync)
-
-  const url = new URL(request.url);
-  const isSameOrigin = url.origin === self.location.origin;
-
-  if (isSameOrigin && url.pathname.endsWith("/data.json")) {
-    event.respondWith(handleDataRequest(request));
-    return;
-  }
-
-  event.respondWith(handleShellRequest(request));
+  event.respondWith(networkFirst(request));
 });
 
 // Permet à app.js de forcer une mise à jour immédiate depuis l'interface

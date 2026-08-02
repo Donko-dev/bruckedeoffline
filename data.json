@@ -189,7 +189,10 @@
       "navGallery": "Galerie",
       "autoGalleryHint": "Photos et vidéos ajoutées directement sur GitHub (sans passer par data.json), détectées automatiquement par leur nom de fichier.",
       "autoGalleryEmpty": "Aucune photo ou vidéo trouvée pour l'instant. Déposez un fichier nommé « galerie-photo-1.jpg » ou « galerie-video-1.mp4 » à la racine du dépôt pour qu'il apparaisse ici.",
-      "autoGalleryLoading": "Recherche des photos et vidéos…"
+      "autoGalleryLoading": "Recherche des photos et vidéos…",
+      "externalResourcesTitle": "Pour aller plus loin, gratuitement",
+      "externalResourcesSubtitle": "Ressources externes gratuites, sélectionnées pour ce niveau.",
+      "usefulLinksTitle": "Sources et liens utiles"
     },
     "en": {
       "appTagline": "Learn German, anywhere, even offline.",
@@ -254,7 +257,10 @@
       "navGallery": "Gallery",
       "autoGalleryHint": "Photos and videos added directly on GitHub (without touching data.json), auto-detected from their filename.",
       "autoGalleryEmpty": "No photo or video found yet. Add a file named \"galerie-photo-1.jpg\" or \"galerie-video-1.mp4\" to the repository root for it to appear here.",
-      "autoGalleryLoading": "Looking for photos and videos…"
+      "autoGalleryLoading": "Looking for photos and videos…",
+      "externalResourcesTitle": "Go further, for free",
+      "externalResourcesSubtitle": "Free external resources, selected for this level.",
+      "usefulLinksTitle": "Sources and useful links"
     },
     "es": {
       "appTagline": "Aprende alemán en cualquier lugar, incluso sin conexión.",
@@ -765,6 +771,29 @@
             "title": "Se présenter",
             "contentHtml": "<h3>Se présenter en allemand</h3><p>Pour se présenter, on utilise le verbe <strong>sein</strong> (être) et le verbe <strong>heißen</strong> (s'appeler).</p><p><em>Ich bin Marie. Ich heiße Marie. Ich komme aus Frankreich.</em></p><h4>Conjugaison de « sein » (être) au présent</h4><table><thead><tr><th>Pronom</th><th>Forme</th></tr></thead><tbody><tr><td>ich</td><td>bin</td></tr><tr><td>du</td><td>bist</td></tr><tr><td>er / sie / es</td><td>ist</td></tr><tr><td>wir</td><td>sind</td></tr><tr><td>ihr</td><td>seid</td></tr><tr><td>sie / Sie</td><td>sind</td></tr></tbody></table><h4>Les articles définis au nominatif (der / die / das)</h4><table><thead><tr><th>Genre</th><th>Article</th><th>Exemple</th></tr></thead><tbody><tr><td>Masculin</td><td>der</td><td>der Mann</td></tr><tr><td>Féminin</td><td>die</td><td>die Frau</td></tr><tr><td>Neutre</td><td>das</td><td>das Kind</td></tr><tr><td>Pluriel</td><td>die</td><td>die Kinder</td></tr></tbody></table><p><em>Astuce administrateur&#160;: le bouton «&#160;Insérer un audio&#160;» de l'éditeur (admin.html) ajoute ici une balise &lt;audio&gt; pointant vers un fichier que vous téléversez vous-même à la racine du dépôt.</em></p>"
           }
+        ],
+        "externalResources": [
+          {
+            "title": "Nicos Weg – Folge 1 : « Hallo! »",
+            "org": "Deutsche Welle",
+            "type": "youtube",
+            "youtubeId": "dC6ZGLzdaTs",
+            "note": "Ressource externe gratuite, produite par Deutsche Welle (radiodiffuseur public allemand, financé par l'État fédéral mais éditorialement indépendant) en coopération avec l'Agence fédérale allemande pour l'emploi. BrückeDeOffline n'est pas affilié à Deutsche Welle."
+          },
+          {
+            "title": "Nicos Weg – Folge 2 : « Kein Problem! »",
+            "org": "Deutsche Welle",
+            "type": "youtube",
+            "youtubeId": "upvuC9FR-xU",
+            "note": ""
+          },
+          {
+            "title": "Continuer le cours A1 complet (76 leçons + exercices interactifs)",
+            "org": "Deutsche Welle — learngerman.dw.com",
+            "type": "link",
+            "url": "https://learngerman.dw.com/en/overview",
+            "note": "Gratuit, aucune inscription obligatoire."
+          }
         ]
       },
       {
@@ -775,6 +804,22 @@
             "id": "a2-perfekt",
             "title": "Le Perfekt (passé composé)",
             "contentHtml": "<h3>Formation du Perfekt</h3><p>Le Perfekt se forme avec l'auxiliaire <strong>haben</strong> ou <strong>sein</strong> conjugué + le participe passé (Partizip II) en fin de phrase.</p><p><em>Ich habe einen Kaffee getrunken. Ich bin nach Hause gegangen.</em></p><h4>Quand utiliser « sein » ?</h4><ul><li>Verbes de mouvement : <em>gehen, fahren, kommen, fliegen</em></li><li>Verbes de changement d'état : <em>aufwachen, einschlafen, werden</em></li><li>Exceptions à retenir : <em>sein → gewesen, bleiben → geblieben</em></li></ul>"
+          }
+        ],
+        "externalResources": [
+          {
+            "title": "Nicos Weg A2 — playlist vidéo complète",
+            "org": "Deutsche Welle",
+            "type": "youtube",
+            "playlistId": "PLs7zUO7VPyJ7YxTq_g2Rcl3Jthd5bpTdY",
+            "note": "Ressource externe gratuite, produite par Deutsche Welle (radiodiffuseur public allemand, financé par l'État fédéral mais éditorialement indépendant) en coopération avec l'Agence fédérale allemande pour l'emploi. BrückeDeOffline n'est pas affilié à Deutsche Welle."
+          },
+          {
+            "title": "Exercices, grammaire et glossaire A2",
+            "org": "Deutsche Welle — learngerman.dw.com",
+            "type": "link",
+            "url": "https://learngerman.dw.com/en/overview",
+            "note": ""
           }
         ]
       },
@@ -787,6 +832,22 @@
             "title": "Les propositions subordonnées",
             "contentHtml": "<h3>La place du verbe dans la subordonnée</h3><p>Après <strong>weil, dass, wenn, obwohl</strong>, le verbe conjugué part en toute fin de proposition.</p><p><em>Ich bleibe zu Hause, weil ich krank bin.</em><br><em>Ich glaube, dass er Recht hat.</em></p><p>À l'écrit soutenu et à l'oral rapide, cette construction demande de l'entraînement : on garde le verbe « en réserve » jusqu'à la fin.</p>"
           }
+        ],
+        "externalResources": [
+          {
+            "title": "Nicos Weg B1 — playlist vidéo complète",
+            "org": "Deutsche Welle",
+            "type": "youtube",
+            "playlistId": "PLs7zUO7VPyJ5razSfhOUVbTv9q6SAuPx-",
+            "note": "Ressource externe gratuite, produite par Deutsche Welle (radiodiffuseur public allemand, financé par l'État fédéral mais éditorialement indépendant) en coopération avec l'Agence fédérale allemande pour l'emploi. BrückeDeOffline n'est pas affilié à Deutsche Welle."
+          },
+          {
+            "title": "Exercices, grammaire et glossaire B1",
+            "org": "Deutsche Welle — learngerman.dw.com",
+            "type": "link",
+            "url": "https://learngerman.dw.com/en/overview",
+            "note": ""
+          }
         ]
       },
       {
@@ -797,6 +858,22 @@
             "id": "b2-passiv",
             "title": "Le passif (Vorgangspassiv)",
             "contentHtml": "<h3>Formation</h3><p><strong>werden</strong> conjugué + Partizip II.</p><p><em>Das Haus wird gebaut. (présent) — Das Haus wurde gebaut. (prétérit)</em></p><h4>Zustandspassiv vs Vorgangspassiv</h4><p>Le <em>Vorgangspassiv</em> (avec <strong>werden</strong>) décrit une action en cours ; le <em>Zustandspassiv</em> (avec <strong>sein</strong>) décrit un état résultant : <em>Das Fenster ist geöffnet.</em></p>"
+          }
+        ],
+        "externalResources": [
+          {
+            "title": "Langsam Gesprochene Nachrichten — actualités quotidiennes en allemand simple, avec texte",
+            "org": "Deutsche Welle",
+            "type": "link",
+            "url": "https://learngerman.dw.com/de/langsam-gesprochene-nachrichten/s-60040332",
+            "note": "Ressource externe gratuite, produite par Deutsche Welle (radiodiffuseur public allemand, financé par l'État fédéral mais éditorialement indépendant) en coopération avec l'Agence fédérale allemande pour l'emploi. BrückeDeOffline n'est pas affilié à Deutsche Welle. Publié du lundi au samedi : idéal pour s'entraîner à la compréhension orale avec des sujets d'actualité réels."
+          },
+          {
+            "title": "Kostenlos Deutsch üben — exercices gratuits tous niveaux",
+            "org": "Goethe-Institut",
+            "type": "link",
+            "url": "https://www.goethe.de/de/spr/ueb.html",
+            "note": "Ressource externe gratuite du Goethe-Institut (institut culturel officiel allemand). BrückeDeOffline n'est pas affilié au Goethe-Institut."
           }
         ]
       },
@@ -809,6 +886,29 @@
             "title": "Les attributs participiaux étendus",
             "contentHtml": "<h3>Un style typique de l'allemand écrit formel</h3><p>La presse et les textes académiques compressent une proposition relative en un groupe adjectival placé avant le nom.</p><p><em>Die von der Regierung erlassenen Maßnahmen</em> (= die Maßnahmen, die von der Regierung erlassen wurden).</p><p><strong>Méthode de lecture :</strong> repérer d'abord le nom noyau en fin de groupe, puis « dérouler » l'attribut comme une relative.</p>"
           }
+        ],
+        "externalResources": [
+          {
+            "title": "Langsam Gesprochene Nachrichten — actualités quotidiennes en allemand simple",
+            "org": "Deutsche Welle",
+            "type": "link",
+            "url": "https://learngerman.dw.com/de/langsam-gesprochene-nachrichten/s-60040332",
+            "note": "Ressource externe gratuite, produite par Deutsche Welle (radiodiffuseur public allemand, financé par l'État fédéral mais éditorialement indépendant) en coopération avec l'Agence fédérale allemande pour l'emploi. BrückeDeOffline n'est pas affilié à Deutsche Welle."
+          },
+          {
+            "title": "Ressources avancées DW (Sprachbar, Alltagsdeutsch, Wort der Woche)",
+            "org": "Deutsche Welle",
+            "type": "link",
+            "url": "https://learngerman.dw.com/en/overview",
+            "note": "Expressions idiomatiques, vocabulaire, textes commentés — niveau B2 à C2."
+          },
+          {
+            "title": "Kostenlos Deutsch üben — exercices gratuits tous niveaux",
+            "org": "Goethe-Institut",
+            "type": "link",
+            "url": "https://www.goethe.de/de/spr/ueb.html",
+            "note": "Ressource externe gratuite du Goethe-Institut (institut culturel officiel allemand). BrückeDeOffline n'est pas affilié au Goethe-Institut."
+          }
         ]
       },
       {
@@ -819,6 +919,22 @@
             "id": "c2-nuancen",
             "title": "Nuances de registre",
             "contentHtml": "<h3>Trois expressions à manier avec finesse</h3><ul><li><strong>etwas auf die lange Bank schieben</strong> — repousser indéfiniment quelque chose (registre courant, légèrement critique)</li><li><strong>den Nagel auf den Kopf treffen</strong> — voir juste, cerner exactement le problème (registre neutre à soutenu)</li><li><strong>sich nicht beirren lassen</strong> — garder son cap malgré les objections (registre soutenu, connotation valorisante)</li></ul><p>À ce niveau, la difficulté n'est plus la grammaire mais le <strong>choix du registre juste</strong> selon le contexte.</p>"
+          }
+        ],
+        "externalResources": [
+          {
+            "title": "Ressources avancées DW (Sprachbar, Alltagsdeutsch, Wort der Woche)",
+            "org": "Deutsche Welle",
+            "type": "link",
+            "url": "https://learngerman.dw.com/en/overview",
+            "note": "Ressource externe gratuite, produite par Deutsche Welle (radiodiffuseur public allemand, financé par l'État fédéral mais éditorialement indépendant) en coopération avec l'Agence fédérale allemande pour l'emploi. BrückeDeOffline n'est pas affilié à Deutsche Welle."
+          },
+          {
+            "title": "Kostenlos Deutsch üben — exercices gratuits tous niveaux",
+            "org": "Goethe-Institut",
+            "type": "link",
+            "url": "https://www.goethe.de/de/spr/ueb.html",
+            "note": "Ressource externe gratuite du Goethe-Institut (institut culturel officiel allemand). BrückeDeOffline n'est pas affilié au Goethe-Institut."
           }
         ]
       }
@@ -975,6 +1091,28 @@
       {
         "title": "Droit du travail : les bases",
         "description": "Contrat de travail écrit quasi systématique, congé payé légal minimum (généralement 20 jours pour une semaine de 5 jours), protection renforcée contre le licenciement après la période d'essai."
+      }
+    ],
+    "usefulLinks": [
+      {
+        "title": "Langsam Gesprochene Nachrichten — actualités en allemand simple (quotidien)",
+        "org": "Deutsche Welle",
+        "url": "https://learngerman.dw.com/de/langsam-gesprochene-nachrichten/s-60040332"
+      },
+      {
+        "title": "DW News — actualité allemande et internationale",
+        "org": "Deutsche Welle",
+        "url": "https://www.dw.com/de/"
+      },
+      {
+        "title": "Statistiques officielles (population, Länder, économie)",
+        "org": "Statistisches Bundesamt (Destatis)",
+        "url": "https://www.destatis.de/"
+      },
+      {
+        "title": "Portail officiel de présentation de l'Allemagne",
+        "org": "Deutschland.de",
+        "url": "https://www.deutschland.de/"
       }
     ]
   },

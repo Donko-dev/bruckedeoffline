@@ -287,6 +287,11 @@ button { font-family: inherit; }
 .visa-item__body li { margin-bottom: 6px; }
 .visa-disclaimer { font-size: 0.78rem; color: var(--color-text-muted); border-inline-start: 3px solid var(--color-accent); padding-inline-start: var(--space-3); margin-top: var(--space-4); }
 
+/* Cartes de liens vers des ressources externes (curées, jamais présentées comme du contenu BDE original) */
+.external-resource-link { text-decoration: none; color: var(--color-text); display: flex; flex-direction: column; gap: 4px; transition: border-color 0.15s ease; }
+.external-resource-link:hover { border-color: var(--color-primary); }
+.external-resource-link__org { font-size: 0.8rem; color: var(--color-info); font-weight: 600; }
+
 /* Don */
 .donate-card { background: linear-gradient(135deg, var(--color-primary), color-mix(in srgb, var(--color-primary) 70%, black)); color: var(--color-on-primary); border: none; }
 .donate-card .btn-donate { margin-top: var(--space-3); }

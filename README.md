@@ -45,6 +45,18 @@ python3 -m http.server 8080
 ```
 puis ouvrez `http://localhost:8080`.
 
+**Stratégie de mise en cache : réseau d'abord, hors ligne en repli.** Tant
+que l'appareil est en ligne, chaque page/fichier est systématiquement
+redemandé au serveur (GitHub Pages) pour garantir que vous voyez toujours
+la dernière version publiée — c'est seulement si le réseau échoue que le
+Service Worker sert la dernière copie enregistrée localement. Concrètement :
+mettez à jour un fichier sur GitHub, et il apparaît dès la prochaine visite
+en ligne, sans navigation privée ni vidage de cache nécessaire. (Une
+version antérieure de ce projet utilisait un cache prioritaire sur le
+réseau, ce qui pouvait afficher une version périmée indéfiniment tant que
+le Service Worker n'était pas explicitement mis à jour — ce comportement a
+été corrigé.)
+
 ## 3. Workflow d'administration
 
 1. Ouvrez `admin.html` (localement ou une fois déployé) — lien à ne
@@ -57,9 +69,10 @@ puis ouvrez `http://localhost:8080`.
 6. **⬇️ Exporter data.json** : télécharge le fichier mis à jour.
 7. Téléversez ce nouveau `data.json` (et, le cas échéant, les nouveaux
    fichiers vidéo/audio locaux référencés) sur GitHub, à la racine du
-   dépôt, en remplacement de l'ancien. Les visiteurs reçoivent la mise à
-   jour automatiquement (le Service Worker la détecte et l'affiche au
-   prochain démarrage — un bandeau les prévient).
+   dépôt, en remplacement de l'ancien. Les visiteurs déjà en ligne voient la
+   mise à jour **immédiatement** au chargement suivant : le Service Worker
+   sert toujours le réseau en priorité et ne retombe sur la copie hors
+   ligne qu'en l'absence de connexion (voir section 2 — stratégie de cache).
 
 ## 4. Ajouter des photos et vidéos : deux méthodes possibles
 
@@ -136,7 +149,6 @@ poignée de vidéos assez lourdes, la lecture en avance rapide (« seek »)
 d'un fichier servi depuis le cache hors ligne peut être imparfaite selon
 le navigateur — limite du Cache API face à un flux vidéo volumineux, pas
 un bug de l'application.
-
 
 ## 5. Multi-appareil : ce que l'identifiant unique fait vraiment aujourd'hui
 
@@ -260,7 +272,44 @@ grand public et les robots génériques, pas contre un attaquant déterminé et
 techniquement outillé — ce qui est la limite honnête de **toute** PWA sans
 serveur, quel que soit le prestataire.
 
-## 8. Guide de vie en Allemagne / Hub des visas : à vérifier avant usage réel
+## 8. Ressources externes gratuites intégrées (Deutsche Welle, Goethe-Institut)
+
+Pour éviter les niveaux vides plutôt que d'inventer du contenu non vérifié,
+chaque niveau de cours affiche désormais, sous ses propres leçons, un bloc
+« Pour aller plus loin, gratuitement » avec des ressources **externes,
+gratuites et officielles**, clairement attribuées (jamais présentées comme
+du contenu BrückeDeOffline) :
+
+- **A1, A2, B1** : vidéos de *Nicos Weg*, le cours vidéo gratuit de
+  **Deutsche Welle** (radiodiffuseur public allemand) produit avec l'Agence
+  fédérale allemande pour l'emploi — intégrées et lisibles directement sur
+  la page (A1 : deux épisodes ; A2 et B1 : la playlist complète du niveau).
+- **B2, C1** : *Langsam Gesprochene Nachrichten*, les actualités
+  quotidiennes de DW lues lentement avec texte à l'appui — la ressource la
+  plus adaptée pour travailler la compréhension orale avec de vraies
+  actualités.
+- **Tous niveaux** : lien vers *Kostenlos Deutsch üben* du Goethe-Institut
+  (exercices gratuits interactifs, A1 à C2).
+- **Guide de vie en Allemagne** : section « Sources et liens utiles » avec
+  DW News, Destatis (statistiques officielles) et Deutschland.de (portail
+  officiel du pays).
+
+Toutes ces ressources ont été vérifiées par recherche web avant intégration
+(URLs et identifiants YouTube réels, pas inventés). Les vidéos YouTube
+intégrées nécessitent une connexion Internet au moment du visionnage (comme
+le reste des modules hybrides) ; les cours et le test de niveau de BDE
+restent, eux, 100% fonctionnels hors ligne.
+
+**Pour ajouter d'autres ressources** (vos propres liens, une chaîne YouTube
+que vous recommandez, un site que vous avez trouvé) : envoyez-les-moi et je
+les intègre de la même façon, ou éditez directement
+`data.json > cours.levels[].externalResources` (voir la structure des
+entrées existantes — champs `title`, `org`, `type` (`"youtube"` ou
+`"link"`), et selon le type `youtubeId`/`playlistId` ou `url`, plus `note`).
+Il n'y a pas encore d'interface dédiée dans `admin.html` pour cette liste
+précise — je peux l'ajouter si vous voulez l'éditer vous-même plus souvent.
+
+## 9. Guide de vie en Allemagne / Hub des visas : à vérifier avant usage réel
 
 Les contenus sur les Länder, les lois civiques et les visas sont exacts au
 moment de la rédaction (montants du Chancenkarte et du Sperrkonto vérifiés
@@ -270,7 +319,7 @@ l'ambassade/du consulat ou du portail officiel avant toute démarche.
 BrückeDeOffline reste un outil pédagogique indépendant, non affilié au
 Goethe-Institut, à l'ÖSD, à telc ni à aucune administration allemande.
 
-## 9. Ce qui est un vrai « point de départ » plutôt qu'un contenu exhaustif
+## 10. Ce qui est un vrai « point de départ » plutôt qu'un contenu exhaustif
 
 Pour livrer une application entièrement fonctionnelle plutôt que des
 promesses vides, certains contenus sont volontairement un socle solide et
@@ -293,7 +342,7 @@ réel, extensible depuis `admin.html` sans toucher au code :
 - **16 Länder** et **6 types de visas** : tous rédigés intégralement (pas
   de trou dans la liste).
 
-## 10. Identité visuelle
+## 11. Identité visuelle
 
 Palette et pictogramme du pont (« Brücke ») dessinés spécifiquement pour ce
 projet, sans polices téléchargées (police système uniquement) afin de

@@ -184,7 +184,9 @@ function isSafeAttrValue(tagName, attrName, value) {
   if (/^javascript:/i.test(v)) return false;
   if (attrName !== "src") return true;
   if (tagName === "IFRAME") {
-    return /^https:\/\/www\.youtube-nocookie\.com\/embed\/[a-zA-Z0-9_-]{11}(\?[a-zA-Z0-9=&_-]*)?$/.test(v);
+    const singleVideo = /^https:\/\/www\.youtube-nocookie\.com\/embed\/[a-zA-Z0-9_-]{11}(\?[a-zA-Z0-9=&_-]*)?$/.test(v);
+    const playlist = /^https:\/\/www\.youtube-nocookie\.com\/embed\/videoseries\?list=[a-zA-Z0-9_-]+$/.test(v);
+    return singleVideo || playlist;
   }
   if (tagName === "IMG") {
     return /^data:image\/(png|jpeg|jpg|gif|webp);base64,/i.test(v)
@@ -830,6 +832,49 @@ function renderLevelChooserHtml() {
   `;
 }
 
+/* ---- Ressources externes gratuites (curées, attribuées, jamais présentées comme du contenu BDE original) ---- */
+function youtubeEmbedSrc(res) {
+  if (res.playlistId) return `https://www.youtube-nocookie.com/embed/videoseries?list=${encodeURIComponent(res.playlistId)}`;
+  if (res.youtubeId) return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(res.youtubeId)}`;
+  return null;
+}
+
+function renderExternalResourceCard(res) {
+  if (res.type === "youtube") {
+    const src = youtubeEmbedSrc(res);
+    if (!src || !isSafeAttrValue("IFRAME", "src", src)) return "";
+    return `
+      <div class="media-item" data-requires-online>
+        <div class="media-item__lock-overlay">🔌 ${escapeHtml(t("offlineNotice"))}</div>
+        <div class="media-item__frame">
+          <iframe src="${escapeHtml(src)}" title="${escapeHtml(res.title)}" loading="lazy"
+            allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <h4>${escapeHtml(res.title)}</h4>
+        <p class="media-item__caption">${escapeHtml(res.org)}${res.note ? " — " + escapeHtml(res.note) : ""}</p>
+      </div>`;
+  }
+  // type "link" : simple carte vers une ressource externe (pas d'iframe).
+  return `
+    <a class="card external-resource-link" href="${escapeHtml(res.url)}" target="_blank" rel="noopener">
+      <strong>${escapeHtml(res.title)}</strong>
+      <span class="external-resource-link__org">${escapeHtml(res.org)} ↗</span>
+      ${res.note ? `<p class="media-item__caption">${escapeHtml(res.note)}</p>` : ""}
+    </a>`;
+}
+
+function renderExternalResourcesSection(resources) {
+  if (!resources || !resources.length) return "";
+  const cards = resources.map(renderExternalResourceCard).join("");
+  return `
+    <div style="margin-top:var(--space-6);">
+      <h3>${escapeHtml(t("externalResourcesTitle"))}</h3>
+      <p style="color:var(--color-text-muted);">${escapeHtml(t("externalResourcesSubtitle"))}</p>
+      <div class="grid grid-3">${cards}</div>
+    </div>
+  `;
+}
+
 function renderLevelCourseHtml(levelCode, progress) {
   const openLessonId = AppState.courseUI && AppState.courseUI.levelCode === levelCode ? AppState.courseUI.openLessonId : null;
   const lessons = getLevelLessons(levelCode);
@@ -872,6 +917,7 @@ function renderLevelCourseHtml(levelCode, progress) {
           <button class="btn btn-primary" id="start-validation-btn" type="button">${escapeHtml(t("startLevelValidation"))} →</button>
         </div>
       ` : ""}
+      ${renderExternalResourcesSection(levelMeta ? levelMeta.externalResources : [])}
     </section>
   `;
 }
@@ -996,6 +1042,9 @@ function renderGermanyGuide() {
   const newsArticles = guide.culture.fallbackArticles.map((a) => `
     <div class="card"><h4>${escapeHtml(a.title)}</h4><p>${escapeHtml(a.body)}</p></div>
   `).join("");
+  const usefulLinks = (guide.usefulLinks || []).map((l) => `
+    <li><a href="${escapeHtml(l.url)}" target="_blank" rel="noopener"><strong>${escapeHtml(l.title)}</strong></a> — ${escapeHtml(l.org)}</li>
+  `).join("");
 
   return `
     <section class="section container">
@@ -1011,6 +1060,11 @@ function renderGermanyGuide() {
 
       <h3>${escapeHtml(t("navGuide"))} — droits et devoirs</h3>
       <ul class="civic-list">${civicLaws}</ul>
+
+      ${usefulLinks ? `
+        <h3 style="margin-top:var(--space-6);">${escapeHtml(t("usefulLinksTitle"))}</h3>
+        <ul class="civic-list">${usefulLinks}</ul>
+      ` : ""}
     </section>
   `;
 }
