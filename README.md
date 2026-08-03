@@ -8,7 +8,7 @@ hors ligne après le premier chargement, pilotée entièrement par `data.json`.
 | Fichier | Rôle |
 |---|---|
 | `index.html` | Application utilisateur |
-| `admin.html` | Panneau d'administration (CMS local, autonome) |
+| Tableau | Panneau d'administration (CMS local, autonome) |
 | `app.js` | Logique de l'application utilisateur |
 | `sw.js` | Service Worker (cache hors ligne) |
 | `style.css` | Styles de l'application utilisateur |
