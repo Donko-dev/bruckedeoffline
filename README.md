@@ -8,7 +8,7 @@ hors ligne après le premier chargement, pilotée entièrement par `data.json`.
 | Fichier | Rôle |
 |---|---|
 | `index.html` | Application utilisateur |
-| Tableau | Panneau d'administration (CMS local, autonome) |
+| `admin.html` | Panneau d'administration (CMS local, autonome) |
 | `app.js` | Logique de l'application utilisateur |
 | `sw.js` | Service Worker (cache hors ligne) |
 | `style.css` | Styles de l'application utilisateur |
@@ -75,6 +75,25 @@ le Service Worker n'était pas explicitement mis à jour — ce comportement a
    ligne qu'en l'absence de connexion (voir section 2 — stratégie de cache).
 
 ## 4. Ajouter des photos et vidéos : deux méthodes possibles
+
+⚠️ **Sur les droits d'auteur des photos.** Si les photos que vous voulez
+utiliser proviennent d'une banque d'images (Depositphotos, iStock/Getty,
+Shutterstock, ou une simple recherche Google Images), elles sont presque
+toujours protégées et nécessitent une licence payante — les publier sans
+cela expose légalement à une demande de retrait, voire à une facturation
+a posteriori par l'agence. Pour des photos gratuites et réutilisables
+légalement, deux sources fiables :
+- **Wikimedia Commons** (commons.wikimedia.org) : des centaines de photos
+  libres de droits ou sous licence Creative Commons pour chaque grande
+  ville et monument allemand. Vérifiez la licence indiquée sur la page du
+  fichier ; pour les licences « CC BY » ou « CC BY-SA », mentionnez le nom
+  du photographe dans la légende (voir le champ `caption` d'un média).
+- **Pexels, Unsplash, Pixabay** : photos gratuites, y compris pour un usage
+  commercial, sans attribution obligatoire (mais toujours appréciée).
+
+Une fois l'image téléchargée légalement, deux façons de l'intégrer : la
+Méthode A ci-dessous (dépôt direct sur GitHub, la plus simple) ou la
+Méthode B (import dans admin.html, en base64).
 
 ### Méthode A — Galerie automatique (sans data.json, la plus rapide depuis un téléphone)
 
@@ -292,7 +311,9 @@ du contenu BrückeDeOffline) :
   (exercices gratuits interactifs, A1 à C2).
 - **Guide de vie en Allemagne** : section « Sources et liens utiles » avec
   DW News, Destatis (statistiques officielles) et Deutschland.de (portail
-  officiel du pays).
+  officiel du pays). La galerie de la page inclut aussi deux vidéos
+  officielles DW Reise (Hambourg en 360°, Berlin) intégrées et lisibles
+  directement sur la page.
 
 Toutes ces ressources ont été vérifiées par recherche web avant intégration
 (URLs et identifiants YouTube réels, pas inventés). Les vidéos YouTube
@@ -310,6 +331,10 @@ Il n'y a pas encore d'interface dédiée dans `admin.html` pour cette liste
 précise — je peux l'ajouter si vous voulez l'éditer vous-même plus souvent.
 
 ## 9. Guide de vie en Allemagne / Hub des visas : à vérifier avant usage réel
+
+Les quatre portails officiels listés en bas du Hub des visas (Auswärtiges
+Amt, Make it in Germany, Ausländerportal, ANABIN) sont désormais
+cliquables et s'ouvrent dans un nouvel onglet, sans quitter l'application.
 
 Les contenus sur les Länder, les lois civiques et les visas sont exacts au
 moment de la rédaction (montants du Chancenkarte et du Sperrkonto vérifiés

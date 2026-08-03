@@ -1088,7 +1088,12 @@ function renderVisaHub() {
       </div>
     </div>
   `).join("");
-  const portals = hub.officialPortals.map((p) => `<li><strong>${escapeHtml(p.name)}</strong> — ${escapeHtml(p.note)}</li>`).join("");
+  const portals = hub.officialPortals.map((p) => `
+    <li>${p.url
+      ? `<a href="${escapeHtml(p.url)}" target="_blank" rel="noopener"><strong>${escapeHtml(p.name)}</strong> ↗</a>`
+      : `<strong>${escapeHtml(p.name)}</strong>`
+    } — ${escapeHtml(p.note)}</li>
+  `).join("");
 
   return `
     <section class="section container">
