@@ -382,11 +382,11 @@ window.addEventListener("offline", updateOnlineStatus);
 /* ========================================================================
    11. ÉCRAN D'ACCUEIL (langue puis identifiant)
    ======================================================================== */
-function showOnboarding() {
+function showOnboarding(isFirstRun = false) {
   const overlay = document.getElementById("onboarding-overlay");
   overlay.innerHTML = "";
   overlay.style.display = "flex";
-  renderLanguageStep();
+  renderLanguageStep(isFirstRun);
 }
 
 function hideOnboarding() {
@@ -399,7 +399,7 @@ function sheet(contentHtml) {
   return `<div class="onboarding-sheet" role="dialog" aria-modal="true">${contentHtml}</div>`;
 }
 
-function renderLanguageStep() {
+function renderLanguageStep(isFirstRun) {
   const overlay = document.getElementById("onboarding-overlay");
   const langs = AppState.data.languages.map((l) =>
     `<button class="lang-choice" data-lang="${escapeHtml(l.code)}" type="button">${escapeHtml(l.label)}</button>`
@@ -417,7 +417,17 @@ function renderLanguageStep() {
       AppState.lang = btn.getAttribute("data-lang");
       Store.set(STORAGE_KEYS.language, AppState.lang);
       applyLanguageDirection();
-      renderWelcomeStep();
+      if (isFirstRun) {
+        // Premier lancement uniquement : la langue est choisie AVANT que
+        // l'identifiant unique existe, donc l'étape suivante logique est
+        // de le créer/restaurer.
+        renderWelcomeStep();
+      } else {
+        // Changement de langue en cours d'utilisation : l'identifiant
+        // existe déjà, on ne doit plus jamais le redemander ici.
+        hideOnboarding();
+        renderApp();
+      }
     });
   });
 }
@@ -544,6 +554,7 @@ const NAV_SECTIONS = {
   courses: { route: "courses", labelKey: "navCourses" },
   germanyGuide: { route: "guide", labelKey: "navGuide", featureKey: "germanyGuide" },
   visaHub: { route: "visa", labelKey: "navVisa", featureKey: "visaHub" },
+  phrasebook: { route: "phrasebook", labelKey: "navPhrasebook", featureKey: "phrasebook" },
   gallery: { route: "gallery", labelKey: "navGallery", featureKey: "autoGallery" },
   donate: { route: "donate", labelKey: "navDonate", featureKey: "donationWidget" },
   contact: { route: "contact", labelKey: "navContact" }
@@ -581,7 +592,7 @@ function renderHeader() {
     <nav class="main-nav" id="main-nav">${navLinks}</nav>
   `;
   document.getElementById("theme-toggle").addEventListener("click", toggleThemeMode);
-  document.getElementById("lang-toggle").addEventListener("click", showOnboarding);
+  document.getElementById("lang-toggle").addEventListener("click", () => showOnboarding(false));
   updateOnlineStatus();
 }
 
@@ -621,7 +632,8 @@ function renderRoute(route) {
   const root = document.getElementById("app-root");
   const renderers = {
     home: renderHome, test: renderPlacementTestIntro, courses: renderCourses,
-    guide: renderGermanyGuide, visa: renderVisaHub, donate: renderDonationSection, contact: renderContactSection
+    guide: renderGermanyGuide, visa: renderVisaHub, phrasebook: renderPhrasebook,
+    donate: renderDonationSection, contact: renderContactSection
   };
   const renderer = renderers[route] || renderHome;
   root.innerHTML = renderer();
@@ -762,6 +774,7 @@ function attachRouteHandlers(route) {
   if (route === "courses") attachCoursesHandlers();
   if (route === "guide") attachGuideHandlers();
   if (route === "visa") attachVisaHandlers();
+  if (route === "phrasebook") attachPhrasebookHandlers();
   if (route === "donate") attachDonateHandlers();
 }
 
@@ -1045,6 +1058,27 @@ function renderGermanyGuide() {
   const usefulLinks = (guide.usefulLinks || []).map((l) => `
     <li><a href="${escapeHtml(l.url)}" target="_blank" rel="noopener"><strong>${escapeHtml(l.title)}</strong></a> — ${escapeHtml(l.org)}</li>
   `).join("");
+  const landmarkTypeIcons = { monument: "🗿", musee: "🖼️", unesco: "🏛️", chateau: "🏰" };
+  const landmarkGroups = guide.laender.filter((l) => l.landmarks && l.landmarks.length).map((land) => `
+    <div class="visa-item" data-visa="landmarks-${escapeHtml(land.name)}">
+      <button class="visa-item__head" type="button">
+        <span>${escapeHtml(land.name)}</span><span class="visa-item__chevron">▾</span>
+      </button>
+      <div class="visa-item__body">
+        <div class="grid grid-2">
+          ${land.landmarks.map((site) => `
+            <div class="card">
+              <div style="font-size:0.75rem;color:var(--color-text-muted);font-weight:700;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:4px;">
+                ${landmarkTypeIcons[site.type] || "📍"} ${escapeHtml(t(`landmarksType${site.type.charAt(0).toUpperCase()}${site.type.slice(1)}`))} · ${escapeHtml(site.city)}
+              </div>
+              <h4 style="margin-bottom:4px;">${escapeHtml(site.name)}</h4>
+              <p style="margin:0;font-size:0.9rem;">${escapeHtml(site.description)}</p>
+            </div>
+          `).join("")}
+        </div>
+      </div>
+    </div>
+  `).join("");
 
   return `
     <section class="section container">
@@ -1061,6 +1095,12 @@ function renderGermanyGuide() {
       <h3>${escapeHtml(t("navGuide"))} — droits et devoirs</h3>
       <ul class="civic-list">${civicLaws}</ul>
 
+      ${landmarkGroups ? `
+        <h3 style="margin-top:var(--space-6);">${escapeHtml(t("landmarksTitle"))}</h3>
+        <p style="color:var(--color-text-muted);">${escapeHtml(t("landmarksSubtitle"))}</p>
+        <div class="visa-accordion">${landmarkGroups}</div>
+      ` : ""}
+
       ${usefulLinks ? `
         <h3 style="margin-top:var(--space-6);">${escapeHtml(t("usefulLinksTitle"))}</h3>
         <ul class="civic-list">${usefulLinks}</ul>
@@ -1068,7 +1108,7 @@ function renderGermanyGuide() {
     </section>
   `;
 }
-function attachGuideHandlers() { /* section statique : aucun gestionnaire supplémentaire requis */ }
+function attachGuideHandlers() { attachAccordionHandlers(); }
 
 /* ---- Hub des visas ---- */
 function renderVisaHub() {
@@ -1104,9 +1144,103 @@ function renderVisaHub() {
     </section>
   `;
 }
-function attachVisaHandlers() {
+// Accordéon générique (classes .visa-item / .visa-item__head), réutilisé à
+// la fois par le Hub des visas et la section « Monuments, musées et sites
+// remarquables » du guide Allemagne.
+function attachAccordionHandlers() {
   document.querySelectorAll(".visa-item__head").forEach((head) => {
     head.addEventListener("click", () => head.closest(".visa-item").classList.toggle("is-open"));
+  });
+}
+function attachVisaHandlers() { attachAccordionHandlers(); }
+
+/* ---- Phrases & Grammaire ---- */
+function localizedField(item) {
+  return item[AppState.lang] || item.en || item.fr || "";
+}
+
+const TENSE_ORDER = ["präsens", "präteritum", "perfekt", "futur1"];
+const TENSE_LABEL_KEYS = { präsens: "tensePräsens", präteritum: "tensePräteritum", perfekt: "tensePerfekt", futur1: "tenseFutur1" };
+
+function renderPhrasebook() {
+  const pb = AppState.data.phrasebook;
+  if (!pb) return `<section class="section container"><div class="card">${escapeHtml(t("loading"))}</div></section>`;
+
+  const phrasesHtml = pb.phraseCategories.map((cat) => `
+    <h3>${escapeHtml(cat[AppState.lang === "fr" ? "titleFr" : "titleEn"] || cat.titleEn)}</h3>
+    <div class="grid grid-2" style="margin-bottom:var(--space-5);">
+      ${cat.phrases.map((p) => `
+        <div class="card phrase-card">
+          <div class="phrase-card__de">${escapeHtml(p.de)}</div>
+          <div class="phrase-card__translation">${escapeHtml(localizedField(p))}</div>
+        </div>
+      `).join("")}
+    </div>
+  `).join("");
+
+  const vocabHtml = pb.vocabularyCategories.map((cat) => `
+    <h3>${escapeHtml(cat[AppState.lang === "fr" ? "titleFr" : "titleEn"] || cat.titleEn)}</h3>
+    <div class="grid grid-3" style="margin-bottom:var(--space-5);">
+      ${cat.words.map((w) => `
+        <div class="card phrase-card">
+          <div class="phrase-card__de">${escapeHtml(w.de)}</div>
+          <div class="phrase-card__translation">${escapeHtml(localizedField(w))}</div>
+        </div>
+      `).join("")}
+    </div>
+  `).join("");
+
+  const verbsHtml = pb.verbTables.map((v) => `
+    <div class="card" style="margin-bottom:var(--space-5);">
+      <h3 style="margin-bottom:2px;">${escapeHtml(v.infinitive)} <span style="color:var(--color-text-muted);font-weight:400;">— ${escapeHtml(AppState.lang === "fr" ? v.meaningFr : v.meaningEn)}</span></h3>
+      <p style="color:var(--color-text-muted);font-size:0.88rem;">${escapeHtml(v.note)}</p>
+      <div class="grid grid-2">
+        ${TENSE_ORDER.filter((tk) => v.tenses[tk]).map((tk) => `
+          <table class="lesson-body" style="width:100%;">
+            <thead><tr><th colspan="2">${escapeHtml(t(TENSE_LABEL_KEYS[tk]))}</th></tr></thead>
+            <tbody>
+              ${v.tenses[tk].map((f) => `<tr><td>${escapeHtml(f.pronoun)}</td><td>${escapeHtml(f.form)}</td></tr>`).join("")}
+            </tbody>
+          </table>
+        `).join("")}
+      </div>
+    </div>
+  `).join("");
+
+  const examplesHtml = pb.examples.map((ex) => `
+    <div class="card" style="margin-bottom:var(--space-3);">
+      <p style="font-weight:700;margin-bottom:4px;">${escapeHtml(ex.de)}</p>
+      <p style="margin-bottom:4px;">${escapeHtml(localizedField(ex))}</p>
+      <p style="color:var(--color-text-muted);font-size:0.85rem;margin:0;">${escapeHtml(ex.note)}</p>
+    </div>
+  `).join("");
+
+  return `
+    <section class="section container">
+      <div class="section__head"><h2>${escapeHtml(t("navPhrasebook"))}</h2><p>${escapeHtml(t("phrasebookSubtitle"))}</p></div>
+      <div class="subtabs" id="phrasebook-tabs">
+        <button class="subtab is-active" data-tab="phrases" type="button">${escapeHtml(t("phrasebookPhrasesTitle"))}</button>
+        <button class="subtab" data-tab="vocab" type="button">${escapeHtml(t("phrasebookVocabTitle"))}</button>
+        <button class="subtab" data-tab="verbs" type="button">${escapeHtml(t("phrasebookVerbsTitle"))}</button>
+        <button class="subtab" data-tab="examples" type="button">${escapeHtml(t("phrasebookExamplesTitle"))}</button>
+      </div>
+      <div data-tab-panel="phrases">${phrasesHtml}</div>
+      <div data-tab-panel="vocab" style="display:none;">${vocabHtml}</div>
+      <div data-tab-panel="verbs" style="display:none;">${verbsHtml}</div>
+      <div data-tab-panel="examples" style="display:none;">${examplesHtml}</div>
+    </section>
+  `;
+}
+function attachPhrasebookHandlers() {
+  document.querySelectorAll("#phrasebook-tabs .subtab").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("#phrasebook-tabs .subtab").forEach((b) => b.classList.remove("is-active"));
+      btn.classList.add("is-active");
+      const tab = btn.dataset.tab;
+      document.querySelectorAll("[data-tab-panel]").forEach((panel) => {
+        panel.style.display = panel.dataset.tabPanel === tab ? "" : "none";
+      });
+    });
   });
 }
 
@@ -1374,7 +1508,7 @@ function renderApp() {
   renderHeader();
   renderFooter();
   const initialRoute = (location.hash || "#home").replace("#", "") || "home";
-  renderRoute(["home", "test", "courses", "guide", "visa", "gallery", "donate", "contact"].includes(initialRoute) ? initialRoute : "home");
+  renderRoute(["home", "test", "courses", "guide", "visa", "phrasebook", "gallery", "donate", "contact"].includes(initialRoute) ? initialRoute : "home");
 }
 
 window.addEventListener("hashchange", () => {
@@ -1406,7 +1540,7 @@ async function init() {
   if (!onboardingDone || !AppState.userId) {
     renderHeader();
     renderFooter();
-    showOnboarding();
+    showOnboarding(true); // premier lancement : langue PUIS création/restauration de l'identifiant
   } else {
     renderApp();
   }

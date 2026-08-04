@@ -381,3 +381,46 @@ et tout en bas ; le drapeau européen (proportions et disposition des 12
 du bas, dans le pied de page. Les deux sont dessinés en CSS/SVG (aucune
 image à héberger) et volontairement masqués aux lecteurs d'écran
 (`aria-hidden`), étant purement décoratifs.
+
+## 12. Nouveautés
+
+**Bandes drapeau fixes.** Les bandes du haut et du bas restent maintenant
+à l'écran pendant le défilement de la page (`position: fixed`), au lieu de
+défiler avec le contenu comme avant.
+
+**Correctif : changer de langue ne redemande plus l'identifiant.** Le
+bouton 🌐 dans l'en-tête ne propose plus que le choix de la langue une fois
+l'identifiant déjà créé — l'étape « générer/restaurer mon identifiant » ne
+s'affiche plus qu'au tout premier lancement de l'application.
+
+**Nouvelle page « Phrases & Grammaire ».** Accessible depuis le menu,
+entièrement originale (rédigée pour ce projet, pas de contenu tiers) :
+- Expressions courantes (salutations, politesse, questions de base,
+  urgences, au restaurant — 32 phrases).
+- Vocabulaire thématique (nombres, couleurs, famille, jours, nourriture —
+  44 mots).
+- Tableaux de conjugaison complets (Präsens, Präteritum, Perfekt, Futur I)
+  pour 6 verbes clés : sein, haben, werden, gehen, sprechen, machen.
+- 8 phrases d'exemple illustrant des points de grammaire précis (Perfekt
+  avec sein/haben, subordonnées, relatives, passif…).
+
+Tout s'affiche en allemand à côté de la traduction dans la langue choisie
+par l'utilisateur (français et anglais complets ; les autres langues
+utilisent le repli automatique vers l'anglais déjà en place ailleurs dans
+l'application). Éditable dans `data.json > phrasebook` (pas encore
+d'interface admin dédiée — dites-le-moi si vous la voulez).
+
+**Nouvelle section « Monuments, musées et sites remarquables ».** Ajoutée
+à la page *Vivre en Allemagne*, sous forme d'accordéon dépliable par Land :
+42 sites sélectionnés (musées, monuments, châteaux, sites UNESCO) sur les
+16 Länder — une sélection curée des incontournables plutôt qu'une liste
+exhaustive de tous les musées d'Allemagne (plusieurs milliers), qui ne
+serait ni vérifiable avec rigueur ni réellement utilisable dans une
+application mobile. Éditable dans
+`data.json > germanyGuide.laender[].landmarks`.
+
+**Portails officiels du Hub des visas.** Auswärtiges Amt, Make it in
+Germany, Ausländerportal et ANABIN sont désormais cliquables (nouvel
+onglet, l'application reste ouverte derrière) avec leurs adresses
+officielles vérifiées.
+

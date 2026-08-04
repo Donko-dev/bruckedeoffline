@@ -54,6 +54,7 @@
       "courses",
       "germanyGuide",
       "visaHub",
+      "phrasebook",
       "donate",
       "contact",
       "gallery"
@@ -66,7 +67,8 @@
       "liveNews": true,
       "visaHub": true,
       "germanyGuide": true,
-      "autoGallery": true
+      "autoGallery": true,
+      "phrasebook": true
     }
   },
   "languages": [
@@ -192,7 +194,23 @@
       "autoGalleryLoading": "Recherche des photos et vidéos…",
       "externalResourcesTitle": "Pour aller plus loin, gratuitement",
       "externalResourcesSubtitle": "Ressources externes gratuites, sélectionnées pour ce niveau.",
-      "usefulLinksTitle": "Sources et liens utiles"
+      "usefulLinksTitle": "Sources et liens utiles",
+      "landmarksTitle": "Monuments, musées et sites remarquables",
+      "landmarksSubtitle": "Une sélection curée par Land — pas une liste exhaustive (l'Allemagne compte des milliers de musées), mais les incontournables les plus notables.",
+      "landmarksTypeMonument": "Monument",
+      "landmarksTypeMusee": "Musée",
+      "landmarksTypeUnesco": "Patrimoine UNESCO",
+      "landmarksTypeChateau": "Château",
+      "navPhrasebook": "Phrases & Grammaire",
+      "phrasebookSubtitle": "Expressions courantes, vocabulaire thématique, tableaux de conjugaison et exemples — contenu original BrückeDeOffline, à consulter à tout moment.",
+      "phrasebookPhrasesTitle": "Expressions courantes",
+      "phrasebookVocabTitle": "Vocabulaire thématique",
+      "phrasebookVerbsTitle": "Tableaux de conjugaison",
+      "phrasebookExamplesTitle": "Phrases d'exemple",
+      "tensePräsens": "Présent (Präsens)",
+      "tensePräteritum": "Prétérit (Präteritum)",
+      "tensePerfekt": "Parfait (Perfekt)",
+      "tenseFutur1": "Futur (Futur I)"
     },
     "en": {
       "appTagline": "Learn German, anywhere, even offline.",
@@ -260,7 +278,23 @@
       "autoGalleryLoading": "Looking for photos and videos…",
       "externalResourcesTitle": "Go further, for free",
       "externalResourcesSubtitle": "Free external resources, selected for this level.",
-      "usefulLinksTitle": "Sources and useful links"
+      "usefulLinksTitle": "Sources and useful links",
+      "landmarksTitle": "Monuments, museums and notable sites",
+      "landmarksSubtitle": "A curated selection per Land — not an exhaustive list (Germany has thousands of museums), but the most notable highlights.",
+      "landmarksTypeMonument": "Monument",
+      "landmarksTypeMusee": "Museum",
+      "landmarksTypeUnesco": "UNESCO Heritage",
+      "landmarksTypeChateau": "Castle",
+      "navPhrasebook": "Phrases & Grammar",
+      "phrasebookSubtitle": "Common expressions, thematic vocabulary, conjugation tables and examples — original BrückeDeOffline content, available anytime.",
+      "phrasebookPhrasesTitle": "Common expressions",
+      "phrasebookVocabTitle": "Thematic vocabulary",
+      "phrasebookVerbsTitle": "Conjugation tables",
+      "phrasebookExamplesTitle": "Example sentences",
+      "tensePräsens": "Present (Präsens)",
+      "tensePräteritum": "Past (Präteritum)",
+      "tensePerfekt": "Present perfect (Perfekt)",
+      "tenseFutur1": "Future (Futur I)"
     },
     "es": {
       "appTagline": "Aprende alemán en cualquier lugar, incluso sin conexión.",
@@ -966,97 +1000,381 @@
         "name": "Baden-Württemberg",
         "capital": "Stuttgart",
         "population": "environ 11,3 millions",
-        "description": "Moteur industriel du sud-ouest, berceau de l'automobile (Mercedes-Benz, Porsche) et de la mécanique de précision. Paysages contrastés entre la Forêt-Noire et la vallée du Neckar. Karlsruhe abrite la Cour constitutionnelle fédérale."
+        "description": "Moteur industriel du sud-ouest, berceau de l'automobile (Mercedes-Benz, Porsche) et de la mécanique de précision. Paysages contrastés entre la Forêt-Noire et la vallée du Neckar. Karlsruhe abrite la Cour constitutionnelle fédérale.",
+        "landmarks": [
+          {
+            "name": "Schloss Heidelberg",
+            "city": "Heidelberg",
+            "type": "chateau",
+            "description": "Ruines romantiques d'un des châteaux les plus visités d'Allemagne, surplombant le Neckar."
+          },
+          {
+            "name": "Mercedes-Benz Museum",
+            "city": "Stuttgart",
+            "type": "musee",
+            "description": "Retrace l'histoire complète de l'automobile à travers les modèles Mercedes-Benz."
+          },
+          {
+            "name": "Porsche Museum",
+            "city": "Stuttgart",
+            "type": "musee",
+            "description": "Dédié à l'histoire et aux modèles emblématiques du constructeur Porsche."
+          },
+          {
+            "name": "Ulmer Münster",
+            "city": "Ulm",
+            "type": "monument",
+            "description": "La plus haute tour d'église du monde (161 m), visible à des kilomètres à la ronde."
+          }
+        ]
       },
       {
         "name": "Bayern (Bavière)",
         "capital": "Munich",
         "population": "environ 13,5 millions",
-        "description": "Le plus grand Land par sa superficie, entre Alpes bavaroises et vastes plaines. Forte identité régionale et dialecte marqué, poids économique majeur (BMW, Siemens, Allianz) et tradition de l'Oktoberfest."
+        "description": "Le plus grand Land par sa superficie, entre Alpes bavaroises et vastes plaines. Forte identité régionale et dialecte marqué, poids économique majeur (BMW, Siemens, Allianz) et tradition de l'Oktoberfest.",
+        "landmarks": [
+          {
+            "name": "Schloss Neuschwanstein",
+            "city": "Schwangau",
+            "type": "chateau",
+            "description": "Le château féerique de Louis II de Bavière, qui a inspiré le château de Disney."
+          },
+          {
+            "name": "Alte Pinakothek",
+            "city": "Munich",
+            "type": "musee",
+            "description": "Une des plus importantes collections de peinture européenne ancienne (XIVe-XVIIIe siècle)."
+          },
+          {
+            "name": "Deutsches Museum",
+            "city": "Munich",
+            "type": "musee",
+            "description": "Le plus grand musée des sciences et techniques au monde."
+          },
+          {
+            "name": "Residenz München",
+            "city": "Munich",
+            "type": "chateau",
+            "description": "Ancien palais des rois de Bavière, plus grand ensemble palatial urbain d'Allemagne."
+          }
+        ]
       },
       {
         "name": "Berlin",
         "capital": "Berlin (ville-Land, capitale fédérale)",
         "population": "environ 3,8 millions",
-        "description": "Capitale politique et culturelle de l'Allemagne, scène artistique internationale, mémoire vive de la division Est-Ouest, ville jeune et cosmopolite."
+        "description": "Capitale politique et culturelle de l'Allemagne, scène artistique internationale, mémoire vive de la division Est-Ouest, ville jeune et cosmopolite.",
+        "landmarks": [
+          {
+            "name": "Museumsinsel (Île aux musées)",
+            "city": "Berlin",
+            "type": "unesco",
+            "description": "Ensemble classé UNESCO de cinq musées majeurs, dont le Pergamonmuseum et le Neues Museum (buste de Néfertiti)."
+          },
+          {
+            "name": "Brandenburger Tor",
+            "city": "Berlin",
+            "type": "monument",
+            "description": "Symbole de la réunification allemande, ancienne porte monumentale du XVIIIe siècle."
+          },
+          {
+            "name": "Reichstagsgebäude",
+            "city": "Berlin",
+            "type": "monument",
+            "description": "Siège du Bundestag, célèbre pour sa coupole de verre accessible au public."
+          },
+          {
+            "name": "East Side Gallery",
+            "city": "Berlin",
+            "type": "monument",
+            "description": "Le plus long tronçon préservé du mur de Berlin, transformé en galerie d'art à ciel ouvert."
+          }
+        ]
       },
       {
         "name": "Brandenburg",
         "capital": "Potsdam",
         "population": "environ 2,6 millions",
-        "description": "Land rural entourant Berlin, lacs et forêts, célèbre château de Sans-Souci à Potsdam, nombreux habitants pendulaires vers la capitale."
+        "description": "Land rural entourant Berlin, lacs et forêts, célèbre château de Sans-Souci à Potsdam, nombreux habitants pendulaires vers la capitale.",
+        "landmarks": [
+          {
+            "name": "Schloss Sanssouci",
+            "city": "Potsdam",
+            "type": "unesco",
+            "description": "Palais rococo de Frédéric le Grand, entouré de jardins classés au patrimoine mondial."
+          },
+          {
+            "name": "Filmpark Babelsberg",
+            "city": "Potsdam",
+            "type": "musee",
+            "description": "L'un des plus anciens studios de cinéma au monde, aujourd'hui parc à thème."
+          }
+        ]
       },
       {
         "name": "Bremen",
         "capital": "Brême (villes de Brême et Bremerhaven)",
         "population": "environ 680 000",
-        "description": "Le plus petit Land, cité hanséatique portuaire au riche patrimoine maritime et à l'architecture typique de la Hanse."
+        "description": "Le plus petit Land, cité hanséatique portuaire au riche patrimoine maritime et à l'architecture typique de la Hanse.",
+        "landmarks": [
+          {
+            "name": "Bremer Stadtmusikanten",
+            "city": "Brême",
+            "type": "monument",
+            "description": "Statue des Musiciens de la ville de Brême, célèbre conte des frères Grimm."
+          },
+          {
+            "name": "Rathaus & Roland",
+            "city": "Brême",
+            "type": "unesco",
+            "description": "Hôtel de ville gothique et statue de Roland, classés au patrimoine mondial."
+          }
+        ]
       },
       {
         "name": "Hamburg",
         "capital": "Hambourg (ville-Land)",
         "population": "environ 1,9 million",
-        "description": "Deuxième port d'Europe, pôle médiatique et commercial, quartier moderne de la HafenCity, ville marquée par son ouverture sur le monde."
+        "description": "Deuxième port d'Europe, pôle médiatique et commercial, quartier moderne de la HafenCity, ville marquée par son ouverture sur le monde.",
+        "landmarks": [
+          {
+            "name": "Elbphilharmonie",
+            "city": "Hambourg",
+            "type": "monument",
+            "description": "Salle de concert spectaculaire posée sur un ancien entrepôt, devenue le symbole architectural de la ville."
+          },
+          {
+            "name": "Speicherstadt",
+            "city": "Hambourg",
+            "type": "unesco",
+            "description": "Le plus grand complexe d'entrepôts sur pilotis au monde, classé au patrimoine mondial."
+          },
+          {
+            "name": "Miniatur Wunderland",
+            "city": "Hambourg",
+            "type": "musee",
+            "description": "Le plus grand réseau ferroviaire miniature au monde."
+          }
+        ]
       },
       {
         "name": "Hessen (Hesse)",
         "capital": "Wiesbaden (Francfort-sur-le-Main = plus grande ville)",
         "population": "environ 6,4 millions",
-        "description": "Cœur financier de l'Allemagne autour de Francfort, siège de la Banque centrale européenne, région Rhin-Main densément peuplée."
+        "description": "Cœur financier de l'Allemagne autour de Francfort, siège de la Banque centrale européenne, région Rhin-Main densément peuplée.",
+        "landmarks": [
+          {
+            "name": "Städel Museum",
+            "city": "Francfort-sur-le-Main",
+            "type": "musee",
+            "description": "Collection de référence allant de Dürer aux impressionnistes jusqu'à l'art contemporain."
+          },
+          {
+            "name": "Goethe-Haus",
+            "city": "Francfort-sur-le-Main",
+            "type": "monument",
+            "description": "Maison natale de Johann Wolfgang von Goethe, aujourd'hui musée."
+          },
+          {
+            "name": "Römer",
+            "city": "Francfort-sur-le-Main",
+            "type": "monument",
+            "description": "Ancien hôtel de ville gothique, emblème de la place centrale de Francfort."
+          }
+        ]
       },
       {
         "name": "Mecklenburg-Vorpommern",
         "capital": "Schwerin",
         "population": "environ 1,6 million",
-        "description": "Land rural de la côte baltique, île de Rügen, faible densité de population, tourisme balnéaire important."
+        "description": "Land rural de la côte baltique, île de Rügen, faible densité de population, tourisme balnéaire important.",
+        "landmarks": [
+          {
+            "name": "Schweriner Schloss",
+            "city": "Schwerin",
+            "type": "chateau",
+            "description": "Château romantique posé sur une île, siège du parlement régional."
+          },
+          {
+            "name": "Königsstuhl (falaises de craie de Rügen)",
+            "city": "Île de Rügen",
+            "type": "monument",
+            "description": "Célèbres falaises de craie blanche surplombant la mer Baltique."
+          }
+        ]
       },
       {
         "name": "Niedersachsen (Basse-Saxe)",
         "capital": "Hanovre",
         "population": "environ 8 millions",
-        "description": "Siège de Volkswagen à Wolfsbourg, façade sur la mer du Nord, deuxième Land par la superficie."
+        "description": "Siège de Volkswagen à Wolfsbourg, façade sur la mer du Nord, deuxième Land par la superficie.",
+        "landmarks": [
+          {
+            "name": "Herrenhäuser Gärten",
+            "city": "Hanovre",
+            "type": "monument",
+            "description": "L'un des plus importants jardins baroques d'Europe."
+          },
+          {
+            "name": "Autostadt",
+            "city": "Wolfsbourg",
+            "type": "musee",
+            "description": "Parc d'exposition automobile attenant au siège de Volkswagen."
+          }
+        ]
       },
       {
         "name": "Nordrhein-Westfalen (Rhénanie-du-Nord-Westphalie)",
         "capital": "Düsseldorf",
         "population": "environ 18 millions",
-        "description": "Land le plus peuplé d'Allemagne, ancien bassin industriel de la Ruhr en pleine reconversion, grandes villes rapprochées (Cologne, Dortmund, Essen)."
+        "description": "Land le plus peuplé d'Allemagne, ancien bassin industriel de la Ruhr en pleine reconversion, grandes villes rapprochées (Cologne, Dortmund, Essen).",
+        "landmarks": [
+          {
+            "name": "Kölner Dom",
+            "city": "Cologne",
+            "type": "unesco",
+            "description": "Cathédrale gothique classée au patrimoine mondial, monument le plus visité d'Allemagne."
+          },
+          {
+            "name": "Zeche Zollverein",
+            "city": "Essen",
+            "type": "unesco",
+            "description": "Ancien complexe minier, chef-d'œuvre de l'architecture industrielle classé UNESCO."
+          },
+          {
+            "name": "Aachener Dom",
+            "city": "Aix-la-Chapelle",
+            "type": "unesco",
+            "description": "Première cathédrale allemande classée UNESCO, chapelle palatine de Charlemagne."
+          },
+          {
+            "name": "Museum Ludwig",
+            "city": "Cologne",
+            "type": "musee",
+            "description": "Une des plus grandes collections d'art moderne et contemporain d'Europe."
+          }
+        ]
       },
       {
         "name": "Rheinland-Pfalz (Rhénanie-Palatinat)",
         "capital": "Mayence",
         "population": "environ 4,1 millions",
-        "description": "Région viticole le long du Rhin et de la Moselle, paysages de collines et de châteaux."
+        "description": "Région viticole le long du Rhin et de la Moselle, paysages de collines et de châteaux.",
+        "landmarks": [
+          {
+            "name": "Porta Nigra",
+            "city": "Trèves",
+            "type": "unesco",
+            "description": "Porte romaine du IIe siècle la mieux conservée au nord des Alpes."
+          },
+          {
+            "name": "Deutsches Eck",
+            "city": "Coblence",
+            "type": "monument",
+            "description": "Confluent du Rhin et de la Moselle, avec la statue équestre de Guillaume Ier."
+          }
+        ]
       },
       {
         "name": "Saarland (Sarre)",
         "capital": "Sarrebruck",
         "population": "environ 980 000",
-        "description": "Plus petit Land continental par la superficie, frontalier de la France, ancien bassin minier et sidérurgique en reconversion."
+        "description": "Plus petit Land continental par la superficie, frontalier de la France, ancien bassin minier et sidérurgique en reconversion.",
+        "landmarks": [
+          {
+            "name": "Völklinger Hütte",
+            "city": "Völklingen",
+            "type": "unesco",
+            "description": "Ancienne usine sidérurgique classée UNESCO, unique témoignage intact de l'ère industrielle."
+          },
+          {
+            "name": "Saarschleife",
+            "city": "Mettlach",
+            "type": "monument",
+            "description": "Méandre spectaculaire de la Sarre, vue panoramique emblématique de la région."
+          }
+        ]
       },
       {
         "name": "Sachsen (Saxe)",
         "capital": "Dresde",
         "population": "environ 4 millions",
-        "description": "Patrimoine architectural baroque à Dresde, dynamisme technologique autour de Leipzig et Dresde (microélectronique, « Silicon Saxony »)."
+        "description": "Patrimoine architectural baroque à Dresde, dynamisme technologique autour de Leipzig et Dresde (microélectronique, « Silicon Saxony »).",
+        "landmarks": [
+          {
+            "name": "Frauenkirche",
+            "city": "Dresde",
+            "type": "monument",
+            "description": "Église baroque reconstruite après sa destruction en 1945, symbole de réconciliation."
+          },
+          {
+            "name": "Zwinger",
+            "city": "Dresde",
+            "type": "musee",
+            "description": "Palais baroque abritant plusieurs musées, dont la galerie de maîtres anciens."
+          },
+          {
+            "name": "Völkerschlachtdenkmal",
+            "city": "Leipzig",
+            "type": "monument",
+            "description": "Monument commémorant la bataille des Nations de 1813, l'un des plus grands d'Europe."
+          }
+        ]
       },
       {
         "name": "Sachsen-Anhalt",
         "capital": "Magdebourg",
         "population": "environ 2,1 millions",
-        "description": "Sites classés à l'UNESCO liés à la Réforme protestante (Wittenberg, ville de Luther), industrie chimique historique."
+        "description": "Sites classés à l'UNESCO liés à la Réforme protestante (Wittenberg, ville de Luther), industrie chimique historique.",
+        "landmarks": [
+          {
+            "name": "Schlosskirche de Wittenberg",
+            "city": "Wittenberg",
+            "type": "unesco",
+            "description": "Église où Luther afficha ses 95 thèses en 1517, berceau de la Réforme protestante."
+          },
+          {
+            "name": "Bauhaus Dessau",
+            "city": "Dessau",
+            "type": "unesco",
+            "description": "Bâtiment historique de l'école Bauhaus, classé au patrimoine mondial."
+          }
+        ]
       },
       {
         "name": "Schleswig-Holstein",
         "capital": "Kiel",
         "population": "environ 2,9 millions",
-        "description": "Land le plus septentrional, entre mer du Nord et mer Baltique, paysages de plaines côtières."
+        "description": "Land le plus septentrional, entre mer du Nord et mer Baltique, paysages de plaines côtières.",
+        "landmarks": [
+          {
+            "name": "Holstentor",
+            "city": "Lübeck",
+            "type": "unesco",
+            "description": "Porte gothique emblématique de l'ancienne cité hanséatique de Lübeck."
+          }
+        ]
       },
       {
         "name": "Thüringen (Thuringe)",
         "capital": "Erfurt",
         "population": "environ 2,1 millions",
-        "description": "Surnommée le « cœur vert de l'Allemagne » pour ses forêts, ville de Weimar liée à Goethe et Schiller."
+        "description": "Surnommée le « cœur vert de l'Allemagne » pour ses forêts, ville de Weimar liée à Goethe et Schiller.",
+        "landmarks": [
+          {
+            "name": "Wartburg",
+            "city": "Eisenach",
+            "type": "unesco",
+            "description": "Forteresse médiévale où Luther traduisit le Nouveau Testament en allemand."
+          },
+          {
+            "name": "Goethe-Schiller-Denkmal",
+            "city": "Weimar",
+            "type": "monument",
+            "description": "Statue emblématique des deux plus grands poètes de la littérature allemande."
+          }
+        ]
       }
     ],
     "civicLaws": [
@@ -1320,5 +1638,1185 @@
       "category": "guide",
       "src": "jSdLtwe7F-8"
     }
-  ]
+  ],
+  "phrasebook": {
+    "phraseCategories": [
+      {
+        "id": "greetings",
+        "titleFr": "Salutations",
+        "titleEn": "Greetings",
+        "phrases": [
+          {
+            "de": "Hallo!",
+            "fr": "Salut !",
+            "en": "Hi!"
+          },
+          {
+            "de": "Guten Morgen!",
+            "fr": "Bonjour (le matin) !",
+            "en": "Good morning!"
+          },
+          {
+            "de": "Guten Tag!",
+            "fr": "Bonjour !",
+            "en": "Good day!"
+          },
+          {
+            "de": "Guten Abend!",
+            "fr": "Bonsoir !",
+            "en": "Good evening!"
+          },
+          {
+            "de": "Gute Nacht!",
+            "fr": "Bonne nuit !",
+            "en": "Good night!"
+          },
+          {
+            "de": "Auf Wiedersehen!",
+            "fr": "Au revoir !",
+            "en": "Goodbye!"
+          },
+          {
+            "de": "Tschüss!",
+            "fr": "Salut ! (au revoir, familier)",
+            "en": "Bye! (informal)"
+          },
+          {
+            "de": "Bis bald!",
+            "fr": "À bientôt !",
+            "en": "See you soon!"
+          }
+        ]
+      },
+      {
+        "id": "courtesy",
+        "titleFr": "Politesse",
+        "titleEn": "Courtesy",
+        "phrases": [
+          {
+            "de": "Bitte",
+            "fr": "S'il vous plaît / Je vous en prie",
+            "en": "Please / You're welcome"
+          },
+          {
+            "de": "Danke schön",
+            "fr": "Merci beaucoup",
+            "en": "Thank you very much"
+          },
+          {
+            "de": "Entschuldigung",
+            "fr": "Excusez-moi",
+            "en": "Excuse me"
+          },
+          {
+            "de": "Es tut mir leid",
+            "fr": "Je suis désolé(e)",
+            "en": "I'm sorry"
+          },
+          {
+            "de": "Kein Problem",
+            "fr": "Pas de problème",
+            "en": "No problem"
+          },
+          {
+            "de": "Gern geschehen",
+            "fr": "Je vous en prie (réponse à un merci)",
+            "en": "You're welcome"
+          }
+        ]
+      },
+      {
+        "id": "questions",
+        "titleFr": "Questions de base",
+        "titleEn": "Basic questions",
+        "phrases": [
+          {
+            "de": "Wie heißt du?",
+            "fr": "Comment t'appelles-tu ?",
+            "en": "What's your name?"
+          },
+          {
+            "de": "Wie geht es dir?",
+            "fr": "Comment vas-tu ?",
+            "en": "How are you?"
+          },
+          {
+            "de": "Woher kommst du?",
+            "fr": "D'où viens-tu ?",
+            "en": "Where are you from?"
+          },
+          {
+            "de": "Wo ist...?",
+            "fr": "Où est... ?",
+            "en": "Where is...?"
+          },
+          {
+            "de": "Wie viel kostet das?",
+            "fr": "Combien ça coûte ?",
+            "en": "How much does that cost?"
+          },
+          {
+            "de": "Sprechen Sie Englisch?",
+            "fr": "Parlez-vous anglais ?",
+            "en": "Do you speak English?"
+          },
+          {
+            "de": "Können Sie mir helfen?",
+            "fr": "Pouvez-vous m'aider ?",
+            "en": "Can you help me?"
+          },
+          {
+            "de": "Wie spät ist es?",
+            "fr": "Quelle heure est-il ?",
+            "en": "What time is it?"
+          }
+        ]
+      },
+      {
+        "id": "emergencies",
+        "titleFr": "Urgences",
+        "titleEn": "Emergencies",
+        "phrases": [
+          {
+            "de": "Hilfe!",
+            "fr": "Au secours !",
+            "en": "Help!"
+          },
+          {
+            "de": "Rufen Sie einen Krankenwagen!",
+            "fr": "Appelez une ambulance !",
+            "en": "Call an ambulance!"
+          },
+          {
+            "de": "Ich brauche einen Arzt.",
+            "fr": "J'ai besoin d'un médecin.",
+            "en": "I need a doctor."
+          },
+          {
+            "de": "Wo ist die nächste Apotheke?",
+            "fr": "Où est la pharmacie la plus proche ?",
+            "en": "Where is the nearest pharmacy?"
+          },
+          {
+            "de": "Ich habe mich verlaufen.",
+            "fr": "Je me suis perdu(e).",
+            "en": "I'm lost."
+          }
+        ]
+      },
+      {
+        "id": "restaurant",
+        "titleFr": "Au restaurant",
+        "titleEn": "At the restaurant",
+        "phrases": [
+          {
+            "de": "Die Speisekarte, bitte.",
+            "fr": "La carte, s'il vous plaît.",
+            "en": "The menu, please."
+          },
+          {
+            "de": "Ich möchte gern... bestellen.",
+            "fr": "Je voudrais commander...",
+            "en": "I would like to order..."
+          },
+          {
+            "de": "Die Rechnung, bitte.",
+            "fr": "L'addition, s'il vous plaît.",
+            "en": "The bill, please."
+          },
+          {
+            "de": "Guten Appetit!",
+            "fr": "Bon appétit !",
+            "en": "Enjoy your meal!"
+          },
+          {
+            "de": "Zum Wohl!",
+            "fr": "Santé !",
+            "en": "Cheers!"
+          }
+        ]
+      }
+    ],
+    "vocabularyCategories": [
+      {
+        "id": "numbers",
+        "titleFr": "Nombres (0-10)",
+        "titleEn": "Numbers (0-10)",
+        "words": [
+          {
+            "de": "null",
+            "fr": "zéro",
+            "en": "zero"
+          },
+          {
+            "de": "eins",
+            "fr": "un",
+            "en": "one"
+          },
+          {
+            "de": "zwei",
+            "fr": "deux",
+            "en": "two"
+          },
+          {
+            "de": "drei",
+            "fr": "trois",
+            "en": "three"
+          },
+          {
+            "de": "vier",
+            "fr": "quatre",
+            "en": "four"
+          },
+          {
+            "de": "fünf",
+            "fr": "cinq",
+            "en": "five"
+          },
+          {
+            "de": "sechs",
+            "fr": "six",
+            "en": "six"
+          },
+          {
+            "de": "sieben",
+            "fr": "sept",
+            "en": "seven"
+          },
+          {
+            "de": "acht",
+            "fr": "huit",
+            "en": "eight"
+          },
+          {
+            "de": "neun",
+            "fr": "neuf",
+            "en": "nine"
+          },
+          {
+            "de": "zehn",
+            "fr": "dix",
+            "en": "ten"
+          }
+        ]
+      },
+      {
+        "id": "colors",
+        "titleFr": "Couleurs",
+        "titleEn": "Colors",
+        "words": [
+          {
+            "de": "rot",
+            "fr": "rouge",
+            "en": "red"
+          },
+          {
+            "de": "blau",
+            "fr": "bleu",
+            "en": "blue"
+          },
+          {
+            "de": "grün",
+            "fr": "vert",
+            "en": "green"
+          },
+          {
+            "de": "gelb",
+            "fr": "jaune",
+            "en": "yellow"
+          },
+          {
+            "de": "schwarz",
+            "fr": "noir",
+            "en": "black"
+          },
+          {
+            "de": "weiß",
+            "fr": "blanc",
+            "en": "white"
+          },
+          {
+            "de": "orange",
+            "fr": "orange",
+            "en": "orange"
+          },
+          {
+            "de": "lila",
+            "fr": "violet",
+            "en": "purple"
+          },
+          {
+            "de": "rosa",
+            "fr": "rose",
+            "en": "pink"
+          },
+          {
+            "de": "grau",
+            "fr": "gris",
+            "en": "gray"
+          }
+        ]
+      },
+      {
+        "id": "family",
+        "titleFr": "La famille",
+        "titleEn": "Family",
+        "words": [
+          {
+            "de": "die Mutter",
+            "fr": "la mère",
+            "en": "the mother"
+          },
+          {
+            "de": "der Vater",
+            "fr": "le père",
+            "en": "the father"
+          },
+          {
+            "de": "die Schwester",
+            "fr": "la sœur",
+            "en": "the sister"
+          },
+          {
+            "de": "der Bruder",
+            "fr": "le frère",
+            "en": "the brother"
+          },
+          {
+            "de": "die Tochter",
+            "fr": "la fille (enfant)",
+            "en": "the daughter"
+          },
+          {
+            "de": "der Sohn",
+            "fr": "le fils",
+            "en": "the son"
+          },
+          {
+            "de": "die Großmutter",
+            "fr": "la grand-mère",
+            "en": "the grandmother"
+          },
+          {
+            "de": "der Großvater",
+            "fr": "le grand-père",
+            "en": "the grandfather"
+          }
+        ]
+      },
+      {
+        "id": "days",
+        "titleFr": "Jours de la semaine",
+        "titleEn": "Days of the week",
+        "words": [
+          {
+            "de": "Montag",
+            "fr": "lundi",
+            "en": "Monday"
+          },
+          {
+            "de": "Dienstag",
+            "fr": "mardi",
+            "en": "Tuesday"
+          },
+          {
+            "de": "Mittwoch",
+            "fr": "mercredi",
+            "en": "Wednesday"
+          },
+          {
+            "de": "Donnerstag",
+            "fr": "jeudi",
+            "en": "Thursday"
+          },
+          {
+            "de": "Freitag",
+            "fr": "vendredi",
+            "en": "Friday"
+          },
+          {
+            "de": "Samstag",
+            "fr": "samedi",
+            "en": "Saturday"
+          },
+          {
+            "de": "Sonntag",
+            "fr": "dimanche",
+            "en": "Sunday"
+          }
+        ]
+      },
+      {
+        "id": "food",
+        "titleFr": "Nourriture de base",
+        "titleEn": "Basic food",
+        "words": [
+          {
+            "de": "das Brot",
+            "fr": "le pain",
+            "en": "bread"
+          },
+          {
+            "de": "das Wasser",
+            "fr": "l'eau",
+            "en": "water"
+          },
+          {
+            "de": "der Kaffee",
+            "fr": "le café",
+            "en": "coffee"
+          },
+          {
+            "de": "die Milch",
+            "fr": "le lait",
+            "en": "milk"
+          },
+          {
+            "de": "der Apfel",
+            "fr": "la pomme",
+            "en": "the apple"
+          },
+          {
+            "de": "das Fleisch",
+            "fr": "la viande",
+            "en": "meat"
+          },
+          {
+            "de": "das Gemüse",
+            "fr": "les légumes",
+            "en": "vegetables"
+          },
+          {
+            "de": "der Käse",
+            "fr": "le fromage",
+            "en": "cheese"
+          }
+        ]
+      }
+    ],
+    "verbTables": [
+      {
+        "infinitive": "sein",
+        "meaningFr": "être",
+        "meaningEn": "to be",
+        "note": "Verbe auxiliaire irrégulier, indispensable dès le niveau A1.",
+        "tenses": {
+          "präsens": [
+            {
+              "pronoun": "ich",
+              "form": "bin"
+            },
+            {
+              "pronoun": "du",
+              "form": "bist"
+            },
+            {
+              "pronoun": "er/sie/es",
+              "form": "ist"
+            },
+            {
+              "pronoun": "wir",
+              "form": "sind"
+            },
+            {
+              "pronoun": "ihr",
+              "form": "seid"
+            },
+            {
+              "pronoun": "sie/Sie",
+              "form": "sind"
+            }
+          ],
+          "präteritum": [
+            {
+              "pronoun": "ich",
+              "form": "war"
+            },
+            {
+              "pronoun": "du",
+              "form": "warst"
+            },
+            {
+              "pronoun": "er/sie/es",
+              "form": "war"
+            },
+            {
+              "pronoun": "wir",
+              "form": "waren"
+            },
+            {
+              "pronoun": "ihr",
+              "form": "wart"
+            },
+            {
+              "pronoun": "sie/Sie",
+              "form": "waren"
+            }
+          ],
+          "perfekt": [
+            {
+              "pronoun": "ich",
+              "form": "bin gewesen"
+            },
+            {
+              "pronoun": "du",
+              "form": "bist gewesen"
+            },
+            {
+              "pronoun": "er/sie/es",
+              "form": "ist gewesen"
+            },
+            {
+              "pronoun": "wir",
+              "form": "sind gewesen"
+            },
+            {
+              "pronoun": "ihr",
+              "form": "seid gewesen"
+            },
+            {
+              "pronoun": "sie/Sie",
+              "form": "sind gewesen"
+            }
+          ],
+          "futur1": [
+            {
+              "pronoun": "ich",
+              "form": "werde sein"
+            },
+            {
+              "pronoun": "du",
+              "form": "wirst sein"
+            },
+            {
+              "pronoun": "er/sie/es",
+              "form": "wird sein"
+            },
+            {
+              "pronoun": "wir",
+              "form": "werden sein"
+            },
+            {
+              "pronoun": "ihr",
+              "form": "werdet sein"
+            },
+            {
+              "pronoun": "sie/Sie",
+              "form": "werden sein"
+            }
+          ]
+        }
+      },
+      {
+        "infinitive": "haben",
+        "meaningFr": "avoir",
+        "meaningEn": "to have",
+        "note": "Deuxième auxiliaire essentiel, utilisé pour former le Perfekt de la plupart des verbes.",
+        "tenses": {
+          "präsens": [
+            {
+              "pronoun": "ich",
+              "form": "habe"
+            },
+            {
+              "pronoun": "du",
+              "form": "hast"
+            },
+            {
+              "pronoun": "er/sie/es",
+              "form": "hat"
+            },
+            {
+              "pronoun": "wir",
+              "form": "haben"
+            },
+            {
+              "pronoun": "ihr",
+              "form": "habt"
+            },
+            {
+              "pronoun": "sie/Sie",
+              "form": "haben"
+            }
+          ],
+          "präteritum": [
+            {
+              "pronoun": "ich",
+              "form": "hatte"
+            },
+            {
+              "pronoun": "du",
+              "form": "hattest"
+            },
+            {
+              "pronoun": "er/sie/es",
+              "form": "hatte"
+            },
+            {
+              "pronoun": "wir",
+              "form": "hatten"
+            },
+            {
+              "pronoun": "ihr",
+              "form": "hattet"
+            },
+            {
+              "pronoun": "sie/Sie",
+              "form": "hatten"
+            }
+          ],
+          "perfekt": [
+            {
+              "pronoun": "ich",
+              "form": "habe gehabt"
+            },
+            {
+              "pronoun": "du",
+              "form": "hast gehabt"
+            },
+            {
+              "pronoun": "er/sie/es",
+              "form": "hat gehabt"
+            },
+            {
+              "pronoun": "wir",
+              "form": "haben gehabt"
+            },
+            {
+              "pronoun": "ihr",
+              "form": "habt gehabt"
+            },
+            {
+              "pronoun": "sie/Sie",
+              "form": "haben gehabt"
+            }
+          ],
+          "futur1": [
+            {
+              "pronoun": "ich",
+              "form": "werde haben"
+            },
+            {
+              "pronoun": "du",
+              "form": "wirst haben"
+            },
+            {
+              "pronoun": "er/sie/es",
+              "form": "wird haben"
+            },
+            {
+              "pronoun": "wir",
+              "form": "werden haben"
+            },
+            {
+              "pronoun": "ihr",
+              "form": "werdet haben"
+            },
+            {
+              "pronoun": "sie/Sie",
+              "form": "werden haben"
+            }
+          ]
+        }
+      },
+      {
+        "infinitive": "werden",
+        "meaningFr": "devenir",
+        "meaningEn": "to become",
+        "note": "Sert aussi à former le futur et le passif — un des verbes les plus polyvalents de l'allemand.",
+        "tenses": {
+          "präsens": [
+            {
+              "pronoun": "ich",
+              "form": "werde"
+            },
+            {
+              "pronoun": "du",
+              "form": "wirst"
+            },
+            {
+              "pronoun": "er/sie/es",
+              "form": "wird"
+            },
+            {
+              "pronoun": "wir",
+              "form": "werden"
+            },
+            {
+              "pronoun": "ihr",
+              "form": "werdet"
+            },
+            {
+              "pronoun": "sie/Sie",
+              "form": "werden"
+            }
+          ],
+          "präteritum": [
+            {
+              "pronoun": "ich",
+              "form": "wurde"
+            },
+            {
+              "pronoun": "du",
+              "form": "wurdest"
+            },
+            {
+              "pronoun": "er/sie/es",
+              "form": "wurde"
+            },
+            {
+              "pronoun": "wir",
+              "form": "wurden"
+            },
+            {
+              "pronoun": "ihr",
+              "form": "wurdet"
+            },
+            {
+              "pronoun": "sie/Sie",
+              "form": "wurden"
+            }
+          ],
+          "perfekt": [
+            {
+              "pronoun": "ich",
+              "form": "bin geworden"
+            },
+            {
+              "pronoun": "du",
+              "form": "bist geworden"
+            },
+            {
+              "pronoun": "er/sie/es",
+              "form": "ist geworden"
+            },
+            {
+              "pronoun": "wir",
+              "form": "sind geworden"
+            },
+            {
+              "pronoun": "ihr",
+              "form": "seid geworden"
+            },
+            {
+              "pronoun": "sie/Sie",
+              "form": "sind geworden"
+            }
+          ],
+          "futur1": [
+            {
+              "pronoun": "ich",
+              "form": "werde werden"
+            },
+            {
+              "pronoun": "du",
+              "form": "wirst werden"
+            },
+            {
+              "pronoun": "er/sie/es",
+              "form": "wird werden"
+            },
+            {
+              "pronoun": "wir",
+              "form": "werden werden"
+            },
+            {
+              "pronoun": "ihr",
+              "form": "werdet werden"
+            },
+            {
+              "pronoun": "sie/Sie",
+              "form": "werden werden"
+            }
+          ]
+        }
+      },
+      {
+        "infinitive": "gehen",
+        "meaningFr": "aller",
+        "meaningEn": "to go",
+        "note": "Verbe de mouvement : Perfekt avec « sein », pas « haben ».",
+        "tenses": {
+          "präsens": [
+            {
+              "pronoun": "ich",
+              "form": "gehe"
+            },
+            {
+              "pronoun": "du",
+              "form": "gehst"
+            },
+            {
+              "pronoun": "er/sie/es",
+              "form": "geht"
+            },
+            {
+              "pronoun": "wir",
+              "form": "gehen"
+            },
+            {
+              "pronoun": "ihr",
+              "form": "geht"
+            },
+            {
+              "pronoun": "sie/Sie",
+              "form": "gehen"
+            }
+          ],
+          "präteritum": [
+            {
+              "pronoun": "ich",
+              "form": "ging"
+            },
+            {
+              "pronoun": "du",
+              "form": "gingst"
+            },
+            {
+              "pronoun": "er/sie/es",
+              "form": "ging"
+            },
+            {
+              "pronoun": "wir",
+              "form": "gingen"
+            },
+            {
+              "pronoun": "ihr",
+              "form": "gingt"
+            },
+            {
+              "pronoun": "sie/Sie",
+              "form": "gingen"
+            }
+          ],
+          "perfekt": [
+            {
+              "pronoun": "ich",
+              "form": "bin gegangen"
+            },
+            {
+              "pronoun": "du",
+              "form": "bist gegangen"
+            },
+            {
+              "pronoun": "er/sie/es",
+              "form": "ist gegangen"
+            },
+            {
+              "pronoun": "wir",
+              "form": "sind gegangen"
+            },
+            {
+              "pronoun": "ihr",
+              "form": "seid gegangen"
+            },
+            {
+              "pronoun": "sie/Sie",
+              "form": "sind gegangen"
+            }
+          ],
+          "futur1": [
+            {
+              "pronoun": "ich",
+              "form": "werde gehen"
+            },
+            {
+              "pronoun": "du",
+              "form": "wirst gehen"
+            },
+            {
+              "pronoun": "er/sie/es",
+              "form": "wird gehen"
+            },
+            {
+              "pronoun": "wir",
+              "form": "werden gehen"
+            },
+            {
+              "pronoun": "ihr",
+              "form": "werdet gehen"
+            },
+            {
+              "pronoun": "sie/Sie",
+              "form": "werden gehen"
+            }
+          ]
+        }
+      },
+      {
+        "infinitive": "sprechen",
+        "meaningFr": "parler",
+        "meaningEn": "to speak",
+        "note": "Verbe fort à changement de voyelle (e → i) aux 2e/3e personnes du singulier au présent.",
+        "tenses": {
+          "präsens": [
+            {
+              "pronoun": "ich",
+              "form": "spreche"
+            },
+            {
+              "pronoun": "du",
+              "form": "sprichst"
+            },
+            {
+              "pronoun": "er/sie/es",
+              "form": "spricht"
+            },
+            {
+              "pronoun": "wir",
+              "form": "sprechen"
+            },
+            {
+              "pronoun": "ihr",
+              "form": "sprecht"
+            },
+            {
+              "pronoun": "sie/Sie",
+              "form": "sprechen"
+            }
+          ],
+          "präteritum": [
+            {
+              "pronoun": "ich",
+              "form": "sprach"
+            },
+            {
+              "pronoun": "du",
+              "form": "sprachst"
+            },
+            {
+              "pronoun": "er/sie/es",
+              "form": "sprach"
+            },
+            {
+              "pronoun": "wir",
+              "form": "sprachen"
+            },
+            {
+              "pronoun": "ihr",
+              "form": "spracht"
+            },
+            {
+              "pronoun": "sie/Sie",
+              "form": "sprachen"
+            }
+          ],
+          "perfekt": [
+            {
+              "pronoun": "ich",
+              "form": "habe gesprochen"
+            },
+            {
+              "pronoun": "du",
+              "form": "hast gesprochen"
+            },
+            {
+              "pronoun": "er/sie/es",
+              "form": "hat gesprochen"
+            },
+            {
+              "pronoun": "wir",
+              "form": "haben gesprochen"
+            },
+            {
+              "pronoun": "ihr",
+              "form": "habt gesprochen"
+            },
+            {
+              "pronoun": "sie/Sie",
+              "form": "haben gesprochen"
+            }
+          ],
+          "futur1": [
+            {
+              "pronoun": "ich",
+              "form": "werde sprechen"
+            },
+            {
+              "pronoun": "du",
+              "form": "wirst sprechen"
+            },
+            {
+              "pronoun": "er/sie/es",
+              "form": "wird sprechen"
+            },
+            {
+              "pronoun": "wir",
+              "form": "werden sprechen"
+            },
+            {
+              "pronoun": "ihr",
+              "form": "werdet sprechen"
+            },
+            {
+              "pronoun": "sie/Sie",
+              "form": "werden sprechen"
+            }
+          ]
+        }
+      },
+      {
+        "infinitive": "machen",
+        "meaningFr": "faire",
+        "meaningEn": "to do / to make",
+        "note": "Verbe faible parfaitement régulier — le modèle de référence pour conjuguer la plupart des verbes allemands.",
+        "tenses": {
+          "präsens": [
+            {
+              "pronoun": "ich",
+              "form": "mache"
+            },
+            {
+              "pronoun": "du",
+              "form": "machst"
+            },
+            {
+              "pronoun": "er/sie/es",
+              "form": "macht"
+            },
+            {
+              "pronoun": "wir",
+              "form": "machen"
+            },
+            {
+              "pronoun": "ihr",
+              "form": "macht"
+            },
+            {
+              "pronoun": "sie/Sie",
+              "form": "machen"
+            }
+          ],
+          "präteritum": [
+            {
+              "pronoun": "ich",
+              "form": "machte"
+            },
+            {
+              "pronoun": "du",
+              "form": "machtest"
+            },
+            {
+              "pronoun": "er/sie/es",
+              "form": "machte"
+            },
+            {
+              "pronoun": "wir",
+              "form": "machten"
+            },
+            {
+              "pronoun": "ihr",
+              "form": "machtet"
+            },
+            {
+              "pronoun": "sie/Sie",
+              "form": "machten"
+            }
+          ],
+          "perfekt": [
+            {
+              "pronoun": "ich",
+              "form": "habe gemacht"
+            },
+            {
+              "pronoun": "du",
+              "form": "hast gemacht"
+            },
+            {
+              "pronoun": "er/sie/es",
+              "form": "hat gemacht"
+            },
+            {
+              "pronoun": "wir",
+              "form": "haben gemacht"
+            },
+            {
+              "pronoun": "ihr",
+              "form": "habt gemacht"
+            },
+            {
+              "pronoun": "sie/Sie",
+              "form": "haben gemacht"
+            }
+          ],
+          "futur1": [
+            {
+              "pronoun": "ich",
+              "form": "werde machen"
+            },
+            {
+              "pronoun": "du",
+              "form": "wirst machen"
+            },
+            {
+              "pronoun": "er/sie/es",
+              "form": "wird machen"
+            },
+            {
+              "pronoun": "wir",
+              "form": "werden machen"
+            },
+            {
+              "pronoun": "ihr",
+              "form": "werdet machen"
+            },
+            {
+              "pronoun": "sie/Sie",
+              "form": "werden machen"
+            }
+          ]
+        }
+      }
+    ],
+    "examples": [
+      {
+        "de": "Ich heiße Anna und ich komme aus Frankreich.",
+        "fr": "Je m'appelle Anna et je viens de France.",
+        "en": "My name is Anna and I come from France.",
+        "note": "Présentation de base (A1)."
+      },
+      {
+        "de": "Er hat gestern ein Buch gekauft.",
+        "fr": "Il a acheté un livre hier.",
+        "en": "He bought a book yesterday.",
+        "note": "Perfekt avec « haben » (A2)."
+      },
+      {
+        "de": "Sie ist letzte Woche nach Berlin gefahren.",
+        "fr": "Elle est allée à Berlin la semaine dernière.",
+        "en": "She went to Berlin last week.",
+        "note": "Perfekt avec « sein » : verbe de mouvement (A2)."
+      },
+      {
+        "de": "Wenn ich Zeit habe, gehe ich ins Kino.",
+        "fr": "Si j'ai le temps, je vais au cinéma.",
+        "en": "If I have time, I go to the movies.",
+        "note": "Proposition subordonnée avec « wenn », verbe en fin de proposition (B1)."
+      },
+      {
+        "de": "Das ist das Auto, das mein Vater gekauft hat.",
+        "fr": "C'est la voiture que mon père a achetée.",
+        "en": "This is the car that my father bought.",
+        "note": "Proposition relative (B1)."
+      },
+      {
+        "de": "Ich möchte gern einen Kaffee bestellen.",
+        "fr": "Je voudrais commander un café.",
+        "en": "I would like to order a coffee.",
+        "note": "Verbe de modalité « möchten » + infinitif (A1-A2)."
+      },
+      {
+        "de": "Obwohl es regnete, sind wir spazieren gegangen.",
+        "fr": "Bien qu'il ait plu, nous sommes allés nous promener.",
+        "en": "Although it was raining, we went for a walk.",
+        "note": "Proposition concessive avec « obwohl » (B2)."
+      },
+      {
+        "de": "Die Entscheidung wurde nach langer Diskussion getroffen.",
+        "fr": "La décision a été prise après une longue discussion.",
+        "en": "The decision was made after a long discussion.",
+        "note": "Voix passive au Präteritum (B2-C1)."
+      }
+    ]
+  }
 }
